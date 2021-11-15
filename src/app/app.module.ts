@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreServiceModule } from './modules/coreService.module';
 //import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -34,6 +35,7 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { NoticeComponent } from './notice/notice.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.component';
+import { ApplicationFormComponent } from './application-form/application-form.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.componen
     NoticeComponent,
     DashboardComponent,
     LeaveCalendarComponent,
+    ApplicationFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.componen
     CoreServiceModule,
     SharedCommonModule,
     CommonTableModule,
+    ReactiveFormsModule,
     //TabsModule.forRoot(),
     ToastrModule.forRoot(),
     NgxDaterangepickerMd.forRoot({

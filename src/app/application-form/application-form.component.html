@@ -1,0 +1,65 @@
+<div class="container p-5">
+    <h1 class="mt-2 mb-5 text-center">Angular 12 Reactive Form Tutorial</h1>
+    <form class="row g-3" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"  id="inputEmail4">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+       </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Password</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" id="inputPassword4">
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+       </div>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Address</label>
+        <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" id="inputAddress" placeholder="1234 Main St">
+        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+          <div *ngIf="f.address.errors.required">Password is required</div>
+       </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">City</label>
+        <input placeholder="Ludhiana" type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" id="inputCity">
+        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+          <div *ngIf="f.city.errors.required">City is required</div>
+       </div>
+      </div>
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">State</label>
+        <select id="inputState" class="form-select" formControlName="state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+          <option value="">Choose...</option>
+          <option value="punjab">Punjab</option>
+        </select>
+        <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+          <div *ngIf="f.state.errors.required">State is required</div>
+       </div>
+      </div>
+      <div class="col-md-2">
+        <label for="inputZip" class="form-label">Zip</label>
+        <input type="text" formControlName="zip" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip.errors }" id="inputZip">
+        <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">
+          <div *ngIf="f.zip.errors.required">State is required</div>
+       </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check">
+          <input value="" class="form-check-input" formControlName="checkmeout" [ngClass]="{ 'is-invalid': submitted && f.checkmeout.errors }" id="inputZip" type="checkbox" id="gridCheck">
+          <label class="form-check-label" for="gridCheck">
+            Check me out
+          </label>
+          <div *ngIf="submitted && f.checkmeout.errors" class="invalid-feedback">
+            <div *ngIf="f.checkmeout.errors.required">This is required</div>
+         </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+    </form>
+  </div>
