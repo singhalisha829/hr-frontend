@@ -6,6 +6,7 @@
                    >{{buttonName}}</button>
     </div></div></div>
 
+    <form (ngSubmit)="submit()">
 <div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" *ngIf="isHidden">
     <div class="row" style="padding: 10px;">
             <h4>Personal Details</h4>
@@ -173,6 +174,7 @@
                 >Reset</button>
             </div>
         </div>
+        </form>
 
               
           
