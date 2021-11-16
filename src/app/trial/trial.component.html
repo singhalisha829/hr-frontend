@@ -1,0 +1,22 @@
+<div id="tabs" #tabs>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="#search" [ngClass]="{ 'active':activeTab==='search'}" (click)="search('search', $event)"
+           data-toggle="tab">Search</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"  href="#results" [ngClass]="{ 'active':activeTab==='result'}" data-toggle="tab"
+           (click)="result('result', $event)">Results</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane" id="search" [ngClass]="{ 'active':activeTab==='search'}">
+        search screen
+        <button type="button" (click)="search('result', $event)">Search</button>
+      </div>
+      <div class="tab-pane" id="results" [ngClass]="{ 'active':activeTab==='result'}">results screen</div>
+    </div>
+
+  </div>

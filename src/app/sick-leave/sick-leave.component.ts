@@ -12,5 +12,13 @@ export class SickLeaveComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  activeTab = 'Pending';
+
+  next(activeTab: string){
+    if(activeTab=='Pending')
+    this.activeTab = 'Approved';
+  }
+
+
   
 }

@@ -18,11 +18,24 @@ export class EmployeeComponent implements OnInit {
   ];
   cityArr = [];
   filterObj!: {};
+  formSteps = ['Personal Details', 'Education Details & Work Ex','Bank Details', 'Upload Documents'];
+  divNumber!: number;
+  productTableRows: any[]= [];
   
+  newProductArray: any[] = [];
+  productTableHeaders = [
+    // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
+    { headerName: 'Name', field: 'name', type: 'text', value: 'name', isEditable: false,  width: 180},
+    { headerName: 'Age', field: 'age', type: 'text', value: 'age', isEditable: false,  width: 180},
+    { headerName: 'Occupation', field: 'occupation', type: 'text', value: 'occupation', isEditable: true,  width: 180},
+    { headerName: 'Action', field: 'deleteBTN', width: 65,  },
+  ];
+ 
+
   constructor( private utilsService: UtilsService) { }
 
   ngOnInit(): void {
-
+    this.initProductTable();
     
   }
 
@@ -30,6 +43,9 @@ export class EmployeeComponent implements OnInit {
 
   }
 
+  initProductTable() {
+    this.productTableRows = [{name:'', age:'', occupation: '', deleteBTN: ''}]
+  }
   addEmployee(){
     if(!this.isHidden)
     {
@@ -58,5 +74,14 @@ onSortHeaderClicked(e: { ascending: any; headerField: string; }) {
   }
   this.filterObj = {...this.filterObj, sort_by: e.headerField}
   //this.getAllCiies();
+}
+
+jumpToSection(sectionNumber: number) {
+  if(this.divNumber !== sectionNumber)
+  this.divNumber = sectionNumber;
+}
+
+addRow() {
+  this.productTableRows.push({description:'',specification:'',power_rating:'', etd:'', qty: '', total_mwp:'', total: '', deleteBTN: ''});
 }
 }

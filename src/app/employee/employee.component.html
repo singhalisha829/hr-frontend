@@ -102,12 +102,24 @@
                   </div>
                   
                   <h6>Please mention briefly about your family.</h6><br>
-                  <app-common-table
+                  <div class="col-md-6 col-12 mt-4">
+                    <button class="btn btn-primary add-Btn" type="button"
+                    (click)="addRow()">Add</button>
+                    
+                  </div>
+                
+                <div class="row" style="margin-top: 10px;">
+                  <!-- <div class="col-sm-12 table-responsive"> -->
+                    <app-common-table [headers]="productTableHeaders" [rows]="productTableRows" 
+                      >
+                    </app-common-table>
+                  </div>
+                  <!-- <app-common-table
                   [headers] = "cityHeaders"
                   [rows] = "cityArr"
                   (onSortClicked)="onSortHeaderClicked($event)"
                   >
-                  </app-common-table>
+                  </app-common-table> -->
                   <br>
                 <h4>Education Qualification</h4><hr>
                 <h6>Please mention your Qualification class X onwards, including Degrees and Diplomas.</h6><br>

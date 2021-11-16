@@ -14,6 +14,7 @@ import { NoticeComponent } from './notice/notice.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
+import { TrialComponent } from './trial/trial.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,10 @@ const routes: Routes = [
   {
     path:'application-form',
     component:ApplicationFormComponent
+  },
+  {
+    path:'trial',
+    component:TrialComponent
   },]
 },
 {path: '**', pathMatch: 'full', component: LoginComponent}

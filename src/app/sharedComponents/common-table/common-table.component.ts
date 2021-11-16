@@ -149,7 +149,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 export class CommonTableComponent implements OnInit {
   @Input() pagination = true;
-  tableHeight = window.innerHeight - 250;
+  tableHeight = window.innerHeight - 1000;
   @Input() headers: any[] = [];
   @Input() rows : any[]= [];
   @Input() showMenu = false;
