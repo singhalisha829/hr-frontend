@@ -19,6 +19,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
  import { FullCalendarModule } from '@fullcalendar/angular'; 
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import {MatStepperModule} from '@angular/material/stepper'
+import {MatButtonModule} from '@angular/material/button';
 // import { AllowSingleClickDirective } from '../utils/services/allow-single-click.directive';
 // import { NgxPrintModule } from 'ngx-print';
 
@@ -39,7 +41,8 @@ FullCalendarModule.registerPlugins([
     //NgxPrintModule,
     ReactiveFormsModule,
     FullCalendarModule,
-
+    MatStepperModule,
+    MatButtonModule,
     //PaginationModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
@@ -77,6 +80,8 @@ FullCalendarModule.registerPlugins([
     BsDatepickerModule,
     DatepickerModule,
     CollapseModule,
+    MatStepperModule,
+    MatButtonModule,
     //NgxChartsModule,
     BsDropdownModule,
     ModalModule,

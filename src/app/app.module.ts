@@ -36,7 +36,8 @@ import { NoticeComponent } from './notice/notice.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
-import { TrialComponent } from './trial/trial.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { TrialComponent } from './trial/trial.component';
     DashboardComponent,
     LeaveCalendarComponent,
     ApplicationFormComponent,
-    TrialComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -80,6 +81,8 @@ import { TrialComponent } from './trial/trial.component';
     }),
 
     CustomDateRangePickerModule,
+
+    BrowserAnimationsModule,
   
   ],
   providers: [
