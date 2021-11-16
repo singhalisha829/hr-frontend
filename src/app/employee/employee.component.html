@@ -104,13 +104,12 @@
                   <h6>Please mention briefly about your family.</h6><br>
                   <div class="col-md-6 col-12 mt-4">
                     <button class="btn btn-primary add-Btn" type="button"
-                    (click)="addRow()">Add</button>
+                    (click)="addRow()">Add Family Member</button>
                     
                   </div>
                 
                 <div class="row" style="margin-top: 10px;">
-                  <!-- <div class="col-sm-12 table-responsive"> -->
-                    <app-common-table [headers]="productTableHeaders" [rows]="productTableRows" 
+                    <app-common-table [headers]="familyTableHeaders" [rows]="familyTableRows" 
                       >
                     </app-common-table>
                   </div>
@@ -124,21 +123,76 @@
                 <h4>Education Qualification</h4><hr>
                 <h6>Please mention your Qualification class X onwards, including Degrees and Diplomas.</h6><br>
                 <!--add qualification table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow1()">Add Education Qualification</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="educationTableHeaders" [rows]="educationTableRows" 
+                    >
+                  </app-common-table>
+                </div>
                 <br>
                 <h4>Work Experience/Internship</h4><hr>
                 <h6>Please mention briefly any internship/Work experience you have.</h6><br>
                 <!--work exp table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow2()">Add Work Ex/Internship</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="workTableHeaders" [rows]="workTableRows" 
+                    >
+                  </app-common-table>
+                </div>
                 <br>
                 <h4>Training Attended</h4><hr>
                 <h6>Please mention briefly any Training that you have recieved.</h6><br>
                 <!--training table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow3()">Add Training</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="trainingTableHeaders" [rows]="trainingTableRows" 
+                    >
+                  </app-common-table>
+                </div>
                 <br>
                 <h4>References</h4><hr>
                 <h6>Please mention references with whom we can cross check the details provided.</h6><br>
                 <!--refrences table-->
+                                <div class="col-md-6 col-12 mt-4">
+  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow4()">Add References</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="referenceTableHeaders" [rows]="referenceTableRows" 
+                    >
+                  </app-common-table>
+                </div>
                 <br>
                 <h4>Emergency Contact</h4><hr>
                 <!--emergency contact table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                                  (click)="addRow5()">Add Emergency Contact</button>
+                                  
+                                </div>
+                              
+                              <div class="row" style="margin-top: 10px;">
+                                  <app-common-table [headers]="contactTableHeaders" [rows]="contactTableRows" 
+                                    >
+                                  </app-common-table>
+                                </div>
                 <br>
                 <h4>Application Details</h4><hr>
                 <div class="form-group col-sm-3 col-12">
