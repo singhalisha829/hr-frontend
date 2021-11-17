@@ -8,21 +8,21 @@
         <thead class="sticky-top">
         <tr>
             <th style="width: 500px;">Name</th>
-            <th style="width: 150px;">Present</th>
-            <th style="width: 150px;">Absent</th>
-            <th style="width: 150px;">Meeting</th>
-            <th style="width: 150px;">First 1/2 Leave</th>
-            <th style="width: 150px;">Second 1/2 Leave</th>
+            <th style="width: 150px;text-align:center;">Present</th>
+            <th style="width: 150px;text-align:center;">Absent</th>
+            <th style="width: 150px;text-align:center;">Meeting</th>
+            <th style="width: 150px;text-align:center;">First 1/2 Leave</th>
+            <th style="width: 150px;text-align:center;">Second 1/2 Leave</th>
         </tr>
         </thead>
         <tbody>
              <tr *ngFor="let data of Employee;let i=index">
             <th style="width: 500px;"> {{ data }}</th>
-            <td style="width: 150px; ">  <input type="radio" id="present" name={{i}} checked></td>
-            <td style="width: 150px;">  <input type="radio" id="absent" name={{i}}></td>
-            <td style="width: 150px;">  <input type="radio" id="meeting" name={{i}}></td>
-            <td style="width: 150px;">  <input type="radio" id="first" name={{i}}></td>
-            <td style="width: 150px;">  <input type="radio" id="second" name={{i}}></td>
+            <td style="width: 150px;text-align:center; ">  <input type="radio" id="present" name={{i}} checked></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="absent" name={{i}}></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="meeting" name={{i}}></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="first" name={{i}}></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="second" name={{i}}></td>
             </tr> 
         </tbody>
         </table>
