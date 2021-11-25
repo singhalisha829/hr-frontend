@@ -75,6 +75,10 @@ const routes: Routes = [
     path:'application-form',
     component:ApplicationFormComponent
   },
+  {
+    path:'policy',
+    component:PolicyComponent
+  }
  ]
 },
 {path: '**', pathMatch: 'full', component: LoginComponent}
