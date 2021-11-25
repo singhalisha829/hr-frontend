@@ -38,6 +38,7 @@ import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.componen
 import { ApplicationFormComponent } from './application-form/application-form.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PolicyComponent } from './policy/policy.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     LeaveCalendarComponent,
     ApplicationFormComponent,
+    PolicyComponent,
     
   ],
   imports: [

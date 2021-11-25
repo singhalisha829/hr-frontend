@@ -14,6 +14,7 @@ import { NoticeComponent } from './notice/notice.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
+import { PolicyComponent } from './policy/policy.component';
 
 
 const routes: Routes = [
@@ -71,6 +72,10 @@ const routes: Routes = [
     path:'application-form',
     component:ApplicationFormComponent
   },
+  {
+    path:'policy',
+    component:PolicyComponent
+  }
  ]
 },
 {path: '**', pathMatch: 'full', component: LoginComponent}
