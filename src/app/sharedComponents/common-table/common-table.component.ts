@@ -4,7 +4,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   selector: 'app-common-table',
   template: `
   <div class="table-responsive-sm">
-  <table style="overflow:auto;" [ngStyle]="{'height.px' : (tableHeight), 'min-height.px' : (!rows || rows.length === 0 ? 110 : 300)}" (window:resize)="onResize($event)" class="table table-bordered table-hover table-striped1">
+  <table style="overflow:auto;" [ngStyle]="{'height.px' : (tableHeight), 'min-height.px' : (!rows || rows.length === 0 ? 110 : 100)}" (window:resize)="onResize($event)" class="table table-bordered table-hover table-striped1">
   <thead id="header" class="sticky-top"  style="">
     <tr>
       <ng-container *ngFor="let h of headers; index as headerIndex; trackBy:headerIdentify">
