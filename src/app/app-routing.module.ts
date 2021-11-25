@@ -14,7 +14,7 @@ import { NoticeComponent } from './notice/notice.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
-
+import { PolicyComponent } from './policy/policy.component';
 
 const routes: Routes = [
   {
@@ -66,6 +66,10 @@ const routes: Routes = [
   {
     path:'leave-calendar',
     component:LeaveCalendarComponent
+  },
+  {
+    path:'policy',
+    component:PolicyComponent
   },
   {
     path:'application-form',
