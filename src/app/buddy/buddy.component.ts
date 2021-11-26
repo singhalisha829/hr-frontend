@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 export class BuddyComponent implements OnInit {
 
   docTableRows:any;
+  buddyObj:{
+    new_joinee:any;
+    buddy_name:any;
+  };
   docTableHeaders = [
     { headerName: 'Name', field: 'name', type: 'text', value: 'name', isEditable: true, width: 180},
     { headerName: 'Doc', field: 'doc', type: 'file', value: 'doc', isEditable: true, width: 180},
@@ -21,6 +25,8 @@ export class BuddyComponent implements OnInit {
   }
 
   preview(){
+    localStorage.setItem('new_joinee',this.buddyObj.new_joinee);
+    localStorage.setItem('buddy_name', this.buddyObj.buddy_name)
     this.router.navigate(['buddy-banner'])
   }
 

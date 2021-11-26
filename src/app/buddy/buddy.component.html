@@ -6,12 +6,12 @@
      
                 <div class="from-group col-sm-6">
                   <label><b>New Joinee:</b><span style="color: red;font-weight: 100;">*</span></label>
-                  <input name="new_joinee" type="text" class="form-control" id="new_joinee" />
+                  <input name="new_joinee" type="text" class="form-control" id="new_joinee" [(ngModel)]="buddyObj.new_joinee" />
                 </div><br><br>
     
                 <div class="form-group col-sm-6">
                   <label> <b>Buddy's Name: </b><span style="color: red;">*</span> </label>
-                  <input name="buddy_name" type="text" class="form-control" id="buddy_name" /> 
+                  <input name="buddy_name" type="text" class="form-control" id="buddy_name" [(ngModel)]="buddyObj.buddy_name"/> 
                 </div><br><br>
     
     
