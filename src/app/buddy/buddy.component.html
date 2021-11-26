@@ -1,1 +1,44 @@
-<p>buddy works!</p>
+<div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px;">
+    <div class="row">
+    <h1 style="text-align: center;">Buddy</h1>
+    <br>
+    <div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" >
+     
+                <div class="from-group col-sm-6">
+                  <label><b>New Joinee:</b><span style="color: red;font-weight: 100;">*</span></label>
+                  <input name="new_joinee" type="text" class="form-control" id="new_joinee" />
+                </div><br><br>
+    
+                <div class="form-group col-sm-6">
+                  <label> <b>Buddy's Name: </b><span style="color: red;">*</span> </label>
+                  <input name="buddy_name" type="text" class="form-control" id="buddy_name" /> 
+                </div><br><br>
+    
+    
+                <div class="form-group col-sm-6">
+                  <label><b>Upload Documents: </b><font color="red">*</font></label>
+                  <div class="col-md-6 col-12 mt-4">
+                    <button class="btn btn-primary add-Btn" type="button"
+                                    (click)="addRow()">Add Documents</button>
+                                    
+                                  </div>
+                                
+                                <div class="row" style="margin-top: 10px;">
+                                    <app-common-table [headers]="docTableHeaders" [rows]="docTableRows" 
+                                      >
+                                    </app-common-table>
+                                  </div>
+              
+  
+              <div class="col-12 pd-0" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success float-right" 
+                 (click)=" preview()" style="margin-right: 60px;"
+                 >Preview</button>
+                <button type="button" class="btn btn-warning float-left" type="reset" 
+                >Reset</button>
+            </div>
+              
+               
+    
+             
+    </div></div>
