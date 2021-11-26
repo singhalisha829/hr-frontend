@@ -58,7 +58,7 @@ import { PolicyComponent } from './policy/policy.component';
     DashboardComponent,
     LeaveCalendarComponent,
     ApplicationFormComponent,
-    PolicyComponent,
+    PolicyComponent
     
   ],
   imports: [

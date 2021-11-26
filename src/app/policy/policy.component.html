@@ -1,9 +1,40 @@
-<div class="card">
-    <div class="card-body">
-        <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Policy Name"><br>
-            <textarea class="form-control" placeholder="Policy Description"></textarea><br>
-            <input type="file" class="custom-file-input" id="inputGroupFile02">            
-          </div>
-    </div>
+
+<div class="card">  
+  <div class="container" id="tc">
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>Policy Name</th>
+            <th>Policy Description</th>
+            <th>Policy File</th>
+            <th>Action</th>
+            <th>View</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td>Arjun</td>
+          <td>Hello World</td>
+          <td>PDF</td>
+          <td class="action-link"> 
+            <a href="#">Edit</a> | 
+            <a href="#">Delete</a>  
+          </td>
+          <td><i class="fa fa-eye" aria-hidden="true"></i></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>  
+
+<div class="card">
+  <div class="card-body">
+      <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="Policy Name"><br>
+          <textarea class="form-control" placeholder="Policy Description"></textarea><br>
+          <input type="file" class="custom-file-input" id="inputGroupFile02"><br><br><br>
+          <button> Submit </button>
+                      
+        </div>
+  </div>
+</div>
