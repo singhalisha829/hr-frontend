@@ -4,56 +4,77 @@
         <mat-step label="Personal Details">
           <div class="row">
           <div class="col-sm-3">
-            <label>Full Name:<span style="color: red;">*</span></label>
-            <input name="full_name" type="text" class="form-control" id="full_name" />
+            <label>First Name:<span style="color: red;">*</span></label>
+            <input  type="text" class="form-control" [(ngModel)]="employeeObj.firstName"/>
           </div>
-
+          <div class="col-sm-3">
+            <label>Last Name:<span style="color: red;">*</span></label>
+            <input  type="text" class="form-control"   [(ngModel)]="employeeObj.lastName"/>
+          </div>
           
 
           <div class="form-group col-sm-3">
             <label> Present Address: <span style="color: red;">*</span> </label>
-            <input name="present_add" type="text" class="form-control" id="present_add" /> 
+            <input  type="text" class="form-control"  [(ngModel)]="employeeObj.presentAddress" /> 
           </div>
 
 
           <div class="form-group col-sm-3 col-12">
-            <label>City: <font color="red">*</font></label>
-            <input name="city" type="text" class="form-control" id="city" /> 
+            <label for="city">City <span style="color: red;">*</span></label>
+            <app-dropdown class='dataon'
+            [key]="'id'"
+            [value]="'name'"
+            [selectedItem]="selectedCity"
+            [placeholder]="'Choose'"
+            [dropDownList]="cityDDList"
+            (selectItemEvent)="selectedCity = $event;">
+            </app-dropdown>
         </div>
           <div class="form-group col-sm-3 col-12">
                 <label>Pincode:<span style="color: red;">*</span></label>
-                <input name="pincode" type="number" class="form-control" id="pincode"> 
+                <input name="pincode" type="number" class="form-control" id="pincode"   [(ngModel)]="employeeObj.pincode"> 
             </div></div><br>
 
             <div class="row">
             <div class="form-group col-sm-3 col-12">
               <label>Permanent Address:<span style="color: red;">*</span></label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control"   [(ngModel)]="employeeObj.permanentAddress">
            </div> 
               <div class="form-group col-sm-3 col-12">
                 <label>City:<span style="color: red;">*</span></label>
-                <input type="text" class="form-control">
+                <app-dropdown class='dataon'
+                [key]="'id'"
+                [value]="'name'"
+                [selectedItem]="selectedCity2"
+                [placeholder]="'Choose'"
+                [dropDownList]="cityDDList"
+                (selectItemEvent)="selectedCity2 = $event;">
+                </app-dropdown>
             </div>
             <div class="form-group col-sm-3">
               <label> Pincode: <span style="color: red;">*</span> </label>
-              <input name="p_pincode" type="number"  class="form-control" id="p_pincode" /> 
+              <input name="p_pincode" type="number"  class="form-control" id="p_pincode"   [(ngModel)]="employeeObj.pincode1"/> 
             </div>
             
             <div class="form-group col-sm-3 col-12">
               <label>Contact No: <span style="color: red;">*</span></label>
-              <input type="number" class="form-control" >
+              <input type="number" class="form-control"   [(ngModel)]="employeeObj.contact">
           </div></div><br>
 
           <div class="row">
           <div class="col-sm-3">
             <label>Alternate Contact No:<span style="color: red;">*</span> </label>
-            <input type="number" class="form-control" >
+            <input type="number" class="form-control"   [(ngModel)]="employeeObj.alternateContact" >
           </div>
 
        
           <div class="form-group col-sm-3">
-            <label>Email:<span style="color: red;">*</span> </label>
-            <input type="email" class="form-control" >
+            <label>Personal Email:<span style="color: red;">*</span> </label>
+            <input type="email" class="form-control"   [(ngModel)]="employeeObj.email">
+          </div>
+          <div class="form-group col-sm-3">
+            <label>Organisational Email:<span style="color: red;">*</span> </label>
+            <input type="email" class="form-control"   [(ngModel)]="employeeObj.orgEmail">
           </div>
           <div class="form-group col-sm-3">
             <label> Date of Birth:<span style="color: red;">*</span> </label>
@@ -64,7 +85,7 @@
 
           <div class="form-group col-sm-3 col-12">
               <label for="pi_file">Gender:<span style="color: red;">*</span> </label>
-              <select class="form-control">
+              <select class="form-control" (change)="selectGender($event)">
                 <option>--Select Gender--</option>
                 <option>Male</option>
                 <option>Female</option>
@@ -74,27 +95,42 @@
           <div class="row">
           <div class="form-group col-sm-3 col-12"><br>
             <label>Aadhaar Card No:<font color="red">*</font></label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" [(ngModel)]="employeeObj.aadhar">
             </div>
             <div class="form-group col-sm-3 col-12"><br>
               <label>Pancard No:<font color="red">*</font></label>
-              <input type="text" class="form-control"><br>
-            </div></div><br>
+              <input type="text" class="form-control" [(ngModel)]="employeeObj.pancard"><br>
+            </div>
+            <div class="form-group col-sm-3 col-12"><br>
+              <label>Organisation:<font color="red">*</font></label>
+              <input type="text" class="form-control" [(ngModel)]="employeeObj.organisation"><br>
+            </div>
+            <div class="form-group col-sm-3 col-12">
+              <label>Department:<span style="color: red;">*</span></label>
+              <app-dropdown class='dataon'
+              [key]="'id'"
+              [value]="'name'"
+              [selectedItem]="selectedDept"
+              [placeholder]="'Choose'"
+              [dropDownList]="deptDDList"
+              (selectItemEvent)="selectedDept = $event;">
+              </app-dropdown>
+          </div></div><br>
             
             <h4 style="font-size:medium;">Family Details</h4>
             <hr>
             <div class="row">
             <div class="col-sm-3">
                 <label>Father's Name:<span style="color: red;">*</span></label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherName"/>
               </div>
               <div class="col-sm-3">
                 <label>Father's Pancard No:<span style="color: red;">*</span></label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherPancard"/>
               </div>
               <div class="col-sm-3">
-                <label>Present/Prior Income:<span style="color: red;">*</span></label>
-                <input type="text" class="form-control"/><br>
+                <label>Occupation:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherOccupation"/><br>
               </div></div>
               
               <h4>Please mention briefly about your family.</h4><br>

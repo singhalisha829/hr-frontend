@@ -2,6 +2,9 @@ export const MAIN = {
     APP: {
       URLS: {
         API_AUTH_TOKEN: '-token-auth/',
+        CITY: '/City/',
+        USER_DETAILS: '/hrm/user-details/',
+        DEPT: '/hrm/user-dept/',
       },
       MESSAGES: {
         UNAUTH_ERR: 'Unauthorized access.',

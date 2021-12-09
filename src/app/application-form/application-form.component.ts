@@ -1,6 +1,13 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from '../services/utils.service';
+import { CompanyapiService } from '../utils/services/companyapi.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ImportsService } from '../utils/services/imports.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-application-form',
@@ -9,7 +16,12 @@ import { UtilsService } from '../services/utils.service';
 })
 export class ApplicationFormComponent implements OnInit {
 
- 
+ employeeObj :any ={};
+ selectedCity :any={};
+ selectedDept :any={};
+ selectedCity2 :any={};
+ cityDDList :any = [];
+ deptDDList :any = [];
   isHidden!: boolean;
   public buttonName:any = 'Add Employee';
   addNewEmployee: any = {};
@@ -28,6 +40,8 @@ export class ApplicationFormComponent implements OnInit {
   workTableRows: any[]= [];
   referenceTableRows: any[]= [];
   contactTableRows: any[]= [];
+  unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets destroyed
+
   newProductArray: any[] = [];
   familyTableHeaders = [
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
@@ -94,16 +108,54 @@ export class ApplicationFormComponent implements OnInit {
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
 
-  constructor( private utilsService: UtilsService) { }
+  constructor( private utilsService: UtilsService, private companyService: CompanyapiService,private importsService: ImportsService,
+    private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.initProductTable();
-    
+    this.getCities();
+    this.getDept();
   }
 
+  dept:number=1;
   submit(){
-
-  }
+    const formdata = new FormData()
+    formdata.append('first_name', this.employeeObj.firstName);
+    formdata.append('last_name', this.employeeObj.lastName);
+    formdata.append('present_address', this.employeeObj.presentAddress);
+    formdata.append('present_pincode', this.employeeObj.pincode);
+    formdata.append('permanent_address', this.employeeObj.permanentAddress);
+    formdata.append('present_city', this.selectedCity.id);
+    formdata.append('permanent_city', this.selectedCity2.id);
+    formdata.append('permanent_pincode', this.employeeObj.pincode1);
+    formdata.append('phone', this.employeeObj.contact);
+    formdata.append('phone2', this.employeeObj.alternateContact);
+    formdata.append('personal_email', this.employeeObj.email);
+    formdata.append('organisation_email', this.employeeObj.orgEmail);
+    formdata.append('date_of_birth', this.employeeObj.date);
+    formdata.append('gender', this.employeeObj.gender);
+    formdata.append('aadhar_card', this.employeeObj.aadhar);
+    formdata.append('pancard', this.employeeObj.pancard);
+    formdata.append('fathers_name', this.employeeObj.fatherName);
+    formdata.append('fathers_pancard', this.employeeObj.fatherPancard);
+    formdata.append('fathers_occupation', this.employeeObj.fatherOccupation);
+    formdata.append('organisation', this.employeeObj.organisation);
+    formdata.append('department' , this.selectedDept.id);
+    
+    this.importsService.postEmployeeDetails(formdata)
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        let last_inserted_id = res.last_inserted_id;
+        this.toaster.success("User Successfully Added");
+        //this.postPayment(last_inserted_id)
+      }
+    }, () => {})
+    }
+  
+    selectGender(e:any){
+         this.employeeObj.gender = e.target.value;
+    }
 
   initProductTable() {
     this.familyTableRows = [{name:'', age:'', occupation: '', deleteBTN: ''}]
@@ -126,7 +178,7 @@ export class ApplicationFormComponent implements OnInit {
   }
 
   onDateRangeSelection(event: { startDate: string | number | Date; }) {
-    this.addNewEmployee.date = this.utilsService.formatDate(event.startDate)
+    this.employeeObj.date = this.utilsService.formatDate(event.startDate)
 }
 
 onSortHeaderClicked(e: { ascending: any; headerField: string; }) {
@@ -143,6 +195,40 @@ onSortHeaderClicked(e: { ascending: any; headerField: string; }) {
   }
   this.filterObj = {...this.filterObj, sort_by: e.headerField}
   //this.getAllCiies();
+}
+
+public getCities() {
+  this.companyService.AllCities()
+  .pipe(takeUntil(this.unsubsribeNotifier))
+  .subscribe((res: any) => {
+    if (res.status.code === 200) {
+      this.cityDDList = res.data.output;
+      console.log(this.cityDDList)
+    } else {
+      this.cityDDList = [];
+    }
+  }),
+    () => {
+      this.cityDDList = [];
+    };
+ 
+}
+
+public getDept() {
+  this.companyService.AllDept()
+  .pipe(takeUntil(this.unsubsribeNotifier))
+  .subscribe((res: any) => {
+    if (res.status.code === 200) {
+      this.deptDDList = res.data.output;
+      console.log(this.deptDDList)
+    } else {
+      this.deptDDList = [];
+    }
+  }),
+    () => {
+      this.deptDDList = [];
+    };
+ 
 }
 
 jumpToSection(sectionNumber: number) {
