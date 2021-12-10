@@ -38,6 +38,11 @@ export class ImportsService {
   public postUserAddress(data:any) {
     return this.httpService.post(CONSTANTS.MAIN.APP.URLS.USER_ADDRESS, data);
   }
+
+  public postOfferLetter(data:any) {
+    return this.httpService.post(CONSTANTS.MAIN.APP.URLS.OFFER_LETTER, data);
+  }
+  
   
 //   public getPODetailsById(data) {
 //     return this.httpService.get(CONSTANTS.MAIN.APP.URLS.PURCHASE_ORDER, data);

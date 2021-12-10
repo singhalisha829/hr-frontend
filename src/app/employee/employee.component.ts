@@ -152,6 +152,7 @@ export class EmployeeComponent implements OnInit {
     formdata.append('fathers_occupation', this.employeeObj.fatherOccupation);
     formdata.append('organisation', this.employeeObj.organisation);
     formdata.append('department' , this.selectedDept.id);
+    formdata.append('designation', this.employeeObj.designation);
 
     //user_present_address
     formdata1.append('present_address', this.employeeObj.presentAddress);

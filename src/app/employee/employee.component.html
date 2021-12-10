@@ -130,6 +130,10 @@
               [dropDownList]="deptDDList"
               (selectItemEvent)="selectedDept = $event;">
               </app-dropdown>
+          </div>
+          <div class="form-group col-sm-3 col-12"><br>
+            <label>Designation:<font color="red">*</font></label>
+            <input type="text" class="form-control" [(ngModel)]="employeeObj.designation"><br>
           </div></div><br>
             
             <h4 style="font-size:medium;">Family Details</h4>
