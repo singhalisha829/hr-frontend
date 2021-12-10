@@ -62,11 +62,12 @@ export class EmployeeComponent implements OnInit {
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
 
+ 
   educationTableHeaders = [
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Institute Name', field: 'inst_name', type: 'text', value: 'inst_name', isEditable: true, width: 180},
     { headerName: 'Institue Address', field: 'inst_address', type: 'text', value: 'inst_address', isEditable: true, width: 180},
-    { headerName: 'Institute City', field: 'inst_city', type: 'text', value: 'inst_city', isEditable: true,  width: 180},
+    { headerName: 'Institute City', field: 'inst_city', showDropdown: true, key: 'id', value: 'name', ddList:[],  dropDownInRow: true, width: 250},
     { headerName: 'Start Date', field: 'start_date', type: 'date', value: 'start_date', isEditable: true,  width: 180},
     { headerName: 'End Date', field: 'end_date', type: 'date', value: 'end_date', isEditable: true,  width: 180},
     { headerName: 'Course Name', field: 'course_name', type: 'text', value: 'course_name', isEditable: true,  width: 180},
@@ -97,7 +98,7 @@ export class EmployeeComponent implements OnInit {
     { headerName: 'Institute Pincode', field: 'inst_pincode', type: 'number', value: 'inst_pincode', isEditable: true,  width: 180},
     { headerName: 'Start Date', field: 'start_date', type: 'date', value: 'start_date', isEditable: true,  width: 180},
     { headerName: 'End Date', field: 'end_date', type: 'date', value: 'end_date', isEditable: true,  width: 180},
-    { headerName: 'Name of the Training', field: 'name-training_attended', type: 'text', value: 'name_training_attended', isEditable: true,  width: 180},
+    { headerName: 'Name of the Training', field: 'name_training_attended', type: 'text', value: 'name_training_attended', isEditable: true,  width: 180},
     { headerName: 'Take Away', field: 'take_away', type: 'text', value: 'take_away', isEditable: true,  width: 180},
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
@@ -133,15 +134,11 @@ export class EmployeeComponent implements OnInit {
 
   }
   submitUserDetails(){
-    const formdata = new FormData()
+    const formdata = new FormData();
+    const formdata1= new FormData();
+    const formdata2= new FormData();
     formdata.append('first_name', this.employeeObj.firstName);
     formdata.append('last_name', this.employeeObj.lastName);
-    formdata.append('present_address', this.employeeObj.presentAddress);
-    formdata.append('present_pincode', this.employeeObj.pincode);
-    formdata.append('permanent_address', this.employeeObj.permanentAddress);
-    formdata.append('present_city', this.selectedCity.id);
-    formdata.append('permanent_city', this.selectedCity2.id);
-    formdata.append('permanent_pincode', this.employeeObj.pincode1);
     formdata.append('phone', this.employeeObj.contact);
     formdata.append('phone2', this.employeeObj.alternateContact);
     formdata.append('personal_email', this.employeeObj.email);
@@ -155,19 +152,158 @@ export class EmployeeComponent implements OnInit {
     formdata.append('fathers_occupation', this.employeeObj.fatherOccupation);
     formdata.append('organisation', this.employeeObj.organisation);
     formdata.append('department' , this.selectedDept.id);
-    
+
+    //user_present_address
+    formdata1.append('present_address', this.employeeObj.presentAddress);
+    formdata1.append('present_pincode', this.employeeObj.pincode);
+    formdata1.append('present_city', this.selectedCity.id);
+    formdata1.append('type','Present')
+    formdata1.append('UserDetails', this.employeeId)
+
+    //user_permanent_address
+    formdata2.append('present_address', this.employeeObj.permanentAddress);
+    formdata2.append('present_city', this.selectedCity2.id);
+    formdata2.append('present_pincode', this.employeeObj.pincode1);
+    formdata2.append('type','Permanent')
+    formdata2.append('UserDetails', this.employeeId)
+
+
     this.importsService.postEmployeeDetails(formdata)
     .pipe(takeUntil(this.unsubsribeNotifier))
     .subscribe((res: any) => {
       if(res.status.code === 200) {
-        let last_inserted_id = res.last_inserted_id;
         this.toaster.success("User Successfully Added");
-        //this.postPayment(last_inserted_id)
+        this.submitFamilyDetails();
       }
     }, () => {})
-  }
 
   
+    this.importsService.postUserAddress(formdata1)
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        // this.toaster.success("User Address Successfully Added");
+      }
+    }, () => {})
+
+    this.importsService.postUserAddress(formdata2)
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        // this.toaster.success("User Address Successfully Added");
+        
+      }
+    }, () => {})
+    
+  }
+ 
+
+  submitFamilyDetails(){
+    for( let i=0; i< this.familyTableRows.length; i++){
+      this.familyTableRows[i]['name']= this.familyTableRows[i]['name'];
+      this.familyTableRows[i]['age'] = this.familyTableRows[i]['age'];
+      this.familyTableRows[i]['occupation']= this.familyTableRows[i]['occupation'];
+      this.familyTableRows[i]['UserDetails']=this.employeeId;
+    }
+    for(let k = 0; k < this.familyTableRows.length; k++ ){
+     this.importsService.postFamilyDetails(this.familyTableRows[k])
+     .pipe(takeUntil(this.unsubsribeNotifier))
+     .subscribe((res: any) => {
+      if(res.status.code == 200){
+       
+      }
+     }, () => {})
+    }
+    
+  }
+
+  onStep2(){
+    for( let i=0; i< this.educationTableRows.length; i++){
+      this.educationTableRows[i]['inst_name']= this.educationTableRows[i]['inst_name'];
+      this.educationTableRows[i]['inst_address'] = this.educationTableRows[i]['inst_address'];
+      this.educationTableRows[i]['start_date']= this.educationTableRows[i]['start_date'];
+      this.educationTableRows[i]['end_date']= this.educationTableRows[i]['end_date'];
+      this.educationTableRows[i]['course_name']= this.educationTableRows[i]['course_name'];
+      this.educationTableRows[i]['overall_percentage']= this.educationTableRows[i]['overall_percentage'];
+      this.educationTableRows[i]['inst_city']= this.employeeId;
+      this.educationTableRows[i]['UserDetails']= this.employeeId;
+    }
+    for(let k = 0; k < this.educationTableRows.length; k++ ){
+     this.importsService.postEducationDetails(this.educationTableRows[k])
+     .pipe(takeUntil(this.unsubsribeNotifier))
+     .subscribe((res: any) => {
+      if(res.status.code == 200){
+         this.toaster.success('Education Updated Successfully');
+      }
+     }, () => {})
+    }
+
+    for( let i=0; i< this.workTableRows.length; i++){
+      this.workTableRows[i]['company_name']= this.workTableRows[i]['company_name'];
+      this.workTableRows[i]['company_address'] = this.workTableRows[i]['company_address'];
+      this.workTableRows[i]['company_pincode']= this.workTableRows[i]['company_pincode'];
+      this.workTableRows[i]['start_date']= this.workTableRows[i]['start_date'];
+      this.workTableRows[i]['end_date']= this.workTableRows[i]['end_date'];
+      this.workTableRows[i]['job_profile']= this.workTableRows[i]['job_profile'];
+      this.workTableRows[i]['employer_name']= this.workTableRows[i]['employer_name'];
+      this.workTableRows[i]['contact_no']= this.workTableRows[i]['contact_no'];
+      this.workTableRows[i]['company_city']= this.employeeId;
+      this.workTableRows[i]['UserDetails']= this.employeeId;
+    }
+    for(let k = 0; k < this.workTableRows.length; k++ ){
+     this.importsService.postWorkDetails(this.workTableRows[k])
+     .pipe(takeUntil(this.unsubsribeNotifier))
+     .subscribe((res: any) => {
+      if(res.status.code == 200){
+         this.toaster.success('Work/Internship Updated Successfully');
+      }
+     }, () => {})
+    }
+
+    for( let i=0; i< this.trainingTableRows.length; i++){
+      this.trainingTableRows[i]['inst_name']= this.trainingTableRows[i]['inst_name'];
+      this.trainingTableRows[i]['inst_address'] = this.trainingTableRows[i]['inst_address'];
+      this.trainingTableRows[i]['inst_pincode']= this.trainingTableRows[i]['inst_pincode'];
+      this.trainingTableRows[i]['start_date']= this.trainingTableRows[i]['start_date'];
+      this.trainingTableRows[i]['end_date']= this.trainingTableRows[i]['end_date'];
+      this.trainingTableRows[i]['name_training_attended']= this.trainingTableRows[i]['name_training_attended'];
+      this.trainingTableRows[i]['take_away']= this.trainingTableRows[i]['take_away'];
+      this.trainingTableRows[i]['inst_city']= this.employeeId;
+      this.trainingTableRows[i]['UserDetails']= this.employeeId;
+    }
+    for(let k = 0; k < this.trainingTableRows.length; k++ ){
+     this.importsService.postTrainingDetails(this.trainingTableRows[k])
+     .pipe(takeUntil(this.unsubsribeNotifier))
+     .subscribe((res: any) => {
+      if(res.status.code == 200){
+         this.toaster.success('Work/Internship Updated Successfully');
+      }
+     }, () => {})
+    }
+  }
+
+
+  //bank_details
+  bankDetailObj:any={};
+  submitBankDetails(){
+    const formdata = new FormData()
+    formdata.append('account_holder_name', this.bankDetailObj.name);
+    formdata.append('bank_name', this.bankDetailObj.bankName);
+    formdata.append('bank_account', this.bankDetailObj.bankAccount);
+    formdata.append('bank_branch', this.bankDetailObj.bankBranch);
+    formdata.append('ifsc_code', this.bankDetailObj.ifsc_code);
+    formdata.append('UserDetails', this.employeeId);
+    
+    this.importsService.postBankDetails(formdata)
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.toaster.success("Bank Details Successfully Added");
+      }
+    }, () => {})
+
+  }
+
   selectGender(e:any){
     this.employeeObj.gender = e.target.value;
 }
@@ -220,6 +356,7 @@ export class EmployeeComponent implements OnInit {
     this.isHidden = !this.isHidden;
   }
 
+  employeeId:any;
   public getallEmployee() {
     if (this.incomingApi) this.incomingApi.unsubscribe();
     this.incomingApi = this.importsService.getEmployeeData({end_limit: 25, page: this.currentPage, ...this.filterObj})
@@ -228,9 +365,10 @@ export class EmployeeComponent implements OnInit {
       if (res.status.code === 200) {
         this.employeeTableRows = res.data.output;
         this.totalCount = res.data.total_count;
+        this.employeeId = this.employeeTableRows[this.totalCount-1]['id'];
+        console.log(this.employeeId)
         for(let i =0 ; i < this.employeeTableRows.length; i++){
           this.employeeTableRows[i]['fullName'] = this.employeeTableRows[i]['first_name']+" "+ this.employeeTableRows[i]['last_name'];
-         
         }
       } else {this.employeeTableRows = [];}
     }),
@@ -238,8 +376,8 @@ export class EmployeeComponent implements OnInit {
   }
 
   onDateRangeSelection(event: { startDate: string | number | Date; }) {
-    this.addNewEmployee.date = this.utilsService.formatDate(event.startDate)
-}
+    this.employeeObj.date = this.utilsService.formatDate(event.startDate)
+  }
 
 onSortHeaderClicked(e: { ascending: any; headerField: string; }) {
   if (!e.ascending) e.headerField  = `-${e.headerField}`
@@ -263,7 +401,7 @@ public getCities() {
   .subscribe((res: any) => {
     if (res.status.code === 200) {
       this.cityDDList = res.data.output;
-      console.log(this.cityDDList)
+      this.employeeTableHeaders[0]['ddList'] = [...this.cityDDList]
     } else {
       this.cityDDList = [];
     }

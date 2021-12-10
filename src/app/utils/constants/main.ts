@@ -5,6 +5,12 @@ export const MAIN = {
         CITY: '/City/',
         USER_DETAILS: '/hrm/user-details/',
         DEPT: '/hrm/user-dept/',
+        USER_FAMILY: '/hrm/user-family/',
+        USER_EDUCATION:'/hrm/user-education/',
+        USER_WORK:'/hrm/user-internshipExp/',
+        USER_TRAINING:'/hrm/user-traning/',
+        USER_BANK:'/hrm/user-bank/',
+        USER_ADDRESS:'/hrm/user-address',
       },
       MESSAGES: {
         UNAUTH_ERR: 'Unauthorized access.',

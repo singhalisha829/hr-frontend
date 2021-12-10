@@ -124,7 +124,7 @@
               <label>Department:<span style="color: red;">*</span></label>
               <app-dropdown class='dataon'
               [key]="'id'"
-              [value]="'name'"
+              [value]="'department'"
               [selectedItem]="selectedDept"
               [placeholder]="'Choose'"
               [dropDownList]="deptDDList"
@@ -217,7 +217,7 @@
               background-color:lightgrey; margin-right:30px">Back</button>
               <button mat-button matStepperNext style=" background-color:green;
               color:white; 
-              margin-top:10px">Save and Continue</button>
+              margin-top:10px" (click)="onStep2()">Save and Continue</button>
           </div>
         </mat-step>
       
@@ -284,29 +284,29 @@
         <mat-step label="Bank Details">
           <div class="form-group col-sm-3 col-12">
             <label>Account Holder's Name:<span style="color: red;">*</span></label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" [(ngModel)]="bankDetailObj.name">
         </div>
         <div class="form-group col-sm-3 col-12">
             <label>Bank Account No:<span style="color: red;">*</span></label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankAccount">
         </div>
         <div class="form-group col-sm-3 col-12">
             <label>Bank Name:<span style="color: red;">*</span></label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankName">
         </div><div class="form-group col-sm-3 col-12">
             <label>Bank Branch Name:<span style="color: red;">*</span></label>
-            <input type="text" class="form-control"><br>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankBranch"><br>
         </div>
         <div class="form-group col-sm-3 col-12">
             <label>Bank IFSC Code:<span style="color: red;">*</span></label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.ifsc_code">
         </div>
           <div>
               <button mat-button matStepperPrevious style="margin-top: 10px;
               background-color:lightgrey; margin-right:30px">Back</button>
               <button mat-button matStepperNext style=" background-color:green;
               color:white; 
-              margin-top:10px">Save and Continue</button>
+              margin-top:10px" (click)="submitBankDetails()">Save and Continue</button>
           </div>
         </mat-step>
         <mat-step label="Documents">
