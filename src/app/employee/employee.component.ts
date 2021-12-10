@@ -16,7 +16,7 @@ export class EmployeeComponent implements OnInit {
     { headerName: 'City Name', field: 'name', width: 120 },
     { headerName: 'State', field: 'state', width:120 },
   ];
-  cityArr = [];
+  cityArr: any = [];
   filterObj!: {};
   formSteps = ['Personal Details', 'Education Details & Work Ex','Bank Details', 'Upload Documents'];
   divNumber!: number;

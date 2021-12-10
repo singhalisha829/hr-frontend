@@ -14,7 +14,11 @@ import { NoticeComponent } from './notice/notice.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
+import { BuddyComponent } from './buddy/buddy.component';
+import { BuddyBannerComponent } from './buddy-banner/buddy-banner.component';
+import { policyservice } from './utils/services/policy.service';
 import { PolicyComponent } from './policy/policy.component';
+
 
 const routes: Routes = [
   {
@@ -68,17 +72,21 @@ const routes: Routes = [
     component:LeaveCalendarComponent
   },
   {
-    path:'policy',
-    component:PolicyComponent
-  },
-  {
     path:'application-form',
     component:ApplicationFormComponent
   },
   {
+    path:'buddy',
+    component:BuddyComponent
+  },
+  {
+    path:'buddy-banner',
+    component:BuddyBannerComponent
+  },
+  {
     path:'policy',
     component:PolicyComponent
-  }
+  },
  ]
 },
 {path: '**', pathMatch: 'full', component: LoginComponent}

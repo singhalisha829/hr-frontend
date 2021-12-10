@@ -21,7 +21,7 @@ export class DropDownComponent implements OnInit {
   public _selectedItem : any= {}; // hold info of selected item from dropdown
   public _placeHolder = '--Select--'; // placeholder to show when nothing is selected in dropdown
   public _dropDownList : any = []; // dropdown list
-  public _filteredDDList = [];
+  public _filteredDDList: any[] = [];
   public isDropDownOpened = false;
   public _isToolTip = false;
   @Input() isDDClickedToOpen = false;
