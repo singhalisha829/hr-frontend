@@ -16,9 +16,9 @@ export class ImportsService {
   public postEmployeeDetails(data:any) {
     return this.httpService.post(CONSTANTS.MAIN.APP.URLS.USER_DETAILS, data)
    }
-//   public getPOdetails(data) {
-//     return this.httpService.get(CONSTANTS.MAIN.APP.URLS.PURCHASE_ORDER, data);
-//   }
+  public getEmployeeData(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_DETAILS, data);
+  }
 //   public getCompanyPOC(data) {
 //     return this.httpService.get(CONSTANTS.MAIN.APP.URLS.PRODUCT_COMPANY_POC, data)
 //   }

@@ -6,7 +6,12 @@
                    >{{buttonName}}</button>
     </div></div></div>
 
-    <form (ngSubmit)="submit()">
+    <div class="row" style="margin-top: 50px;" *ngIf="!isHidden">
+      <app-common-table [headers]="employeeTableHeaders" [rows]="employeeTableRows" 
+        >
+      </app-common-table>
+    </div>
+   
 <div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" *ngIf="isHidden">
     <div class="row" style="padding: 10px;">
             <h4>Personal Details</h4>
@@ -240,7 +245,28 @@
                 >Reset</button>
             </div>
         </div>
-        </form>
+
+        <div class="row" *ngIf="!isHidden" style="margin-top: 500px;">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="companyCount">Total :<span class="text-primary">{{totalCount}}</span></div>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-12 buttonpostion">
+            <button  (click)="getallEmployeeExport()" class="btn third">Export</button>
+          </div>
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <div class="justify-content-end" *ngIf="totalCount">
+              <pagination style="float: right;" [boundaryLinks]="true" [itemsPerPage]="10" [maxSize]="10" [totalItems]="totalCount" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+          </div>
+        </div>
+        <div class="row" hidden>
+          <div class="col-lg-12" #TABLE>
+            <app-common-table
+            [headers] = "employeeTableHeaders"
+            [rows] = "employeeTableRows"
+            ></app-common-table>
+          </div>
+        </div>
 
               
           
