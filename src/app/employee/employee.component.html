@@ -6,122 +6,174 @@
                    >{{buttonName}}</button>
     </div></div></div>
 
-    <form (ngSubmit)="submit()">
+    <div class="row" style="margin-top: 50px;" *ngIf="!isHidden">
+      <app-common-table [headers]="employeeTableHeaders" [rows]="employeeTableRows" 
+        >
+      </app-common-table>
+    </div>
+   
 <div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" *ngIf="isHidden">
-    <div class="row" style="padding: 10px;">
-            <h4>Personal Details</h4>
-            <hr>
-              <div class="col-sm-3">
-                <label>Full Name:<span style="color: red;">*</span></label>
-                <input name="full_name" type="text" class="form-control" id="full_name" />
-              </div>
-  
-              
-  
-              <div class="form-group col-sm-3">
-                <label> Present Address: <span style="color: red;">*</span> </label>
-                <input name="present_add" type="text" class="form-control" id="present_add" /> 
-              </div>
-  
-  
+    
+			<mat-vertical-stepper>
+
+        <mat-step label="Personal Details">
+          <div class="row">
+          <div class="col-sm-3">
+            <label>First Name:<span style="color: red;">*</span></label>
+            <input  type="text" class="form-control" [(ngModel)]="employeeObj.firstName"/>
+          </div>
+          <div class="col-sm-3">
+            <label>Last Name:<span style="color: red;">*</span></label>
+            <input  type="text" class="form-control"   [(ngModel)]="employeeObj.lastName"/>
+          </div>
+          
+
+          <div class="form-group col-sm-3">
+            <label> Present Address: <span style="color: red;">*</span> </label>
+            <input  type="text" class="form-control"  [(ngModel)]="employeeObj.presentAddress" /> 
+          </div>
+
+
+          <div class="form-group col-sm-3 col-12">
+            <label for="city">City <span style="color: red;">*</span></label>
+            <app-dropdown class='dataon'
+            [key]="'id'"
+            [value]="'name'"
+            [selectedItem]="selectedCity"
+            [placeholder]="'Choose'"
+            [dropDownList]="cityDDList"
+            (selectItemEvent)="selectedCity = $event;">
+            </app-dropdown>
+        </div>
+          <div class="form-group col-sm-3 col-12">
+                <label>Pincode:<span style="color: red;">*</span></label>
+                <input name="pincode" type="number" class="form-control" id="pincode"   [(ngModel)]="employeeObj.pincode"> 
+            </div></div><br>
+
+            <div class="row">
+            <div class="form-group col-sm-3 col-12">
+              <label>Permanent Address:<span style="color: red;">*</span></label>
+              <input type="text" class="form-control"   [(ngModel)]="employeeObj.permanentAddress">
+           </div> 
               <div class="form-group col-sm-3 col-12">
-                <label>City: <font color="red">*</font></label>
-                <input name="city" type="text" class="form-control" id="city" /> 
+                <label>City:<span style="color: red;">*</span></label>
+                <app-dropdown class='dataon'
+                [key]="'id'"
+                [value]="'name'"
+                [selectedItem]="selectedCity2"
+                [placeholder]="'Choose'"
+                [dropDownList]="cityDDList"
+                (selectItemEvent)="selectedCity2 = $event;">
+                </app-dropdown>
+            </div>
+            <div class="form-group col-sm-3">
+              <label> Pincode: <span style="color: red;">*</span> </label>
+              <input name="p_pincode" type="number"  class="form-control" id="p_pincode"   [(ngModel)]="employeeObj.pincode1"/> 
             </div>
             
-              <div class="form-group col-sm-3 col-12">
-                    <label>Pincode:<span style="color: red;">*</span></label>
-                    <input name="pincode" type="number" class="form-control" id="pincode"> <br>
-                </div>
-                <div class="form-group col-sm-3 col-12">
-                  <label>Permanent Address:<span style="color: red;">*</span></label>
-                  <input type="text" class="form-control">
-               </div> 
-                  <div class="form-group col-sm-3 col-12">
-                    <label>City:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="form-group col-sm-3">
-                  <label> Pincode: <span style="color: red;">*</span> </label>
-                  <input name="p_pincode" type="number"  class="form-control" id="p_pincode" /> 
-                </div>
-                
-                <div class="form-group col-sm-3 col-12">
-                  <label>Contact No: <span style="color: red;">*</span></label>
-                  <input type="number" class="form-control" ><br> 
+            <div class="form-group col-sm-3 col-12">
+              <label>Contact No: <span style="color: red;">*</span></label>
+              <input type="number" class="form-control"   [(ngModel)]="employeeObj.contact">
+          </div></div><br>
+
+          <div class="row">
+          <div class="col-sm-3">
+            <label>Alternate Contact No:<span style="color: red;">*</span> </label>
+            <input type="number" class="form-control"   [(ngModel)]="employeeObj.alternateContact" >
+          </div>
+
+       
+          <div class="form-group col-sm-3">
+            <label>Personal Email:<span style="color: red;">*</span> </label>
+            <input type="email" class="form-control"   [(ngModel)]="employeeObj.email">
+          </div>
+          <div class="form-group col-sm-3">
+            <label>Organisational Email:<span style="color: red;">*</span> </label>
+            <input type="email" class="form-control"   [(ngModel)]="employeeObj.orgEmail">
+          </div>
+          <div class="form-group col-sm-3">
+            <label> Date of Birth:<span style="color: red;">*</span> </label>
+            <app-custom-dateRangePicker [singleCalendar]="true" [resetCalendar]="true"
+              (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
+           
+          </div>
+
+          <div class="form-group col-sm-3 col-12">
+              <label for="pi_file">Gender:<span style="color: red;">*</span> </label>
+              <select class="form-control" (change)="selectGender($event)">
+                <option>--Select Gender--</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+          </div></div><br>
+
+          <div class="row">
+          <div class="form-group col-sm-3 col-12"><br>
+            <label>Aadhaar Card No:<font color="red">*</font></label>
+            <input type="text" class="form-control" [(ngModel)]="employeeObj.aadhar">
+            </div>
+            <div class="form-group col-sm-3 col-12"><br>
+              <label>Pancard No:<font color="red">*</font></label>
+              <input type="text" class="form-control" [(ngModel)]="employeeObj.pancard"><br>
+            </div>
+            <div class="form-group col-sm-3 col-12"><br>
+              <label>Organisation:<font color="red">*</font></label>
+              <input type="text" class="form-control" [(ngModel)]="employeeObj.organisation"><br>
+            </div>
+            <div class="form-group col-sm-3 col-12">
+              <label>Department:<span style="color: red;">*</span></label>
+              <app-dropdown class='dataon'
+              [key]="'id'"
+              [value]="'department'"
+              [selectedItem]="selectedDept"
+              [placeholder]="'Choose'"
+              [dropDownList]="deptDDList"
+              (selectItemEvent)="selectedDept = $event;">
+              </app-dropdown>
+          </div>
+          <div class="form-group col-sm-3 col-12"><br>
+            <label>Designation:<font color="red">*</font></label>
+            <input type="text" class="form-control" [(ngModel)]="employeeObj.designation"><br>
+          </div></div><br>
+            
+            <h4 style="font-size:medium;">Family Details</h4>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <label>Father's Name:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherName"/>
               </div>
               <div class="col-sm-3">
-                <label>Alternate Contact No:<span style="color: red;">*</span> </label>
-                <input type="number" class="form-control" >
+                <label>Father's Pancard No:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherPancard"/>
               </div>
-  
-           
-              <div class="form-group col-sm-3">
-                <label>Email:<span style="color: red;">*</span> </label>
-                <input type="email" class="form-control" >
-              </div>
-              <div class="form-group col-sm-3">
-                <label> Date of Birth:<span style="color: red;">*</span> </label>
-                <app-custom-dateRangePicker [singleCalendar]="true" [resetCalendar]="true"
-                  (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
-               
-              </div>
-  
-              <div class="form-group col-sm-3 col-12">
-                  <label for="pi_file">Gender:<span style="color: red;">*</span> </label>
-                  <select class="form-control">
-                    <option>--Select Gender--</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-              </div>
-  
+              <div class="col-sm-3">
+                <label>Occupation:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherOccupation"/><br>
+              </div></div>
               
-              <div class="form-group col-sm-3 col-12"><br>
-                <label>Aadhaar Card No:<font color="red">*</font></label>
-                <input type="text" class="form-control">
-                </div>
-                <div class="form-group col-sm-3 col-12"><br>
-                  <label>Pancard No:<font color="red">*</font></label>
-                  <input type="text" class="form-control"><br>
-                </div>
+              <h4>Please mention briefly about your family.</h4><br>
+              <div class="col-md-6 col-12 mt-4">
+                <button class="btn btn-primary add-Btn" type="button"
+                (click)="addRow()">Add Family Member</button>
                 
-                <h4>Family Details</h4>
-                <hr>
-                <div class="col-sm-3">
-                    <label>Father's Name:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control"/>
-                  </div>
-                  <div class="col-sm-3">
-                    <label>Father's Pancard No:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control"/>
-                  </div>
-                  <div class="col-sm-3">
-                    <label>Present/Prior Income:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control"/><br>
-                  </div>
-                  
-                  <h6>Please mention briefly about your family.</h6><br>
-                  <div class="col-md-6 col-12 mt-4">
-                    <button class="btn btn-primary add-Btn" type="button"
-                    (click)="addRow()">Add Family Member</button>
-                    
-                  </div>
-                
-                <div class="row" style="margin-top: 10px;">
-                    <app-common-table [headers]="familyTableHeaders" [rows]="familyTableRows" 
-                      >
-                    </app-common-table>
-                  </div>
-                  <!-- <app-common-table
-                  [headers] = "cityHeaders"
-                  [rows] = "cityArr"
-                  (onSortClicked)="onSortHeaderClicked($event)"
+              </div>
+            
+            <div class="row" style="margin-top: 10px;">
+                <app-common-table [headers]="familyTableHeaders" [rows]="familyTableRows" 
                   >
-                  </app-common-table> -->
-                  <br>
-                <h4>Education Qualification</h4><hr>
-                <h6>Please mention your Qualification class X onwards, including Degrees and Diplomas.</h6><br>
+                </app-common-table>
+              </div>
+          <div>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px" (click)="submitUserDetails()">Save and Continue</button>
+          </div>
+        </mat-step>
+      
+        <mat-step label="Qualifications & Experiences">
+          <h4>Education Qualification</h4><hr>
+                <h4>Please mention your Qualification class X onwards, including Degrees and Diplomas.</h4><br>
                 <!--add qualification table-->
                 <div class="col-md-6 col-12 mt-4">
                   <button class="btn btn-primary add-Btn" type="button"
@@ -136,7 +188,7 @@
                 </div>
                 <br>
                 <h4>Work Experience/Internship</h4><hr>
-                <h6>Please mention briefly any internship/Work experience you have.</h6><br>
+                <h4>Please mention briefly any internship/Work experience you have.</h4><br>
                 <!--work exp table-->
                 <div class="col-md-6 col-12 mt-4">
                   <button class="btn btn-primary add-Btn" type="button"
@@ -164,9 +216,17 @@
                     >
                   </app-common-table>
                 </div>
-                <br>
-                <h4>References</h4><hr>
-                <h6>Please mention references with whom we can cross check the details provided.</h6><br>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px" (click)="onStep2()">Save and Continue</button>
+          </div>
+        </mat-step>
+      
+        <mat-step label="Contact">
+          <h6>Please mention references with whom we can cross check the details provided.</h6><br>
                 <!--refrences table-->
                                 <div class="col-md-6 col-12 mt-4">
   <button class="btn btn-primary add-Btn" type="button"
@@ -193,54 +253,99 @@
                                     >
                                   </app-common-table>
                                 </div>
-                <br>
-                <h4>Application Details</h4><hr>
-                <div class="form-group col-sm-3 col-12">
-                    <label>Company:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="form-group col-sm-3 col-12">
-                    <label>Application Date:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="form-group col-sm-3 col-12">
-                    <label>Application Position:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div><div class="form-group col-sm-3 col-12">
-                    <label>Application By:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control"><br>
-                </div>
-                <br>
-                <h4>Bank Details</h4><hr>
-                <div class="form-group col-sm-3 col-12">
-                    <label>Account Holder's Name:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="form-group col-sm-3 col-12">
-                    <label>Bank Account No:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="form-group col-sm-3 col-12">
-                    <label>Bank Name:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div><div class="form-group col-sm-3 col-12">
-                    <label>Bank Branch Name:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control"><br>
-                </div>
-                <div class="form-group col-sm-3 col-12">
-                    <label>Bank IFSC Code:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-12 pd-0" style="margin-top: 10px;">
-                <button type="submit" class="btn btn-success float-right" 
-                 (click)=" submit()" style="margin-right: 60px;"
-                 >Submit</button>
-                <button type="button" class="btn btn-warning float-left" type="reset" 
-                >Reset</button>
-            </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px">Save and Continue</button>
+          </div>
+        </mat-step>
+        <mat-step label="Application Details">
+          <div class="form-group col-sm-3 col-12">
+            <label>Company:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
         </div>
-        </form>
+        <div class="form-group col-sm-3 col-12">
+            <label>Application Date:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Application Position:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div><div class="form-group col-sm-3 col-12">
+            <label>Application By:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"><br>
+        </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px">Save and Continue</button>
+          </div>
+        </mat-step>
+        <mat-step label="Bank Details">
+          <div class="form-group col-sm-3 col-12">
+            <label>Account Holder's Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control" [(ngModel)]="bankDetailObj.name">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank Account No:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankAccount">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankName">
+        </div><div class="form-group col-sm-3 col-12">
+            <label>Bank Branch Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankBranch"><br>
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank IFSC Code:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.ifsc_code">
+        </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px" (click)="submitBankDetails()">Save and Continue</button>
+          </div>
+        </mat-step>
+        <mat-step label="Documents">
+          Upload...
+          <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button type="submit" class="btn btn-success float-right" 
+              (click)=" submit()" style="margin-right: 60px;"
+              >Submit</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+        </div>
+
+        <div class="row" *ngIf="!isHidden" style="margin-top: 500px;">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="companyCount">Total :<span class="text-primary">{{totalCount}}</span></div>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-12 buttonpostion">
+            <button  (click)="getallEmployeeExport()" class="btn third">Export</button>
+          </div>
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <div class="justify-content-end" *ngIf="totalCount">
+              <pagination style="float: right;" [boundaryLinks]="true" [itemsPerPage]="10" [maxSize]="10" [totalItems]="totalCount" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+          </div>
+        </div>
+        <div class="row" hidden>
+          <div class="col-lg-12" #TABLE>
+            <app-common-table
+            [headers] = "employeeTableHeaders"
+            [rows] = "employeeTableRows"
+            ></app-common-table>
+          </div>
+        </div>
 
               
           
