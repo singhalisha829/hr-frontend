@@ -1,0 +1,215 @@
+<!-- 
+  <body onload="window.print();"> -->
+  
+    <!-- <div class="page-header" style="text-align: center">
+  
+      <br/>
+  
+    </div>
+  
+    <div class="page-footer">
+  
+    </div>
+  
+    <table>
+  
+      <thead>
+        <tr>
+          <td> -->
+            <!--place holder for the fixed-position header-->
+            <!-- <div class="page-header-space"></div>
+          </td>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr>
+          <td> -->
+            <!--*** CONTENT GOES HERE ***-->
+        
+            <!-- <div  style=" margin:10.5mm;">
+           <div style="font-size:11pt;">
+       <p align="center"><b><u>PRIVATE & CONFIDENTIAL</u></b></p>
+       
+       <?php $newdate = date("j F Y", strtotime($date)); ?>
+       
+  
+       
+  <p>   <p align="right"> <?php echo $newdate?> </p></p>
+      <p >To,<br/>
+          <b><?php echo $name?></b> <br/>
+      <?php echo $address?> <br/>
+      <?php echo $city?>,
+     <?php echo $state?>-
+     <?php echo $pincode?> </p>
+      
+      <?php $newdate1 = date("j F Y", strtotime($date_of_commen)); ?>
+  <p>We are pleased to offer you employment with <b><?php echo $company?></b> on the following terms and conditions:</p>
+     <p>1.	<u> Date of Commencement:</u> Your employment with the Company will commence on  <?php echo $newdate1;?>  .</p>
+     <p>2.	<u>Position & Scope </u><</p>
+     <p>2.1.	Your appointment with the Company is that of  <b><?php echo $profile?></b> .You will faithfully and diligently perform all acts, duties and obligations and comply with such orders as may be designated by the Company which are reasonably consistent with that position. <br/> 2.2.	You are required to comply with all the Company's rules, regulations and policies from time to time in force and to comply with the Company's lawful and reasonable instructions. </p>
+  
+  <p>3.	<u>Probation:</u> You will be on probation for a period of 6 months, from your Date Of Joining, after which you will be confrimed.During the probation period either party may terminate this agreement by giving 7 days notice.If your services are not considered appropriate during your probation period you would be  to leave with immediate effect.</p>
+     <p>4.	<u>Remuneration  </u></p>
+     
+     
+     
+     
+     
+  <table style="width:100%;  border: 1px solid black;   border-collapse: collapse;">
+    <tr style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 12px;">
+      <th style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 12px;">SN</th>
+      <th style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 12px;">Component </th> 
+      <th style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 12px;">Particulars</th>
+      <th style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 12px;">Monthly Amount</th>
+      <th style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 12px;">Annual Amount</th>
+    </tr>
+    <tr>
+      <td rowspan= "5" style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">1. </td>
+      <td rowspan= "5" style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">Gross Salary  </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;"> 1a. Basic Salary</td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $basic_salary?> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;<?php echo $abasic_salary?> </td>
+    </tr>
+      <tr>
+   
+     
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">1b. HRA                                                      </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $hra?> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $ahra?></td>
+    </tr>
+      <tr>
+     
+      
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">1c. Conveyance </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $conveyance?> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;  <?php echo $aconveyance?></td>
+    </tr>
+      <tr>
+      
+      
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">1d.Other Allowances  </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $other_allowances?> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;<?php echo $aother_allowances?> </td>
+    </tr>
+        <tr>
+      
+      
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;"><b>Sub Total(Gross Salary)</b></td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9; <?php echo $sub?></b> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9;<?php echo $asub?></b> </td>
+    </tr>
+      <tr>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">2. </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;"> EPF</td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">Employers Contribution </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;  <?php echo $epf?> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $aepf?> </td>
+    </tr>
+      <tr>
+      
+      <td colspan="3" style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;"><b>Total Cost to Company </b></td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9;  <?php echo $tcc?> </b></td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9; <?php echo $atcc?> </b> </td>
+    </tr>
+    
+  
+  </table>
+  
+     
+     
+    <p>4.1.	<u>Annual fixed compensation   </u></p> 
+  <p>You will receive a gross annual fixed compensation, defined as a <b>gross salary of &#x20B9; <?php echo $atcc?> /year.</b> Your Cost to Company may be split into appropriate heads, within Indian laws and prevailing Company policy. The gross annual salary may be reviewed and revised periodically.</p>
+  
+   <p>4.2.	<u>Payment    </u></p> 
+  <p>The salary will be paid by the Company on a monthly basis, in Indian Rupees into your bank account in India</p>
+  
+  <p>4.3.	<u>Taxes and deductions  </u></p> 
+  <p>The Company shall pay you the above compensation after withholding applicable taxes as per the provisions of the law. You are personally liable for all personal income taxes (and where the Company is required under laws to withhold any taxes on payments required to be made by the Company to you, such payment received by you shall be net of the tax withheld by the Company and the Company shall not be required to make up the difference between the payment required to be made and the tax withheld) arising from your employment. </p>
+  
+   <p>5.	<u>Working Hours:     </u>
+  As an employee, you are expected to work the number of hours required to get the job done. However, you are generally expected to be present during normal working hours of the Company</p>
+  
+   <p>6.	<u>Staff Benefits:     </u>
+  The Company has full discretion to classify employees and other individuals performing services for the Company and to determine the eligibility of the employees in the provision of staff benefits. The Company also reserves the right to change or revise any staff benefits at its discretion. You will be eligible to enjoy all general staff benefits as mentioned below: </p>
+   <p>6.1.	<u>Annual Leave     </u></p> 
+  <p>In addition to the public holidays which the Company will inform you from time to time, you will be entitled to 12 days of paid leave in each complete calendar year from the date of joining. You shall notify your supervisor in advance of desired leave dates for approval by the company. </p>
+  <p>Sick/ Medical leaves are exempted from the above 12 days quota, only post production of a valid medical certificate or consent by the managements</p>
+  
+  <p>6.2.	<u>Tax saving reimbursement benefits      </u></p> 
+  
+  <p>Tax saving reimbursement benefits (like travel allowance, medical allowance, food reimbursement) of reasonable amount in accordance with the company policies, would be provided by the Company  </p>
+  
+   <p>7.	<u>Non – Solicitation and Non Hire of Company Employees:    </u>
+   You agree that during the term of your employment and a further period of 12 (twelve) calendar months after separation from the Company, for whatever reasons, you shall not either directly or indirectly solicit or entice away or endeavor to solicit or to entice away or assist any other Person to solicit or hire or entice away from the Company, any Company employee. 
+   </p> 
+  
+  <p>7.1.	<u>	Exclusivity of Service       </u></p> 
+  <p>Your appointment with the Company is exclusive. You shall not directly or indirectly be interested in, engage in, be concerned with, or provide services, whether solely or with others, to any other person, company, business entity or other organisation whatsoever (whether as an employee, officer, director, agent, partner, consultant or otherwise) except at the direction of the Company. You shall not involve yourself outside the Company in any part-time service or business, but shall devote the whole of your time and attention to your present job as well as to promote the interest of the Company. You shall not engage in any outside commercial activity, which could interfere with the performance of your present job.</p>
+  
+  <p>8.	<u>Non-Disclosure of the Company’s Confidential Information </u></p>
+  <p>	8.1.	You shall neither during your employment (except in the proper performance of your duties) nor at any time (without limit) after its termination directly or indirectly: <br/> 
+  8.1.1.1.	use for your own purposes or those of any other person, company, business entity or other organization whatsoever; or <br/>
+  
+  8.1.1.2.	disclose to any person, company, business entity or other organization whatsoever; </p>
+  
+  <p>any non public information relating or belonging to the Company or any of its Associated Companies including, any document marked ‘Confidential’ (or with a similar expression), or any information which you have been told is confidential or which you might reasonably expect the Company would regard as confidential, or any information which has been given to the Company or any Associated Company (as defined hereinafter) in confidence by customers, suppliers and other persons.</p>
+  
+  <p>8.2.	For the purposes of this agreement, “Associated Company” means in relation to the Company, any subsidiary or holding company of the Company, any subsidiary of such holding company, and any company in which the Company or any such holding company holds or controls directly or indirectly not less than 20% of the issued share capital. “Company” and “Associated Company” shall include the successors in title and assigns of the Company and Associated Company. 
+  <br/>8.3.	If you, who disclose the Company’s confidential information / documents without prior written authorization, you will be subject to legal action.
+  <br/>8.4.	You shall not at any time during the continuance of your employment with the Company make any notes or memoranda relating to any matter within the scope of the Company’s or any Associated Company’s business, dealings or affairs otherwise than for the benefit of the Company or any Associated Company. </p>
+  
+   <p>9.	<u>Intellectual Property Rights    </u></p>
+  <p>9.1.	If at any time during the course of your employment with the Company, on and from the date of this agreement, you, make or discover or participate in the making or discovery of any intellectual property (including any patent) relating to or capable of being used in the business of the Company, you shall immediately assign any rights you may have with regard to such intellectual property (“Intellectual Property”) to the Company and full details of the Intellectual Property shall immediately be communicated by you to the Company, and such Intellectual Property shall belong absolutely to the Company. 
+  <br/>9.2.	Further, at the request and expense of the Company, you shall give and supply all such information, data, drawings and assistance as may be required to enable the Company to exploit the Intellectual Property to the best advantage, and shall execute all documents and do all things which may be necessary or desirable for obtaining registration or other protection for the Intellectual Property in such parts of the world as may be specified by the Company and for vesting the same in the Company or as it may direct. </p>
+  
+  <p>10.	<u>Indemnification:  </u>
+  You agree to indemnify and hold the Company harmless from all losses, liabilities, claims and damages (including reasonable legal fees) which may arise out of or as a result of any unauthorized act by you or any act caused by you being in contravention of this agreement. </p>
+  
+  <p>11.	<u>Termination of Employment </u></p>
+  <p>11.1.	Either party may terminate your employment with one month’s written notice or at the election of the Company by payment of salary in lieu of notice or as per applicable statutory requirements. 
+      <br/>11.2.	The Company reserves the right to terminate your contract without any notice if it has reasonable grounds to believe you are guilty of gross misconduct and/ or material breach of any of the terms of your employment. 
+      <br/>11.3.	On termination of your employment, you must immediately return to the Company in accordance with its instructions all equipment, correspondence, records, specifications, software, disks, models, notes, reports and other documents and any copies thereof and any other property belonging to the Company or its Associated Companies which are in your possession or under your control. You must, if so, required by the Company, confirm in writing that you have complied with your obligations under this paragraph.
+      </p>
+  
+  <p>12.	<u>Warranty:  </u>You represent and warrant that you are not prevented by any agreement, arrangement, contract, understanding, Court Order or otherwise, which in any way directly or indirectly restricts or prohibits you from fully performing any of the duties of your employment in accordance with the terms of this agreement. </p>
+  
+  <p>13.	<u>Fulfillment Obligation: </u>Any cash bonuses or other expenses paid prior to normal salary periods are recoverable by the Company for the first 90 days of employment should you terminate your employment without cause.</p>
+  
+  <p>14.	<u>Transfer & Relocation:  </u>You will be liable to transfer in such capacity as the company may from time to time determine to any other location, department, establishment, factory or branch of the company or its affiliate, associate or subsidiary companies. In such case, you will be governed by the terms and conditions of service applicable to the new assignment.</p>
+  
+  <p>15.	<u>Non –Compete:  </u>You agree that during the term of your employment and for  further period of 12 (twelve) calendar months after separation from the Company, for whatever reasons, you shall not carry on or engage in directly or indirectly in any business which competes directly or indirectly with any or all the business pursued by the Company in any territory, whether in India or overseas, at the relevant point of time or proposed to be pursued by the Company in the immediate future, in respect of which proposal you were aware of or likely to be aware of considering the nature of your duties        (Restricted Business), other than through the Company.</p>
+  <p>16.	<u>Non-Solicitation of Customers:  </u>You agree that during the term of your employment and for a further  period of 12 (twelve) calendar months after separation from the Company, for whatever reasons, you shall not directly or indirectly, irrespective of whether the relationship between the Company and a customer was originally established in whole or in part through your efforts; (i) solicit any Restricted Business from any customer; (ii) persuade any existing or prospective customer to cease doing Restricted Business with the Company; (iii) reduce the amount of Restricted Business which any customer has customarily done or might propose doing with the Company.</p>
+  <p>17.	<u>Entire Agreement:  </u>This agreement supersedes and is in substitution for all previous letters of engagement, agreements and arrangements whether oral or in writing relating to the subject matter hereof between the Company and yourself, all of which shall be deemed to have been terminated by mutual consent. </p>
+  <p>18.	<u>Severability : </u>This agreement is governed by and construed in accordance with Indian laws, and you and the Company submit to the exclusive jurisdiction of the Indian courts. You will be solely responsible for all personal and other taxes, as relevant, including the preparation and filing of such tax returns to the appropriate Authorities. </p>
+  <p>Please sign and return the duplicate of this agreement to the undersigned to indicate your acceptance of this appointment and the terms of this agreement.</p>
+  <p>We welcome you to our company and look forward to your association with us</p>
+  <p>Yours sincerely,</p>
+  <p>For and on behalf of <b><?php echo $company?></b></p>
+  <br/>
+  <p><b>Aditya Goel,</b> </p>
+  <p><b>Director</b></p>
+  <p>I agree with the terms and conditions of my employment with the Company as set out or referred to above.</p>
+  
+  <p>Signed __________________________	Date   ____________________</p>
+  
+  
+    </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+  
+      <tfoot>
+        <tr>
+          <td> -->
+            <!--place holder for the fixed-position footer-->
+            <!-- <div class="page-footer-space"></div>
+          </td>
+        </tr>
+      </tfoot>
+  
+    </table>
+   -->
+ 
+   -->

@@ -16,6 +16,7 @@ import { LeaveCalendarComponent } from './leave-calendar/leave-calendar.componen
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { BuddyComponent } from './buddy/buddy.component';
 import { BuddyBannerComponent } from './buddy-banner/buddy-banner.component';
+import { OfferLetterComponent } from './offer-letter/offer-letter.component';
 
 
 const routes: Routes = [
@@ -80,6 +81,10 @@ const routes: Routes = [
   {
     path:'buddy-banner',
     component:BuddyBannerComponent
+  },
+  {
+    path:'offer-letter-pdf',
+    component:OfferLetterComponent
   },
  ]
 },

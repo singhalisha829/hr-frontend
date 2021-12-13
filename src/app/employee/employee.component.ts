@@ -153,6 +153,8 @@ export class EmployeeComponent implements OnInit {
     formdata.append('organisation', this.employeeObj.organisation);
     formdata.append('department' , this.selectedDept.id);
     formdata.append('designation', this.employeeObj.designation);
+    formdata.append('application_date', this.employeeObj.app_date);
+    formdata.append('reference_by', this.employeeObj.app_by);
 
     //user_present_address
     formdata1.append('present_address', this.employeeObj.presentAddress);
@@ -378,6 +380,10 @@ export class EmployeeComponent implements OnInit {
 
   onDateRangeSelection(event: { startDate: string | number | Date; }) {
     this.employeeObj.date = this.utilsService.formatDate(event.startDate)
+  }
+
+  onDateRangeSelection1(event: { startDate: string | number | Date; }) {
+    this.employeeObj.app_date = this.utilsService.formatDate(event.startDate)
   }
 
 onSortHeaderClicked(e: { ascending: any; headerField: string; }) {

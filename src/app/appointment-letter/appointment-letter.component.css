@@ -1,0 +1,48 @@
+ 
+  .page-header, .page-header-space {
+    height: 100px;
+  }
+  
+  .page-footer, .page-footer-space {
+    height: 100px;
+  
+  }
+  
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+   background-position: center;
+    
+    background-image: url("http://sunlightinabox.com/HRM/admin/footer1.jpg") ; /* for demo */
+      background-repeat: no-repeat;
+      margin-bottom:-2mm
+      
+  }
+  
+  .page-header {
+    position: fixed;
+    top: 0mm;
+    width: 100%;
+   background-position: center;
+    background-image: url("http://sunlightinabox.com/HRM/admin/header1.jpg"); /* for demo */
+      background-repeat: no-repeat;
+     margin-top:0mm
+  }
+  
+  .page {
+    page-break-after: always;
+  }
+  
+  @page {
+    margin: 0mm
+  }
+  
+  @media print {
+     thead {display: table-header-group;} 
+     tfoot {display: table-footer-group;}
+     
+     button {display: none;}
+     
+     body {margin: 0;}
+  }

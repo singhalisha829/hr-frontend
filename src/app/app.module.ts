@@ -40,6 +40,8 @@ import { ApplicationFormComponent } from './application-form/application-form.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BuddyComponent } from './buddy/buddy.component';
 import { BuddyBannerComponent } from './buddy-banner/buddy-banner.component';
+import { AppointmentLetterComponent } from './appointment-letter/appointment-letter.component';
+import { OfferLetterComponent } from './offer-letter/offer-letter.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { BuddyBannerComponent } from './buddy-banner/buddy-banner.component';
     ApplicationFormComponent,
     BuddyComponent,
     BuddyBannerComponent,
+    AppointmentLetterComponent,
+    OfferLetterComponent,
     
   ],
   imports: [

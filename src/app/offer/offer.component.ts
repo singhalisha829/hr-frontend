@@ -21,22 +21,27 @@ export class OfferComponent implements OnInit {
   public buttonName:any = 'Create New Offer';
   addNewOffer: any = {};
   cityDDList :any = [];
+  incomingApi:any;
+  totalCount;
   unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets 
 
   offerTableHeaders = [
-    { headerName: 'Employee Id', field: 'id',width: 60, },
-    { headerName: 'Name', field: 'fullName', width: 180},
-    { headerName: 'Email Id', field: 'organisation_email', width: 180},
-    { headerName: 'Contact No', field: 'phone',  width: 180},
-    { headerName: 'Company', field: 'organisation',  width: 180},
-    { headerName: 'Designation', field: 'designation', width: 180,  },
-    { headerName: 'Details', field: 'occupation',  width: 65},
+    { headerName: 'Date', field: 'date',width: 80, },
+    { headerName: 'Name', field: 'emp_name', width: 150},
+    { headerName: 'Ref No', field: 'ref_no', width: 180},
+    { headerName: 'Profile', field: 'job_profile',  width: 150},
+    { headerName: 'DOJ', field: 'exp_joining_date',  width: 80},
+    { headerName: 'Contact', field: 'mobile_no', width: 65,  },
+    { headerName: 'Company', field: 'comapany',  width: 65},
+    { headerName: 'Status', field: 'status',  width: 65},
+    { headerName: 'Document', field: 'occupation',  width: 65},
   ];
   constructor( public utilsService: UtilsService, private companyService: CompanyapiService,private importsService: ImportsService,
     private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.getCities();
+    this.getallOffer();
   }
 
   public getCities() {
@@ -79,6 +84,24 @@ export class OfferComponent implements OnInit {
        
       }
     }, () => {})
+  }
+
+  public getallOffer() {
+    if (this.incomingApi) this.incomingApi.unsubscribe();
+    this.incomingApi = this.importsService.getOfferData({end_limit: 25,  })
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.offerTableRows = res.data.output;
+        this.totalCount = res.data.total_count;
+        // this.employeeId = this.offerTableRows[this.totalCount-1]['id'];
+        // console.log(this.employeeId)
+        // for(let i =0 ; i < this.offerTableRows.length; i++){
+        //   this.offerTableRows[i]['fullName'] = this.offerTableRows[i]['first_name']+" "+ this.offerTableRows[i]['last_name'];
+        // }
+      } else {this.offerTableRows = [];}
+    }),
+      () => {this.offerTableRows = [];};
   }
 
   addOffer(){
