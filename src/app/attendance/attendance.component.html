@@ -18,11 +18,11 @@
         <tbody>
              <tr *ngFor="let data of Employee;let i=index">
             <th style="width: 500px;"> {{ data }}</th>
-            <td style="width: 150px;text-align:center; ">  <input type="radio" id="present" name={{i}} checked></td>
-            <td style="width: 150px;text-align:center;">  <input type="radio" id="absent" name={{i}}></td>
-            <td style="width: 150px;text-align:center;">  <input type="radio" id="meeting" name={{i}}></td>
-            <td style="width: 150px;text-align:center;">  <input type="radio" id="first" name={{i}}></td>
-            <td style="width: 150px;text-align:center;">  <input type="radio" id="second" name={{i}}></td>
+            <td style="width: 150px;text-align:center; ">  <input type="radio" id="present" value="Present" name={{i}} checked (change)="changeGender($event)"></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="absent" value="Absent" name={{i}} (change)="changeGender($event)"></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="meeting" value="Meeting" name={{i}} (change)="changeGender($event)"></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="first" value="First_half_leave" name={{i}} (change)="changeGender($event)"></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="second" value="Second_half_leave" name={{i}} (change)="changeGender($event)"></td>
             </tr> 
         </tbody>
         </table>

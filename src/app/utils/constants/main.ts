@@ -12,7 +12,8 @@ export const MAIN = {
         USER_BANK:'/hrm/user-bank/',
         USER_ADDRESS:'/hrm/user-address',
         OFFER_LETTER:'/hrm/employee-offer-letter/',
-        APPOINTMENT:'/hrm/employee-appointment-letter/'
+        APPOINTMENT:'/hrm/employee-appointment-letter/',
+        ATTENDANCE:'/hrm/employee-attendance/',
       },
       MESSAGES: {
         UNAUTH_ERR: 'Unauthorized access.',

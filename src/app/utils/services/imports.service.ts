@@ -49,6 +49,10 @@ export class ImportsService {
     return this.httpService.post(CONSTANTS.MAIN.APP.URLS.USER_ADDRESS, data);
   }
 
+  public postAttendance(data:any) {
+    return this.httpService.post(CONSTANTS.MAIN.APP.URLS.ATTENDANCE, data);
+  }
+
   public postOfferLetter(data:any) {
     return this.httpService.post(CONSTANTS.MAIN.APP.URLS.OFFER_LETTER, data);
   }

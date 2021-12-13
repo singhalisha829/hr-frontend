@@ -67,7 +67,7 @@ export class EmployeeComponent implements OnInit {
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Institute Name', field: 'inst_name', type: 'text', value: 'inst_name', isEditable: true, width: 180},
     { headerName: 'Institue Address', field: 'inst_address', type: 'text', value: 'inst_address', isEditable: true, width: 180},
-    { headerName: 'Institute City', field: 'inst_city', showDropdown: true, key: 'id', value: 'name', ddList:[],  dropDownInRow: true, width: 250},
+    { headerName: 'Institute City', field: 'inst_city', showDropdown: true, key: 'id', value: 'name', ddList:[],  dropDownInRow: false, width: 250},
     { headerName: 'Start Date', field: 'start_date', type: 'date', value: 'start_date', isEditable: true,  width: 180},
     { headerName: 'End Date', field: 'end_date', type: 'date', value: 'end_date', isEditable: true,  width: 180},
     { headerName: 'Course Name', field: 'course_name', type: 'text', value: 'course_name', isEditable: true,  width: 180},
@@ -79,7 +79,7 @@ export class EmployeeComponent implements OnInit {
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Company Name', field: 'company_name', type: 'text', value: 'company_name', isEditable: true, width: 180},
     { headerName: 'Company Address', field: 'company_address', type: 'text', value: 'company_address', isEditable: true, width: 180},
-    { headerName: 'Company City', field: 'company_city', type: 'text', value: 'company_city', isEditable: true,  width: 180},
+    { headerName: 'Company City', field: 'company_city', showDropdown: true, key: 'id', value: 'name', ddList:[],  dropDownInRow: false, width: 250},
     { headerName: 'Company Pincode', field: 'company_pincode', type: 'number', value: 'company_pincode', isEditable: true,  width: 180},
     { headerName: 'Start Date', field: 'start_date', type: 'date', value: 'start_date', isEditable: true,  width: 180},
     { headerName: 'End Date', field: 'end_date', type: 'date', value: 'end_date', isEditable: true,  width: 180},
@@ -94,7 +94,7 @@ export class EmployeeComponent implements OnInit {
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Institute Name', field: 'inst_name', type: 'text', value: 'inst_name', isEditable: true, width: 180},
     { headerName: 'Institute Address', field: 'inst_address', type: 'text', value: 'inst_address', isEditable: true, width: 180},
-    { headerName: 'Institute City', field: 'inst_city', type: 'text', value: 'inst_city', isEditable: true,  width: 180},
+    { headerName: 'Institute City', field: 'inst_city', showDropdown: true, key: 'id', value: 'name', ddList:[],  dropDownInRow: false, width: 250},
     { headerName: 'Institute Pincode', field: 'inst_pincode', type: 'number', value: 'inst_pincode', isEditable: true,  width: 180},
     { headerName: 'Start Date', field: 'start_date', type: 'date', value: 'start_date', isEditable: true,  width: 180},
     { headerName: 'End Date', field: 'end_date', type: 'date', value: 'end_date', isEditable: true,  width: 180},
@@ -228,8 +228,9 @@ export class EmployeeComponent implements OnInit {
       this.educationTableRows[i]['end_date']= this.educationTableRows[i]['end_date'];
       this.educationTableRows[i]['course_name']= this.educationTableRows[i]['course_name'];
       this.educationTableRows[i]['overall_percentage']= this.educationTableRows[i]['overall_percentage'];
-      this.educationTableRows[i]['inst_city']= this.employeeId;
+      this.educationTableRows[i]['inst_city']= this.educationTableRows[i]['inst_city'].id;
       this.educationTableRows[i]['UserDetails']= this.employeeId;
+      console.log(this.educationTableRows[i]['inst_city'].id)
     }
     for(let k = 0; k < this.educationTableRows.length; k++ ){
      this.importsService.postEducationDetails(this.educationTableRows[k])
@@ -408,7 +409,10 @@ public getCities() {
   .subscribe((res: any) => {
     if (res.status.code === 200) {
       this.cityDDList = res.data.output;
-      this.employeeTableHeaders[0]['ddList'] = [...this.cityDDList]
+      this.educationTableHeaders[2]['ddList'] = [...this.cityDDList]
+      this.workTableHeaders[2]['ddList'] = [...this.cityDDList]
+      this.trainingTableHeaders[2]['ddList'] = [...this.cityDDList]
+      console.log(this.educationTableHeaders)
     } else {
       this.cityDDList = [];
     }
