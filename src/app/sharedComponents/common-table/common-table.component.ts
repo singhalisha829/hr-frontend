@@ -40,7 +40,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
       <ng-container *ngIf="h.type === 'number' && h.subType !== 'float'">
       <input (keypress)="numberOnly($event)" style="width:100%" [(ngModel)]="r[h.field]" (change)="h.func({index: rowIndex, rowObj: r})" [disabled]="!h.isEditable" type="text" [name]="('name' + rowIndex)">
       </ng-container>
-
       <ng-container *ngIf="h.type === 'text'">
       <input style="width:100%" (change)="h.func({index: rowIndex, rowObj: r})" [disabled]="!h.isEditable" type="text" [name]="('name' + rowIndex)" [(ngModel)]="r[h.field]">
       </ng-container>
@@ -48,11 +47,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
       <ng-container *ngIf="h.type === 'file'">
       <input style="width:100%" (change)="h.func({index: rowIndex, rowObj: r})" [disabled]="!h.isEditable" type="file" [name]="('name' + rowIndex)" [(ngModel)]="r[h.field]">
       </ng-container>
-
       <ng-container *ngIf="h.type === 'date'">
       <input style="width:100%" (change)="h.func({index: rowIndex, rowObj: r})" [disabled]="!h.isEditable" type="date" [name]="('name' + rowIndex)" [(ngModel)]="r[h.field]">
       </ng-container>
-
       <ng-container *ngIf="h.type === 'number' && h.subType === 'float'">
       <input style="width:100%" (change)="h.func({index: rowIndex, rowObj: r})" [disabled]="!h.isEditable" type="number" step="0.01" [name]="('name' + rowIndex)" [(ngModel)]="r[h.field]">
       </ng-container>
@@ -66,29 +63,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
                       <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
       </ng-container>
-
       <ng-container *ngIf="h.field === 'checkstatus'" >
       <button style="margin: 0px;height: 35px;" type="button" class="btn btn-sucesses" (click)=" h.func({index: rowIndex, rowObj: r}); " >
             Detail
       </button>
       </ng-container>
-
       <ng-container *ngIf="h.field === 'warranty'" >
       <button style="margin: 0px;height: 35px;" type="button" class="form-control btn-sucesses" (click)=" h.func({index: rowIndex, rowObj: r}); " >
        Warranty </button>
       </ng-container>
-
       <ng-container *ngIf="h.field === 'DownloadBtn'" >
       <button style="margin: 0px;height: 35px;" type="button" class="form-control btn-sucesses" (click)=" h.func({index: rowIndex, rowObj: r}); " >
       <i class="fa fa-download" aria-hidden="true"></i></button>
       </ng-container>
-
       <ng-container *ngIf="h.field === 'PaymentLCbtn'" >
       <button style="margin: 0px;height: 35px;" type="button" class="form-control btn-sucesses" (click)=" h.func({index: rowIndex, rowObj: r}); " >
        LC Payment </button>
       </ng-container>
-
-
       <ng-container *ngIf="h.showDropdown && !h.dropDownInRow">
         <app-dropdown
           [customStyle] ="true"

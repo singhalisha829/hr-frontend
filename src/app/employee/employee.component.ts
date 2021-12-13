@@ -1,5 +1,9 @@
 import { UtilsService } from './../services/utils.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ImportsService } from '../utils/services/imports.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-employee',
@@ -11,6 +15,7 @@ export class EmployeeComponent implements OnInit {
   isHidden!: boolean;
   public buttonName:any = 'Add Employee';
   addNewEmployee: any = {};
+  currentPage = 1;
   cityHeaders = [
     { headerName: 'ID', field: 'id', width: '100' },
     { headerName: 'City Name', field: 'name', width: 120 },
@@ -20,6 +25,7 @@ export class EmployeeComponent implements OnInit {
   filterObj!: {};
   formSteps = ['Personal Details', 'Education Details & Work Ex','Bank Details', 'Upload Documents'];
   divNumber!: number;
+  employeeTableRows: any[]=[];
   familyTableRows: any[]= [];
   educationTableRows: any[]= [];
   trainingTableRows: any[]= [];
@@ -27,6 +33,19 @@ export class EmployeeComponent implements OnInit {
   referenceTableRows: any[]= [];
   contactTableRows: any[]= [];
   newProductArray: any[] = [];
+  incomingApi:any;
+  totalCount:any;
+  unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets 
+  @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
+  employeeTableHeaders = [
+    { headerName: 'Employee Id', field: 'id',width: 60, },
+    { headerName: 'Name', field: 'fullName', width: 180},
+    { headerName: 'Email Id', field: 'organisation_email', width: 180},
+    { headerName: 'Contact No', field: 'phone',  width: 180},
+    { headerName: 'Company', field: 'organisation',  width: 180},
+    { headerName: 'Designation', field: 'designation', width: 180,  },
+    { headerName: 'Details', field: 'occupation',  width: 65},
+  ];
   familyTableHeaders = [
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Name', field: 'name', type: 'text', value: 'name', isEditable: true, width: 180},
@@ -92,10 +111,11 @@ export class EmployeeComponent implements OnInit {
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
 
-  constructor( private utilsService: UtilsService) { }
+  constructor( private utilsService: UtilsService, private importsService: ImportsService,) { }
 
   ngOnInit(): void {
     this.initProductTable();
+    this.getallEmployee();
     
   }
 
@@ -113,6 +133,34 @@ export class EmployeeComponent implements OnInit {
   take_away:'',deleteBTN:''}]
     this.educationTableRows=[{inst_name:'',inst_address:'',inst_city:'',start_date:'',end_date:'',course_name:'',overall_percentage:'',deleteBTN:''}]
   }
+
+  pageChanged(e:any) {
+    if(this.currentPage === e.page) {
+      return;
+    }
+    this.currentPage = e.page;
+    this.persistPage(e.page);
+    this.getallEmployee();
+  }
+
+  persistPage(page?:any) {
+    const pathName  = window.location.pathname.slice(1);
+    this.currentPage = page ? page : 1;
+    if (localStorage.getItem('filterObj' + pathName )) {
+      const DDObj = JSON.parse(localStorage.getItem('filterObj' + pathName ))
+      if(page) {
+        DDObj[pathName]['page'] = this.currentPage;
+      } else {
+        this.currentPage = DDObj[pathName]['page'];
+      }
+      localStorage.setItem(('filterObj' + pathName), JSON.stringify({...DDObj}) )
+    } else {
+      const DDObj :any=  {};
+      DDObj[pathName] = {page: this.currentPage};
+      localStorage.setItem(('filterObj' + pathName), JSON.stringify({...DDObj}) )
+    }
+  }
+
   addEmployee(){
     if(!this.isHidden)
     {
@@ -121,6 +169,23 @@ export class EmployeeComponent implements OnInit {
       this.buttonName = 'Add Employee'
     }
     this.isHidden = !this.isHidden;
+  }
+
+  public getallEmployee() {
+    if (this.incomingApi) this.incomingApi.unsubscribe();
+    this.incomingApi = this.importsService.getEmployeeData({end_limit: 25, page: this.currentPage, ...this.filterObj})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.employeeTableRows = res.data.output;
+        this.totalCount = res.data.total_count;
+        for(let i =0 ; i < this.employeeTableRows.length; i++){
+          this.employeeTableRows[i]['fullName'] = this.employeeTableRows[i]['first_name']+" "+ this.employeeTableRows[i]['last_name'];
+         
+        }
+      } else {this.employeeTableRows = [];}
+    }),
+      () => {this.employeeTableRows = [];};
   }
 
   onDateRangeSelection(event: { startDate: string | number | Date; }) {
@@ -167,5 +232,28 @@ addRow4() {
 }
 addRow5() {
   this.contactTableRows.push({name:'',address:'', phone:'', relation:'',deleteBTN:''});
+}
+
+employeeList:any[]=[];
+getallEmployeeExport(){
+  if (this.incomingApi) this.incomingApi.unsubscribe();
+  this.incomingApi = this.importsService.getEmployeeData({end_limit: this.totalCount, ...this.filterObj})
+  .pipe(takeUntil(this.unsubsribeNotifier))
+  .subscribe((res: any) => {
+    if (res.status.code === 200) {
+      this.employeeList = res.data.output;
+      setTimeout(() => {
+        const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.TABLE.nativeElement);  
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();  
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');  
+        XLSX.writeFile(wb, 'Pi_list.xlsx');
+      }, 1000);
+    } else {
+      this.employeeList = [];
+    }
+  }),
+    () => {
+      this.employeeList = [];
+    };
 }
 }

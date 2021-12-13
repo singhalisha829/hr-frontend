@@ -27,14 +27,20 @@
   </div>
 </div>   -->
 
-<div class="card">
+<!-- <div class="card">
   <div class="card-body">
       <div class="col-md-6">
           <input type="text" class="form-control" placeholder="Policy Name"><br>
-          <!-- <textarea class="form-control" placeholder="Policy Description"></textarea><br> -->
-          <!-- <input type="file" class="custom-file-input" id="inputGroupFile02"><br><br><br> -->
+           <textarea class="form-control" placeholder="Policy Description"></textarea><br> 
+         <input type="file" class="custom-file-input" id="inputGroupFile02"><br><br><br> 
           <button class="btn btn-success"> Submit </button>
                       
         </div>
   </div>
-</div>
+</div> -->
+
+
+
+<ul *ngFor="let policyservice of title">
+  <li>{{policyservice.title}}</li>
+</ul>
