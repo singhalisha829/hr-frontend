@@ -42,6 +42,7 @@ import { BuddyComponent } from './buddy/buddy.component';
 import { BuddyBannerComponent } from './buddy-banner/buddy-banner.component';
 import { AppointmentLetterComponent } from './appointment-letter/appointment-letter.component';
 import { OfferLetterComponent } from './offer-letter/offer-letter.component';
+import { ConveyanceRequestComponent } from './conveyance-request/conveyance-request.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { OfferLetterComponent } from './offer-letter/offer-letter.component';
     BuddyBannerComponent,
     AppointmentLetterComponent,
     OfferLetterComponent,
+    ConveyanceRequestComponent,
     
   ],
   imports: [

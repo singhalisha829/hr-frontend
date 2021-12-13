@@ -269,7 +269,7 @@
               background-color:lightgrey; margin-right:30px">Back</button>
               <button mat-button matStepperNext style=" background-color:green;
               color:white; 
-              margin-top:10px">Save and Continue</button>
+              margin-top:10px" (click)="submitContact()">Save and Continue</button>
           </div>
         </mat-step>
        
@@ -302,11 +302,57 @@
           </div>
         </mat-step>
         <mat-step label="Documents">
-          Upload...
-          <div>
+          <div class="form-group col-lg-6">
+            <!-- <div class="col-md-6 col-12 mt-4">
+              <button class="btn btn-primary add-Btn" type="button"
+              (click)="addDocRow()">Add Documents</button>
+              
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <app-common-table [headers]="docsTableHeaders" [rows]="docsTableRows" 
+                >
+              </app-common-table>
+            </div> -->
+            <!-- <div class="row piInfo-section" style="margin-top: 15px;" >
+              <div class="col-sm-12">
+                  <h3 style="text-align:left;  font-weight: bold;border-bottom: 1px solid grey;">Product Details<span style="color: red;">*</span></h3>
+                  <div style="display: flex;flex-direction: row-reverse;flex: 1;">
+                  <button type="button"  [hidden]="hideDiveForDemo" class="add-user float-right"  style="margin-right:10px" (click)="addFTWZRow()" > Add </button>
+                  <button type="button"  [hidden]="!hideDiveForDemo" class="add-user float-right"  style="margin-right:10px" (click)="addproductCharges()" > Add </button>
+                  </div>
+                 
+                  <table class="table border mt-1" *ngIf="contract_type != 'Domestic'">
+                      <thead class="sticky-top">
+                      <tr>
+                          <th style="width: 250px;">Model Name </th>
+                          <th >Container No /Truck No</th>
+                          <th>Job No</th>
+                          <th>Qty</th>
+                          <th>Gross Weight(KG)</th>
+                          <th>Net Weight(KG)</th>
+                          <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let data of ProductFtwzArr;let i=index">
+                          <td style="width: 250px;">   <select  class="form-control" [(ngModel)]="data.product_id" (change)="selected($event,i)">
+                                      <option  *ngFor="let model of modelNameDDList" [value]="model.id"> {{model.model_name}}</option>
+                                  </select>
+                              </td>
+                          <td> 
+                              <input type="text" class="form-control" [(ngModel)]="data.container_number"></td>
+                          <td> <input type="text" class="form-control" [(ngModel)]="data.job_no"></td>
+                          <td > <input type="number" class="form-control" [(ngModel)]="data.qty"></td>
+                          <td> <input type="number" class="form-control" [(ngModel)]="data.gross_weight"></td>
+                          <td> <input type="number" class="form-control" [(ngModel)]="data.net_weight"></td>
+                          <td><button (click) = "onRowDelete(data)" class="btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  </div> -->
               <button mat-button matStepperPrevious>Back</button>
               <button type="submit" class="btn btn-success float-right" 
-              (click)=" submit()" style="margin-right: 60px;"
+              (click)=" submit()" style="margin-right: 60px;margin-top:30px"
               >Submit</button>
           </div>
         </mat-step>

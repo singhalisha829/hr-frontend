@@ -61,6 +61,17 @@ export class ImportsService {
     return this.httpService.get(CONSTANTS.MAIN.APP.URLS.OFFER_LETTER, data);
   }
   
+  public postReference(data:any) {
+    return this.httpService.post(CONSTANTS.MAIN.APP.URLS.REFERENCE, data);
+  }
+
+  public postEmergencyContact(data:any) {
+    return this.httpService.post(CONSTANTS.MAIN.APP.URLS.CONTACT, data);
+  }
+
+  public postDocuments(data:any) {
+    return this.httpService.post(CONSTANTS.MAIN.APP.URLS.DOCUMENT, data);
+  }
   
 //   public getPODetailsById(data) {
 //     return this.httpService.get(CONSTANTS.MAIN.APP.URLS.PURCHASE_ORDER, data);

@@ -1,3 +1,4 @@
+import { ConveyanceRequestComponent } from './conveyance-request/conveyance-request.component';
 
 import { AttendanceComponent } from './attendance/attendance.component';
 import { NgModule } from '@angular/core';
@@ -86,6 +87,10 @@ const routes: Routes = [
     path:'offer-letter-pdf',
     component:OfferLetterComponent
   },
+  {
+    path:'conveyance-request',
+    component:ConveyanceRequestComponent
+  }
  ]
 },
 {path: '**', pathMatch: 'full', component: LoginComponent}

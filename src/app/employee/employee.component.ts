@@ -34,6 +34,7 @@ export class EmployeeComponent implements OnInit {
   formSteps = ['Personal Details', 'Education Details & Work Ex','Bank Details', 'Upload Documents'];
   divNumber!: number;
   employeeTableRows: any[]=[];
+  docsTableRows: any[]=[];
   familyTableRows: any[]= [];
   educationTableRows: any[]= [];
   trainingTableRows: any[]= [];
@@ -62,6 +63,10 @@ export class EmployeeComponent implements OnInit {
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
 
+  docsTableHeaders = [
+    { headerName: 'Name', field: 'file_name',type:'text',value:'file_name', width: 180},
+    { headerName: 'Document', field: 'file',type:'file',value:'file', width: 180},
+  ];
  
   educationTableHeaders = [
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
@@ -119,6 +124,7 @@ export class EmployeeComponent implements OnInit {
     { headerName: 'Relation', field: 'relation', type: 'text', value: 'relation', isEditable: true,  width: 180},
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
+  empDocs: any;
 
   constructor( private utilsService: UtilsService, private companyService: CompanyapiService,private importsService: ImportsService,
     private toaster: ToastrService) { }
@@ -130,9 +136,23 @@ export class EmployeeComponent implements OnInit {
     this.getDept();
   }
 
+  id:any= 3;
   submit(){
+    const formdata = new FormData();
+    formdata.append('file',this.empDocs);
+    formdata.append('UserDetails',this.id)
+
+    this.importsService.postDocuments(formdata)
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        // this.toaster.success("User Address Successfully Added");
+      }
+    }, () => {})
 
   }
+
+
   submitUserDetails(){
     const formdata = new FormData();
     const formdata1= new FormData();
@@ -308,6 +328,42 @@ export class EmployeeComponent implements OnInit {
 
   }
 
+
+  submitContact(){
+    for( let i=0; i< this.referenceTableRows.length; i++){
+      this.referenceTableRows[i]['name']= this.referenceTableRows[i]['name'];
+      this.referenceTableRows[i]['address'] = this.referenceTableRows[i]['address'];
+      this.referenceTableRows[i]['phone']= this.referenceTableRows[i]['phone'];
+      this.referenceTableRows[i]['relation']= this.referenceTableRows[i]['relation'];
+      this.referenceTableRows[i]['UserDetails']= this.employeeId;
+    }
+    for(let k = 0; k < this.referenceTableRows.length; k++ ){
+     this.importsService.postReference(this.referenceTableRows[k])
+     .pipe(takeUntil(this.unsubsribeNotifier))
+     .subscribe((res: any) => {
+      if(res.status.code == 200){
+         this.toaster.success('Reference Updated Successfully');
+      }
+     }, () => {})
+    }
+
+    for( let i=0; i< this.contactTableRows.length; i++){
+      this.contactTableRows[i]['name']= this.contactTableRows[i]['name'];
+      this.contactTableRows[i]['address'] = this.contactTableRows[i]['address'];
+      this.contactTableRows[i]['phone']= this.contactTableRows[i]['phone'];
+      this.contactTableRows[i]['relation']= this.contactTableRows[i]['relation'];
+      this.contactTableRows[i]['UserDetails']= this.employeeId;
+    }
+    for(let k = 0; k < this.contactTableRows.length; k++ ){
+     this.importsService.postEmergencyContact(this.contactTableRows[k])
+     .pipe(takeUntil(this.unsubsribeNotifier))
+     .subscribe((res: any) => {
+      if(res.status.code == 200){
+         this.toaster.success('Emergency Contact Updated Successfully');
+      }
+     }, () => {})
+    }
+  }
   selectGender(e:any){
     this.employeeObj.gender = e.target.value;
 }
@@ -321,6 +377,11 @@ export class EmployeeComponent implements OnInit {
   this.trainingTableRows= [{inst_name:'',inst_address:'', inst_city:'', inst_pincode:'',start_date:'',end_date:'',name_training_attended:'',
   take_away:'',deleteBTN:''}]
     this.educationTableRows=[{inst_name:'',inst_address:'',inst_city:'',start_date:'',end_date:'',course_name:'',overall_percentage:'',deleteBTN:''}]
+    this.docsTableRows=[{file_name:'Resume',file:''},{file_name:'Aadhar Card', file:''},{file_name:'PAN Card',file:''}]
+  }
+
+  assignfile(e) {
+    this.empDocs =  e.target.files[0];
   }
 
   pageChanged(e:any) {
@@ -464,6 +525,10 @@ addRow4() {
 }
 addRow5() {
   this.contactTableRows.push({name:'',address:'', phone:'', relation:'',deleteBTN:''});
+}
+
+addDocRow() {
+  this.docsTableRows.push({file_name:'',file:''});
 }
 
 employeeList:any[]=[];
