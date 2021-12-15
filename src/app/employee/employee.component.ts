@@ -46,6 +46,38 @@ export class EmployeeComponent implements OnInit {
   totalCount:any;
   unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets 
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
+
+  designationDDList = [
+    {name: 'trila1', id: 1},
+    {name: 'trial2', id: 2},
+    {name: 'trial3', id: 3},
+    // {name: 'Resume', id: 'dpd charges'},
+    // {name: 'Aadhar Card', id: 'clearance charge(CHA)'},
+    // {name: 'PAN Card', id: 'stamp duty'},
+    // {name: 'Joining Form', id: 'FREIGHT'},
+  ];
+
+  documentDDList = [
+    {name: 'Secondary School Certificate', id: 'ocean freight'},
+    {name: 'Higher Secondary School Certificate', id: 'destination charges'},
+    {name: 'Graduation Certificate', id: 'cfs charges'},
+    {name: 'Resume', id: 'dpd charges'},
+    {name: 'Aadhar Card', id: 'clearance charge(CHA)'},
+    {name: 'PAN Card', id: 'stamp duty'},
+    {name: 'Joining Form', id: 'FREIGHT'},
+    {name: 'Salary Certificate/Salary Slip', id: 'inland freight'},
+    {name: 'Proof of Address(Permanent)', id: 'ocean freight'},
+    {name: 'Proof of Address(Correspondence)', id: 'destination charges'},
+    {name: 'Job Acceptance Letter', id: 'cfs charges'},
+    {name: 'Relieving Letter', id: 'dpd charges'},
+    {name: 'Bank Details', id: 'clearance charge(CHA)'},
+    {name: "Master's Degree", id: 'stamp duty'},
+    {name: 'Diploma Certificate', id: 'FREIGHT'},
+    {name: 'Previous Job Offer Letter', id: 'inland freight'},
+    {name: 'Previous Job Acceptance Letter', id: 'cfs charges'},
+    {name: 'Experience Letter', id: 'dpd charges'},
+    {name: 'Letter of Recommendation', id: 'clearance charge(CHA)'},
+  ]
   employeeTableHeaders = [
     { headerName: 'Employee Id', field: 'id',width: 60, },
     { headerName: 'Name', field: 'fullName', width: 180},
@@ -151,13 +183,15 @@ export class EmployeeComponent implements OnInit {
     this.trainingTableRows[e.index]['inst_city'] = e.rowObj.inst_city.selectedDDList.id;
     
   }
-  id:any= 3;
+  id:any= 6;
+  isActive:any=1;
   submit(){
     for(let i=0;i<this.docsTableRows.length;i++){
     const formdata = new FormData();
     formdata.append('file_name',this.docsTableRows[i].file_name)
     formdata.append('file',this.docsTableRows[i].file);
     formdata.append('UserDetails',this.id)
+    formdata.append('is_active',this.isActive)
 
     this.importsService.postDocuments(formdata)
     .pipe(takeUntil(this.unsubsribeNotifier))
@@ -180,6 +214,12 @@ export class EmployeeComponent implements OnInit {
     formdata.append('phone2', this.employeeObj.alternateContact);
     formdata.append('personal_email', this.employeeObj.email);
     formdata.append('organisation_email', this.employeeObj.orgEmail);
+    formdata.append('date_of_joining', this.employeeObj.dateOfJoining);
+    formdata.append('photo', this.employeeObj.photo);
+    formdata.append('total_work_ex_year', this.employeeObj.totalWorkYear);
+    formdata.append('total_work_ex_months', this.employeeObj.totalWorkMon);
+    formdata.append('relevant_work_ex_year', this.employeeObj.relWorkYear);
+    formdata.append('relevant_work_ex_months', this.employeeObj.relWorkMon);
     formdata.append('date_of_birth', this.employeeObj.date);
     formdata.append('gender', this.employeeObj.gender);
     formdata.append('aadhar_card', this.employeeObj.aadhar);
@@ -213,7 +253,6 @@ export class EmployeeComponent implements OnInit {
     .subscribe((res: any) => {
       if(res.status.code === 200) {
         this.toaster.success("User Successfully Added");
-        this.submitFamilyDetails();
       }
     }, () => {})
 
@@ -236,6 +275,8 @@ export class EmployeeComponent implements OnInit {
     }, () => {})
     
   }
+
+  
  
 
   submitFamilyDetails(){
@@ -384,6 +425,10 @@ export class EmployeeComponent implements OnInit {
     this.employeeObj.gender = e.target.value;
 }
 
+selectMaritalStatus(e:any){
+  this.employeeObj.gender = e.target.value;
+}
+
   initProductTable() {
     this.familyTableRows = [{name:'', age:'', occupation: '', deleteBTN: ''}]
     this.referenceTableRows = [{name:'',address:'', phone: '',relation:'', deleteBTN: ''}]
@@ -393,7 +438,11 @@ export class EmployeeComponent implements OnInit {
   this.trainingTableRows= [{inst_name:'',inst_address:'', inst_city:'', inst_pincode:'',start_date:'',end_date:'',name_training_attended:'',
   take_away:'',deleteBTN:''}]
     this.educationTableRows=[{inst_name:'',inst_address:'',inst_city:'',start_date:'',end_date:'',course_name:'',overall_percentage:'',deleteBTN:''}]
-    this.docsTableRows=[{row_id1:0,file_name:'Resume',file:''},{row_id1:1,file_name:'Aadhar Card', file:''},{row_id1:2,file_name:'PAN Card',file:''}]
+    this.docsTableRows=[{row_id1:0,file_name:'',file:'',deleteBTN:''}]
+  }
+
+  checkDuplicate(field){
+
   }
 
   assignfile(e, data) {
@@ -463,8 +512,9 @@ export class EmployeeComponent implements OnInit {
     
 }
 
-addproductCharges(){
+addDocuments(){
   var rowCount = this.docsTableRows.length;
+  console.log(rowCount)
   this.docsTableRows['row_id1'] = rowCount;
   this.docsTableRows.push({
     row_id1: this.docsTableRows['row_id1'],
@@ -474,12 +524,20 @@ addproductCharges(){
   });
   
 }
+
+assignPhoto(e){
+  this.employeeObj.photo=e.target.files[0];
+}
   onDateRangeSelection(event: { startDate: string | number | Date; }) {
     this.employeeObj.date = this.utilsService.formatDate(event.startDate)
   }
 
   onDateRangeSelection1(event: { startDate: string | number | Date; }) {
     this.employeeObj.app_date = this.utilsService.formatDate(event.startDate)
+  }
+
+  onDateRangeSelection2(event: { startDate: string | number | Date; }) {
+    this.employeeObj.dateOfJoining = this.utilsService.formatDate(event.startDate)
   }
 
 onSortHeaderClicked(e: { ascending: any; headerField: string; }) {
