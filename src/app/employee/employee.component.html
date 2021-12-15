@@ -97,6 +97,11 @@
               (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
            
           </div>
+         
+            <!-- <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        -->
 
           <div class="form-group col-sm-3 col-12">
               <label for="pi_file">Gender:<span style="color: red;">*</span> </label>
@@ -193,7 +198,7 @@
                 </div>
               
               <div class="row" style="margin-top: 10px;">
-                  <app-common-table [headers]="educationTableHeaders" [rows]="educationTableRows" 
+                  <app-common-table [headers]="educationTableHeaders" [rows]="educationTableRows" (onDropDownSelected)="onEduCitySelected($event)"
                     >
                   </app-common-table>
                 </div>
@@ -208,7 +213,7 @@
                 </div>
               
               <div class="row" style="margin-top: 10px;">
-                  <app-common-table [headers]="workTableHeaders" [rows]="workTableRows" 
+                  <app-common-table [headers]="workTableHeaders" [rows]="workTableRows"  (onDropDownSelected)="onWorkCitySelected($event)"
                     >
                   </app-common-table>
                 </div>
@@ -223,7 +228,7 @@
                 </div>
               
               <div class="row" style="margin-top: 10px;">
-                  <app-common-table [headers]="trainingTableHeaders" [rows]="trainingTableRows" 
+                  <app-common-table [headers]="trainingTableHeaders" [rows]="trainingTableRows" (onDropDownSelected)="onTrainingCitySelected($event)"
                     >
                   </app-common-table>
                 </div>
@@ -313,43 +318,31 @@
                 >
               </app-common-table>
             </div> -->
-            <!-- <div class="row piInfo-section" style="margin-top: 15px;" >
+            <div class="row piInfo-section" style="margin-top: 15px;" >
               <div class="col-sm-12">
-                  <h3 style="text-align:left;  font-weight: bold;border-bottom: 1px solid grey;">Product Details<span style="color: red;">*</span></h3>
+                  <h3 style="text-align:left;  font-weight: bold;border-bottom: 1px solid grey;">Documents<span style="color: red;">*</span></h3>
                   <div style="display: flex;flex-direction: row-reverse;flex: 1;">
-                  <button type="button"  [hidden]="hideDiveForDemo" class="add-user float-right"  style="margin-right:10px" (click)="addFTWZRow()" > Add </button>
-                  <button type="button"  [hidden]="!hideDiveForDemo" class="add-user float-right"  style="margin-right:10px" (click)="addproductCharges()" > Add </button>
+                  <button type="button"  class="add-user float-right"  style="margin-right:10px" (click)="addproductCharges()" > Add </button>
                   </div>
                  
-                  <table class="table border mt-1" *ngIf="contract_type != 'Domestic'">
+                  <table class="table border mt-1">
                       <thead class="sticky-top">
                       <tr>
-                          <th style="width: 250px;">Model Name </th>
-                          <th >Container No /Truck No</th>
-                          <th>Job No</th>
-                          <th>Qty</th>
-                          <th>Gross Weight(KG)</th>
-                          <th>Net Weight(KG)</th>
+                          <th style="width: 250px;">Title</th>
+                          <th >File</th>
                           <th>Action</th>
                       </tr>
                       </thead>
                       <tbody>
-                          <tr *ngFor="let data of ProductFtwzArr;let i=index">
-                          <td style="width: 250px;">   <select  class="form-control" [(ngModel)]="data.product_id" (change)="selected($event,i)">
-                                      <option  *ngFor="let model of modelNameDDList" [value]="model.id"> {{model.model_name}}</option>
-                                  </select>
-                              </td>
+                          <tr *ngFor="let data of docsTableRows;let i=index">
                           <td> 
-                              <input type="text" class="form-control" [(ngModel)]="data.container_number"></td>
-                          <td> <input type="text" class="form-control" [(ngModel)]="data.job_no"></td>
-                          <td > <input type="number" class="form-control" [(ngModel)]="data.qty"></td>
-                          <td> <input type="number" class="form-control" [(ngModel)]="data.gross_weight"></td>
-                          <td> <input type="number" class="form-control" [(ngModel)]="data.net_weight"></td>
+                              <input type="text" class="form-control" [(ngModel)]="data.file_name"></td>
+                              <td style="width: 250px;">  <input  name="lr_file" class="form-control" (change)="assignfile($event,data)" type="file" id="lr_file" /></td>
                           <td><button (click) = "onRowDelete(data)" class="btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></button></td>
                           </tr>
                       </tbody>
                   </table>
-                  </div> -->
+                  </div></div>
               <button mat-button matStepperPrevious>Back</button>
               <button type="submit" class="btn btn-success float-right" 
               (click)=" submit()" style="margin-right: 60px;margin-top:30px"

@@ -22,6 +22,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
 import { OfferComponent } from './offer/offer.component';
 import { CommonTableModule } from './sharedComponents/common-table/common-table.module';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { CustomDateRangePickerModule } from './sharedComponents/custom-date-range-picker/custom-date-range-picker.module';
@@ -43,6 +44,9 @@ import { BuddyBannerComponent } from './buddy-banner/buddy-banner.component';
 import { AppointmentLetterComponent } from './appointment-letter/appointment-letter.component';
 import { OfferLetterComponent } from './offer-letter/offer-letter.component';
 import { ConveyanceRequestComponent } from './conveyance-request/conveyance-request.component';
+import { DepartmentComponent } from './department/department.component';
+import { NewHiresComponent } from './new-hires/new-hires.component';
+import { BirthdaysComponent } from './birthdays/birthdays.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +71,9 @@ import { ConveyanceRequestComponent } from './conveyance-request/conveyance-requ
     AppointmentLetterComponent,
     OfferLetterComponent,
     ConveyanceRequestComponent,
+    DepartmentComponent,
+    NewHiresComponent,
+    BirthdaysComponent,
     
   ],
   imports: [

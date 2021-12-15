@@ -18,6 +18,9 @@ import { ApplicationFormComponent } from './application-form/application-form.co
 import { BuddyComponent } from './buddy/buddy.component';
 import { BuddyBannerComponent } from './buddy-banner/buddy-banner.component';
 import { OfferLetterComponent } from './offer-letter/offer-letter.component';
+import { DepartmentComponent } from './department/department.component';
+import { NewHiresComponent } from './new-hires/new-hires.component';
+import { BirthdaysComponent } from './birthdays/birthdays.component';
 
 
 const routes: Routes = [
@@ -90,6 +93,18 @@ const routes: Routes = [
   {
     path:'conveyance-request',
     component:ConveyanceRequestComponent
+  },
+  {
+    path:'department',
+    component:DepartmentComponent
+  },
+  {
+    path:'new-hires',
+    component:NewHiresComponent
+  },
+  {
+    path:'birthdays',
+    component:BirthdaysComponent
   }
  ]
 },

@@ -7,6 +7,7 @@ import * as XLSX from 'xlsx';
 import { CompanyapiService } from '../utils/services/companyapi.service';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -31,10 +32,9 @@ export class EmployeeComponent implements OnInit {
   ];
   cityArr: any = [];
   filterObj!: {};
-  formSteps = ['Personal Details', 'Education Details & Work Ex','Bank Details', 'Upload Documents'];
   divNumber!: number;
   employeeTableRows: any[]=[];
-  docsTableRows: any[]=[];
+  docsTableRows: any = {};
   familyTableRows: any[]= [];
   educationTableRows: any[]= [];
   trainingTableRows: any[]= [];
@@ -58,7 +58,7 @@ export class EmployeeComponent implements OnInit {
   familyTableHeaders = [
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Name', field: 'name', type: 'text', value: 'name', isEditable: true, width: 180},
-    { headerName: 'Age', field: 'age', type: 'text', value: 'age', isEditable: true, width: 180},
+    { headerName: 'Age', field: 'age', type: 'number', value: 'age', isEditable: true, width: 180},
     { headerName: 'Occupation', field: 'occupation', type: 'text', value: 'occupation', isEditable: true,  width: 180},
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
@@ -76,7 +76,7 @@ export class EmployeeComponent implements OnInit {
     { headerName: 'Start Date', field: 'start_date', type: 'date', value: 'start_date', isEditable: true,  width: 180},
     { headerName: 'End Date', field: 'end_date', type: 'date', value: 'end_date', isEditable: true,  width: 180},
     { headerName: 'Course Name', field: 'course_name', type: 'text', value: 'course_name', isEditable: true,  width: 180},
-    { headerName: 'Overall Percentage', field: 'overall_percentage', type: 'text', value: 'overall_percentage', isEditable: true,  width: 180},
+    { headerName: 'Overall Percentage', field: 'overall_percentage', type: 'number', value: 'overall_percentage', isEditable: true,  width: 180},
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
 
@@ -111,7 +111,7 @@ export class EmployeeComponent implements OnInit {
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Name', field: 'name', type: 'text', value: 'name', isEditable: true, width: 180},
     { headerName: 'Address', field: 'address', type: 'text', value: 'address', isEditable: true, width: 180},
-    { headerName: 'Contact', field: 'phone', type: 'text', value: 'phone', isEditable: true,  width: 180},
+    { headerName: 'Contact', field: 'phone', type: 'number', value: 'phone', isEditable: true,  width: 180},
     { headerName: 'Relation', field: 'relation', type: 'text', value: 'relation', isEditable: true,  width: 180},
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
@@ -120,7 +120,7 @@ export class EmployeeComponent implements OnInit {
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Name', field: 'name', type: 'text', value: 'name', isEditable: true, width: 180},
     { headerName: 'Address', field: 'address', type: 'text', value: 'address', isEditable: true, width: 180},
-    { headerName: 'Contact', field: 'phone', type: 'text', value: 'phone', isEditable: true,  width: 180},
+    { headerName: 'Contact', field: 'phone', type: 'number', value: 'phone', isEditable: true,  width: 180},
     { headerName: 'Relation', field: 'relation', type: 'text', value: 'relation', isEditable: true,  width: 180},
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
@@ -136,10 +136,27 @@ export class EmployeeComponent implements OnInit {
     this.getDept();
   }
 
+
+  onEduCitySelected(e){
+    this.educationTableRows[e.index]['inst_city'] = e.rowObj.inst_city.selectedDDList.id;
+    
+  }
+
+  onWorkCitySelected(e){
+    this.workTableRows[e.index]['company_city'] = e.rowObj.company_city.selectedDDList.id;
+    
+  }
+
+  onTrainingCitySelected(e){
+    this.trainingTableRows[e.index]['inst_city'] = e.rowObj.inst_city.selectedDDList.id;
+    
+  }
   id:any= 3;
   submit(){
+    for(let i=0;i<this.docsTableRows.length;i++){
     const formdata = new FormData();
-    formdata.append('file',this.empDocs);
+    formdata.append('file_name',this.docsTableRows[i].file_name)
+    formdata.append('file',this.docsTableRows[i].file);
     formdata.append('UserDetails',this.id)
 
     this.importsService.postDocuments(formdata)
@@ -149,7 +166,7 @@ export class EmployeeComponent implements OnInit {
         // this.toaster.success("User Address Successfully Added");
       }
     }, () => {})
-
+  }
   }
 
 
@@ -248,9 +265,8 @@ export class EmployeeComponent implements OnInit {
       this.educationTableRows[i]['end_date']= this.educationTableRows[i]['end_date'];
       this.educationTableRows[i]['course_name']= this.educationTableRows[i]['course_name'];
       this.educationTableRows[i]['overall_percentage']= this.educationTableRows[i]['overall_percentage'];
-      this.educationTableRows[i]['inst_city']= this.educationTableRows[i]['inst_city'].id;
+      this.educationTableRows[i]['inst_city']= this.educationTableRows[i]['inst_city'];
       this.educationTableRows[i]['UserDetails']= this.employeeId;
-      console.log(this.educationTableRows[i]['inst_city'].id)
     }
     for(let k = 0; k < this.educationTableRows.length; k++ ){
      this.importsService.postEducationDetails(this.educationTableRows[k])
@@ -271,7 +287,7 @@ export class EmployeeComponent implements OnInit {
       this.workTableRows[i]['job_profile']= this.workTableRows[i]['job_profile'];
       this.workTableRows[i]['employer_name']= this.workTableRows[i]['employer_name'];
       this.workTableRows[i]['contact_no']= this.workTableRows[i]['contact_no'];
-      this.workTableRows[i]['company_city']= this.employeeId;
+      this.workTableRows[i]['company_city']= this.workTableRows[i]['company_city'];
       this.workTableRows[i]['UserDetails']= this.employeeId;
     }
     for(let k = 0; k < this.workTableRows.length; k++ ){
@@ -292,7 +308,7 @@ export class EmployeeComponent implements OnInit {
       this.trainingTableRows[i]['end_date']= this.trainingTableRows[i]['end_date'];
       this.trainingTableRows[i]['name_training_attended']= this.trainingTableRows[i]['name_training_attended'];
       this.trainingTableRows[i]['take_away']= this.trainingTableRows[i]['take_away'];
-      this.trainingTableRows[i]['inst_city']= this.employeeId;
+      this.trainingTableRows[i]['inst_city']= this.trainingTableRows[i]['inst_city'];
       this.trainingTableRows[i]['UserDetails']= this.employeeId;
     }
     for(let k = 0; k < this.trainingTableRows.length; k++ ){
@@ -377,11 +393,11 @@ export class EmployeeComponent implements OnInit {
   this.trainingTableRows= [{inst_name:'',inst_address:'', inst_city:'', inst_pincode:'',start_date:'',end_date:'',name_training_attended:'',
   take_away:'',deleteBTN:''}]
     this.educationTableRows=[{inst_name:'',inst_address:'',inst_city:'',start_date:'',end_date:'',course_name:'',overall_percentage:'',deleteBTN:''}]
-    this.docsTableRows=[{file_name:'Resume',file:''},{file_name:'Aadhar Card', file:''},{file_name:'PAN Card',file:''}]
+    this.docsTableRows=[{row_id1:0,file_name:'Resume',file:''},{row_id1:1,file_name:'Aadhar Card', file:''},{row_id1:2,file_name:'PAN Card',file:''}]
   }
 
-  assignfile(e) {
-    this.empDocs =  e.target.files[0];
+  assignfile(e, data) {
+    this.docsTableRows[data.row_id1].file =  e.target.files[0];
   }
 
   pageChanged(e:any) {
@@ -440,6 +456,24 @@ export class EmployeeComponent implements OnInit {
       () => {this.employeeTableRows = [];};
   }
 
+  onRowDelete (data) {
+    if(this.docsTableRows.length != 0) {
+     this.docsTableRows.splice(data.row_id, 1);
+      }
+    
+}
+
+addproductCharges(){
+  var rowCount = this.docsTableRows.length;
+  this.docsTableRows['row_id1'] = rowCount;
+  this.docsTableRows.push({
+    row_id1: this.docsTableRows['row_id1'],
+    file_name: '',
+    file:'  ',
+    deleteBTN: '',
+  });
+  
+}
   onDateRangeSelection(event: { startDate: string | number | Date; }) {
     this.employeeObj.date = this.utilsService.formatDate(event.startDate)
   }
@@ -473,7 +507,7 @@ public getCities() {
       this.educationTableHeaders[2]['ddList'] = [...this.cityDDList]
       this.workTableHeaders[2]['ddList'] = [...this.cityDDList]
       this.trainingTableHeaders[2]['ddList'] = [...this.cityDDList]
-      console.log(this.educationTableHeaders)
+      console.log(this.cityDDList)
     } else {
       this.cityDDList = [];
     }
