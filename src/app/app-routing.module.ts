@@ -1,3 +1,4 @@
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { ConveyanceRequestComponent } from './conveyance-request/conveyance-request.component';
 
 import { AttendanceComponent } from './attendance/attendance.component';
@@ -105,6 +106,10 @@ const routes: Routes = [
   {
     path:'birthdays',
     component:BirthdaysComponent
+  },
+  {
+    path:'employeeDetails/:id',
+    component:EmployeeDetailsComponent
   }
  ]
 },

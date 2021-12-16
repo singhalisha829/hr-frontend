@@ -24,6 +24,13 @@ export class ImportsService {
     return this.httpService.get(CONSTANTS.MAIN.APP.URLS.APPOINTMENT, data);
   }
 
+  public getDesignation() {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.DESIGNATION);
+  }
+
+  public getFamilyDetails(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_FAMILY, data);
+  }
   public postAppointmentDetails(data:any) {
     return this.httpService.post(CONSTANTS.MAIN.APP.URLS.APPOINTMENT, data);
   } 

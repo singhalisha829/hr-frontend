@@ -16,7 +16,8 @@ export const MAIN = {
         ATTENDANCE:'/hrm/employee-attendance/',
         REFERENCE:'/hrm/user-reference/',
         CONTACT:'/hrm/employee-Emergency-Contact/',
-        DOCUMENT:'/hrm​/user-docs​/'
+        DOCUMENT:'/hrm​/user-docs​/',
+        DESIGNATION:'/master/user-designation/'
       },
       MESSAGES: {
         UNAUTH_ERR: 'Unauthorized access.',

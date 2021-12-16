@@ -8,7 +8,7 @@
     </div></div></div>
 
     <div class="row" style="margin-top: 50px;" *ngIf="!isHidden">
-      <app-common-table [headers]="employeeTableHeaders" [rows]="employeeTableRows" 
+      <app-common-table [headers]="employeeTableHeaders" [rows]="employeeTableRows"  (onRowClicked) = "onTableRowClicked($event)"
         >
       </app-common-table>
     </div>
@@ -150,9 +150,14 @@
           </div>
           <div class="form-group col-sm-3 col-12">
             <label>Designation:<font color="red">*</font></label>
-            <select class="form-control" [(ngModel)]="employeeObj.designation" >
-              <option  *ngFor="let data of designationDDList" [value]="data.id"> {{data.name}}</option>
-            </select>
+            <app-dropdown class='dataon'
+                [key]="'id'"
+                [value]="'designation'"
+                [selectedItem]="selectedDesignation"
+                [placeholder]="'Choose'"
+                [dropDownList]="designationList"
+                (selectItemEvent)="selectedDesignation = $event;">
+                </app-dropdown>
           </div>
           <div class="form-group col-sm-3 col-12">
             <label> Application Date:<span style="color: red;">*</span> </label>
@@ -225,7 +230,7 @@
               </div></div><br>
               <button mat-button matStepperNext style=" background-color:green;
               color:white; 
-              margin-top:10px" (click)="submitUserDetails()">Save and Continue</button>
+              margin-top:10px" (click)="submitAddress()">Save and Continue</button>
     
         </mat-step>
       

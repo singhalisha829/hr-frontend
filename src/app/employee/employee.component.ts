@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UtilsService } from './../services/utils.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
@@ -18,6 +19,7 @@ export class EmployeeComponent implements OnInit {
   employeeObj :any ={};
  selectedCity :any={};
  selectedDept :any={};
+ selectedDesignation :any={};
  selectedCity2 :any={};
  cityDDList :any = [];
  deptDDList :any = [];
@@ -44,30 +46,21 @@ export class EmployeeComponent implements OnInit {
   newProductArray: any[] = [];
   incomingApi:any;
   totalCount:any;
+  designationList:any=[];
   unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets 
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
 
-  designationDDList = [
-    {name: 'trila1', id: 1},
-    {name: 'trial2', id: 2},
-    {name: 'trial3', id: 3},
-    // {name: 'Resume', id: 'dpd charges'},
-    // {name: 'Aadhar Card', id: 'clearance charge(CHA)'},
-    // {name: 'PAN Card', id: 'stamp duty'},
-    // {name: 'Joining Form', id: 'FREIGHT'},
-  ];
-
   documentDDList = [
-    {name: 'Secondary School Certificate', id: 'ocean freight'},
-    {name: 'Higher Secondary School Certificate', id: 'destination charges'},
-    {name: 'Graduation Certificate', id: 'cfs charges'},
-    {name: 'Resume', id: 'dpd charges'},
-    {name: 'Aadhar Card', id: 'clearance charge(CHA)'},
-    {name: 'PAN Card', id: 'stamp duty'},
-    {name: 'Joining Form', id: 'FREIGHT'},
-    {name: 'Salary Certificate/Salary Slip', id: 'inland freight'},
-    {name: 'Proof of Address(Permanent)', id: 'ocean freight'},
-    {name: 'Proof of Address(Correspondence)', id: 'destination charges'},
+    {name: 'Secondary School Certificate', id: 'Secondary School Certificate'},
+    {name: 'Higher Secondary School Certificate', id: 'Higher Secondary School Certificate'},
+    {name: 'Graduation Certificate', id: 'Graduation Certificate'},
+    {name: 'Resume', id: 'Resume'},
+    {name: 'Aadhar Card', id: 'Aadhar Card'},
+    {name: 'PAN Card', id: 'PAN Card'},
+    {name: 'Joining Form', id: 'Joining Form'},
+    {name: 'Salary Certificate/Salary Slip', id: 'Salary Certificate/Salary Slip'},
+    {name: 'Proof of Address(Permanent)', id: 'Proof of Address(Permanent)'},
+    {name: 'Proof of Address(Correspondence)', id: 'Proof of Address(Correspondence)'},
     {name: 'Job Acceptance Letter', id: 'cfs charges'},
     {name: 'Relieving Letter', id: 'dpd charges'},
     {name: 'Bank Details', id: 'clearance charge(CHA)'},
@@ -88,7 +81,6 @@ export class EmployeeComponent implements OnInit {
     { headerName: 'Details', field: 'occupation',  width: 65},
   ];
   familyTableHeaders = [
-    // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Name', field: 'name', type: 'text', value: 'name', isEditable: true, width: 180},
     { headerName: 'Age', field: 'age', type: 'number', value: 'age', isEditable: true, width: 180},
     { headerName: 'Occupation', field: 'occupation', type: 'text', value: 'occupation', isEditable: true,  width: 180},
@@ -159,13 +151,14 @@ export class EmployeeComponent implements OnInit {
   empDocs: any;
 
   constructor( private utilsService: UtilsService, private companyService: CompanyapiService,private importsService: ImportsService,
-    private toaster: ToastrService) { }
+    private toaster: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.initProductTable();
     this.getallEmployee();
     this.getCities();
     this.getDept();
+    this.getDesignation();
   }
 
 
@@ -203,10 +196,26 @@ export class EmployeeComponent implements OnInit {
   }
   }
 
+  submitAddress(){
+    const formdata1= new FormData();
+    formdata1.append('present_address', this.employeeObj.presentAddress);
+    formdata1.append('present_pincode', this.employeeObj.pincode);
+    formdata1.append('present_city', this.selectedCity.id);
+    formdata1.append('type','Present')
+    formdata1.append('UserDetails', this.employeeId)
+
+    this.importsService.postUserAddress(formdata1)
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        // this.toaster.success("User Address Successfully Added");
+      }
+    }, () => {})
+  }
 
   submitUserDetails(){
     const formdata = new FormData();
-    const formdata1= new FormData();
+    
     const formdata2= new FormData();
     formdata.append('first_name', this.employeeObj.firstName);
     formdata.append('last_name', this.employeeObj.lastName);
@@ -229,16 +238,13 @@ export class EmployeeComponent implements OnInit {
     formdata.append('fathers_occupation', this.employeeObj.fatherOccupation);
     formdata.append('organisation', this.employeeObj.organisation);
     formdata.append('department' , this.selectedDept.id);
-    formdata.append('designation', this.employeeObj.designation);
+    formdata.append('designation', this.selectedDesignation.id);
     formdata.append('application_date', this.employeeObj.app_date);
     formdata.append('reference_by', this.employeeObj.app_by);
+    formdata.append('marital_status', this.employeeObj.marital_status)
 
     //user_present_address
-    formdata1.append('present_address', this.employeeObj.presentAddress);
-    formdata1.append('present_pincode', this.employeeObj.pincode);
-    formdata1.append('present_city', this.selectedCity.id);
-    formdata1.append('type','Present')
-    formdata1.append('UserDetails', this.employeeId)
+    
 
     //user_permanent_address
     formdata2.append('present_address', this.employeeObj.permanentAddress);
@@ -257,13 +263,7 @@ export class EmployeeComponent implements OnInit {
     }, () => {})
 
   
-    this.importsService.postUserAddress(formdata1)
-    .pipe(takeUntil(this.unsubsribeNotifier))
-    .subscribe((res: any) => {
-      if(res.status.code === 200) {
-        // this.toaster.success("User Address Successfully Added");
-      }
-    }, () => {})
+    
 
     this.importsService.postUserAddress(formdata2)
     .pipe(takeUntil(this.unsubsribeNotifier))
@@ -426,7 +426,7 @@ export class EmployeeComponent implements OnInit {
 }
 
 selectMaritalStatus(e:any){
-  this.employeeObj.gender = e.target.value;
+  this.employeeObj.marital_status = e.target.value;
 }
 
   initProductTable() {
@@ -443,6 +443,11 @@ selectMaritalStatus(e:any){
 
   checkDuplicate(field){
 
+  }
+
+  onTableRowClicked (e) {
+
+    this.router.navigate([`./employeeDetails/${e.id}`])
   }
 
   assignfile(e, data) {
@@ -576,6 +581,22 @@ public getCities() {
  
 }
 
+public getDesignation() {
+  this.importsService.getDesignation()
+  .pipe(takeUntil(this.unsubsribeNotifier))
+  .subscribe((res: any) => {
+    if (res.status.code === 200) {
+      this.designationList = res.data.output;
+    } else {
+      this.designationList = [];
+    }
+  }),
+    () => {
+      this.designationList = [];
+    };
+ 
+}
+
 public getDept() {
   this.companyService.AllDept()
   .pipe(takeUntil(this.unsubsribeNotifier))
@@ -599,7 +620,7 @@ jumpToSection(sectionNumber: number) {
 }
 
 addRow() {
-  this.familyTableRows.push({description:'',specification:'',power_rating:'', etd:'', qty: '', total_mwp:'', total: '', deleteBTN: ''});
+  this.familyTableRows.push({name:'', age:'', occupation: '', deleteBTN: ''});
 }
 addRow1() {
   this.educationTableRows.push({inst_name:'',inst_address:'',inst_city:'',start_date:'',end_date:'',course_name:'',overall_percentage:'',deleteBTN:''});

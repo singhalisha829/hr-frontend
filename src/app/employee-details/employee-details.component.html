@@ -1,0 +1,661 @@
+<div class="main-panel">
+        
+    <div class="content-wrapper">
+    
+    <h2>Details of <font color="red"> {{employeeObj.first_name}} {{employeeObj.last_name}}</font></h2>
+
+
+            
+                        <div class="card">
+                        <div class="container" >
+                    <form class="form-horizontal" method="POST" action="">
+                    
+<div class="col-sm-12" style="margin-top:20px;">
+
+ <div class="form-group">
+<h4 >Personal Details</h4><hr/>
+</div>
+</div>
+
+  <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"> <b> Full Name :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+<div type="text" id="name" >{{employeeObj.first_name}} {{employeeObj.last_name}}</div>
+</div>
+</div>
+</div>
+
+    <!--  <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " ><b>Prsent Address :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+ <div ><?php echo $present_address; ?></div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>City :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div  ><?php echo $present_city; ?></div>
+</div>
+</div>
+
+
+
+    <div class="col-sm-2">
+<div class="form-group">
+<div class="control-div " for="email"><b>Pincode :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div><?php echo $present_pincode; ?></div>
+</div>
+</div>
+</div>
+
+      <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Permanent Address :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+<div><?php echo $permanent_address; ?></div>
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3	">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>City :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div><?php echo $permanent_city; ?></div>
+</div>
+</div>
+
+    <div class="col-sm-2">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Pincode :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div><?php echo $permanent_pincode; ?></div>
+</div>
+</div>
+</div> -->
+
+    
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Contact No. :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div>{{employeeObj.phone}}</div>
+</div>
+</div>
+
+
+
+    <div class="col-sm-2">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Contact No. 2 :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div>{{employeeObj.phone2}}</div>
+</div>
+</div>
+</div>
+
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Email ID :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+<div>{{employeeObj.personal_email}}	</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Date Of Birth :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+    {{employeeObj.dob}}
+
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<div class="control-div" for="gender"  ><b>Gender :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+    {{employeeObj.gender}}
+</div>
+</div>
+</div>
+
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="adhar"  ><b>Aadhar Card No. :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+    {{employeeObj.aadhar_card}}
+</div>
+</div>
+ <div class="col-sm-2">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>PAN Card No. :</b></div>
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+    {{employeeObj.pancard}}
+</div>
+</div>
+</div>
+       <h4 >2. Family Details</h4><hr/>
+   
+   
+     
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="father_name"  ><b>Father's Name :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+    {{employeeObj.fathers_name}}
+</div>
+</div>
+ <div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>PAN Card No. :</b></div>
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+    {{employeeObj.fathers_pancard}}
+</div>
+</div>
+</div>	
+
+
+  <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Present/Prior Occuption :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+    {{employeeObj.fathers_occupation}}
+</div>
+</div>
+</div>
+
+        <p><b>Please mention briefly about your family</b></p>
+          <table class="table">
+<thead>
+  <tr style="background-color:#ffeecc">
+   <b>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Occuption</th></b>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let data of employeeFamilyObj;">
+    <td>{{data.name}}</td>
+    <td>{{data.age}}</td>
+    <td>{{data.occupation}}</td>
+   
+  </tr>
+
+
+</tbody>
+</table>
+        
+        
+        <!--
+                     
+
+
+
+
+
+    
+
+
+<h4 >3. Eduction Qualification : </h4><hr/>
+
+
+    <p><b>Please mention you Qualification class X onwards, including Degrees and Diplomas</b></p>
+    
+    
+      <table class="table">
+<thead>
+  <tr style="background-color:#ffeecc">
+   <b> <th>Institution Name and Address</th>
+    <th>Start-Complete Date</th>
+    <th>Course Name</th>
+    <th>Overall Percentage</th></b>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><?php echo $instution_name1; ?></td>
+    <td><?php echo $start_date1; ?>-<?php echo $complete_date1; ?></td>
+    <td><?php echo $course_name1; ?></td>
+    <td><?php echo $prcentage1; ?></td>
+   
+  </tr>
+  <tr>
+    <td><?php echo $instution_name2; ?></td>
+    <td><?php echo $start_date2; ?>-<?php echo $complete_date2; ?></td>
+    <td><?php echo $course_name2; ?></td>
+    <td><?php echo $prcentage2; ?></td>
+   
+  </tr>
+  <tr>
+    <td><?php echo $instution_name3; ?></td>
+    <td><?php echo $start_date3; ?>-<?php echo $complete_date3; ?></td>
+    <td><?php echo $course_name3; ?></td>
+    <td><?php echo $prcentage3; ?></td>
+   
+  </tr>
+  <tr>
+    <td><?php echo $instution_name4; ?></td>
+    <td><?php echo $start_date4; ?>-<?php echo $complete_date4; ?></td>
+    <td><?php echo $course_name4; ?></td>
+    <td><?php echo $prcentage4; ?></td>
+   
+  </tr>
+
+</tbody>
+</table>
+
+
+
+
+
+    
+
+
+
+
+    <h4 >  4. Work Experience/ Internship : </h4><hr/>
+
+
+    <p><b>Please mention briefly the internship/ Work ex you have:</b></p>
+    
+            
+      <table class="table">
+<thead>
+  <tr style="background-color:#ffeecc">
+  <b>  <th>Name and Address of Company</th>
+    <th>Joining-Last Date</th>
+    <th>Position Held & Job Profile</th>
+    <th>Employer Name and contact no</th></b>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><?php echo $name_company1; ?></td>
+    <td><?php echo $j_date1; ?>-<?php echo $l_date1; ?></td>
+    <td><?php echo $position1; ?></td>
+    <td><?php echo $employer_name1; ?> - <?php echo $contact_no1; ?></td>
+   
+  </tr>
+     <tr>
+    <td><?php echo $name_company2; ?></td>
+    <td><?php echo $j_date2; ?>-<?php echo $l_date2; ?></td>
+    <td><?php echo $position2; ?></td>
+    <td><?php echo $employer_name2; ?> - <?php echo $contact_no2; ?></td>
+   
+  </tr>
+     <tr>
+    <td><?php echo $name_company3; ?></td>
+    <td><?php echo $j_date3; ?>-<?php echo $l_date3; ?></td>
+    <td><?php echo $position3; ?></td>
+    <td><?php echo $employer_name3; ?> - <?php echo $contact_no3; ?></td>
+   
+  </tr>
+     <tr>
+    <td><?php echo $name_company4; ?></td>
+    <td><?php echo $j_date4; ?>-<?php echo $l_date4; ?></td>
+    <td><?php echo $position4 ?></td>
+    <td><?php echo $employer_name4; ?> - <?php echo $contact_no4; ?></td>
+    </tr>
+</tbody>
+</table>
+             
+
+    <h4 >5. Traning Attended: </h4><hr/>
+
+
+    <p><b>Please mention briefly the the tranings you have attended:</b></p>
+    
+    
+  <table class="table">
+<thead>
+  <tr style="background-color:#ffeecc">
+    <b><th>Name & Address of institution</th>
+    <th>Year & Duration of Traning(Days)</th>
+    <th>Nmae of Traning Attended</th>
+    <th>Take Away</th></b>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><?php echo $traning_instute1; ?></td>
+    <td><?php echo $year1; ?>-<?php echo $duration1; ?></td>
+    <td><?php echo $name_traning1; ?></td>
+    <td><?php echo $take_away1; ?></td>
+   
+  </tr>
+           <tr>
+    <td><?php echo $traning_instute2; ?></td>
+    <td><?php echo $year2; ?>-<?php echo $duration2; ?></td>
+    <td><?php echo $name_traning2; ?></td>
+    <td><?php echo $take_away2; ?></td>
+   
+  </tr>
+  <tr>
+    <td><?php echo $traning_instute3; ?></td>
+    <td><?php echo $year3; ?>-<?php echo $duration3; ?></td>
+    <td><?php echo $name_traning3; ?></td>
+    <td><?php echo $take_away3; ?></td>
+   
+  </tr>
+</tbody>
+</table>			 
+
+
+
+
+
+
+        
+
+    <h4 >6. References: </h4><hr/>
+
+
+    <p><b>Please mention Two references with whome we can cross check details provided :</b></p>
+    
+    
+        
+  <table class="table">
+<thead>
+  <tr style="background-color:#ffeecc">
+   <b> <th>Name</th>
+    <th>Address</th>
+    <th>Contact No.</th>
+    <th>Relation/ Association</th></b>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><?php echo $ref_name1; ?></td>
+    <td><?php echo $ref_add1; ?>-<?php echo $duration1; ?></td>
+    <td><?php echo $ref_contact1; ?></td>
+    <td><?php echo $ref_relation1; ?></td>
+   
+  </tr>
+    <tr>
+    <td><?php echo $ref_name2; ?></td>
+    <td><?php echo $ref_add2; ?>-<?php echo $duration1; ?></td>
+    <td><?php echo $ref_contact2; ?></td>
+    <td><?php echo $ref_relation2; ?></td>
+   
+  </tr>
+
+</tbody>
+</table>			 
+
+     
+
+
+
+
+        <h4 >7. Emergency Contact: </h4><hr/>
+
+
+
+    
+ <table class="table">
+<thead>
+  <tr style="background-color:#ffeecc">
+   <b> <th>Name</th>
+    <th>Address</th>
+    <th>Contact No.</th>
+    <th>Relation/ Association</th></b>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><?php echo $em_name1; ?></td>
+    <td><?php echo $em_add1; ?></td>
+    <td><?php echo $em_contact1; ?></td>
+    <td><?php echo $em_relation1; ?></td>
+   
+  </tr>
+  
+   <tr>
+    <td><?php echo $em_name2; ?></td>
+    <td><?php echo $em_add2; ?></td>
+    <td><?php echo $em_contact2; ?></td>
+    <td><?php echo $em_relation2; ?></td>
+   
+  </tr>
+   
+
+</tbody>
+</table>			 	
+             
+
+
+
+
+ <div class="col-sm-12" style="margin-top:20px;">
+ <div class="form-group">
+ <h4 >8. Application Details :</h4><hr/>
+</div>
+</div>
+<div class="row" style="margin-top:10px; margin-left:15px; ">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Company :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+  <?php echo $company; ?>
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="application_date"  ><b>Application Date :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"><?php echo $application_date; ?>
+
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Application Position :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"><?php echo $application_position; ?>
+   </div>
+</div>
+</div>
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Application By :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"><?php echo $application_by; ?>
+</div>
+</div>
+</div>
+
+<p><i>Name & No. of Refrence/ Institution / Other</i></p>
+
+<div class="col-sm-12" style="margin-top:20px;">
+
+ <div class="form-group">
+<h4>9. Bank Details</h4><hr/>
+</div>
+</div>
+
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Account Holders Name :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"><?php echo $bank_holder_name; ?>
+</div>
+</div>
+</div>
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Bank Account No :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"><?php echo $bank_account_no; ?>
+</div>
+</div>
+</div>
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Bank Name :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"><?php echo $bank_name; ?>
+</div>
+</div>
+</div>
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Bank Branch Name :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"><?php echo $branch_name; ?>
+</div>
+</div>
+</div>
+
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Bank IFCS Code :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"><?php echo $ifsc; ?>
+</div>
+</div>
+</div>
+    <hr/>
+    
+    <div class="row" style="margin-top:10px; margin-left:15px; ">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Status :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+  <?php echo $status; ?>
+</div>
+</div>
+</div>
+<div class="row" style="margin-top:10px;  margin-left:15px;" >
+<div class="col-sm-1">
+<div class="form-group">
+<input type="reset" class="btn btn-danger" value="Clear">
+</div>
+</div> <div class="col-sm-1"></div>
+<div class="col-sm-1">
+<div class="form-group">
+ <a href="edit_employee.php?id=<?php echo $edited_by;?>"> <input class="btn btn-success" type="button" value="Update"> </a>
+ 
+</div>
+</div>
+</div>
+
+
+</form>
+                        </div>
+
+    </div>
+    </div>
+    </div> -->
+    
+  

@@ -47,6 +47,7 @@ import { ConveyanceRequestComponent } from './conveyance-request/conveyance-requ
 import { DepartmentComponent } from './department/department.component';
 import { NewHiresComponent } from './new-hires/new-hires.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { BirthdaysComponent } from './birthdays/birthdays.component';
     DepartmentComponent,
     NewHiresComponent,
     BirthdaysComponent,
+    EmployeeDetailsComponent,
     
   ],
   imports: [
