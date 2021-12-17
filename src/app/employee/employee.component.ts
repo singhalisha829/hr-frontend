@@ -9,6 +9,7 @@ import { CompanyapiService } from '../utils/services/companyapi.service';
 import { ToastrService } from 'ngx-toastr';
 
 
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -198,25 +199,45 @@ export class EmployeeComponent implements OnInit {
 
   submitAddress(){
     const formdata1= new FormData();
-    formdata1.append('present_address', this.employeeObj.presentAddress);
-    formdata1.append('present_pincode', this.employeeObj.pincode);
-    formdata1.append('present_city', this.selectedCity.id);
-    formdata1.append('type','Present')
-    formdata1.append('UserDetails', this.employeeId)
+    const formdata2= new FormData();
 
-    this.importsService.postUserAddress(formdata1)
+     //user_present_address
+     formdata1.append('present_address', this.employeeObj.presentAddress);
+     formdata1.append('present_pincode', this.employeeObj.pincode);
+     formdata1.append('present_city', this.selectedCity.id);
+     formdata1.append('type','Present')
+     formdata1.append('UserDetails', this.employeeId)
+ 
+ 
+     //user_permanent_address
+     formdata2.append('present_address', this.employeeObj.permanentAddress);
+     formdata2.append('present_city', this.selectedCity2.id);
+     formdata2.append('present_pincode', this.employeeObj.pincode1);
+     formdata2.append('type','Permanent')
+     formdata2.append('UserDetails', this.employeeId)
+ 
+     this.importsService.postUserAddress(formdata1)
     .pipe(takeUntil(this.unsubsribeNotifier))
     .subscribe((res: any) => {
       if(res.status.code === 200) {
         // this.toaster.success("User Address Successfully Added");
       }
     }, () => {})
+
+    this.importsService.postUserAddress(formdata2)
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        // this.toaster.success("User Address Successfully Added");
+        
+      }
+    }, () => {})
+    
   }
 
   submitUserDetails(){
     const formdata = new FormData();
-    
-    const formdata2= new FormData();
+   
     formdata.append('first_name', this.employeeObj.firstName);
     formdata.append('last_name', this.employeeObj.lastName);
     formdata.append('phone', this.employeeObj.contact);
@@ -243,36 +264,19 @@ export class EmployeeComponent implements OnInit {
     formdata.append('reference_by', this.employeeObj.app_by);
     formdata.append('marital_status', this.employeeObj.marital_status)
 
-    //user_present_address
-    
-
-    //user_permanent_address
-    formdata2.append('present_address', this.employeeObj.permanentAddress);
-    formdata2.append('present_city', this.selectedCity2.id);
-    formdata2.append('present_pincode', this.employeeObj.pincode1);
-    formdata2.append('type','Permanent')
-    formdata2.append('UserDetails', this.employeeId)
-
+   
 
     this.importsService.postEmployeeDetails(formdata)
     .pipe(takeUntil(this.unsubsribeNotifier))
     .subscribe((res: any) => {
       if(res.status.code === 200) {
         this.toaster.success("User Successfully Added");
+        this.getallEmployee();
+        this.submitAddress();
       }
     }, () => {})
 
   
-    
-
-    this.importsService.postUserAddress(formdata2)
-    .pipe(takeUntil(this.unsubsribeNotifier))
-    .subscribe((res: any) => {
-      if(res.status.code === 200) {
-        // this.toaster.success("User Address Successfully Added");
-        
-      }
-    }, () => {})
     
   }
 
@@ -445,9 +449,95 @@ selectMaritalStatus(e:any){
 
   }
 
+  totalCountAddress:any;
+  totalCountFamily:any;
+  totalCountEducation:any;
+  totalCountWork:any;
+  totalCountTraining:any;
+  totalCountReference:any;
+  totalCountContact:any;
+  totalCountBank:any;
+  totalCountDocs:any;
   onTableRowClicked (e) {
+    this.importsService.getEmployeeAddress({UserDetails_id: e.id})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.totalCountAddress = res.data.total_count;
 
-    this.router.navigate([`./employeeDetails/${e.id}`])
+    this.importsService.getEmployeeFamily({UserDetails_id: e.id})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.totalCountFamily = res.data.total_count;
+    
+    this.importsService.getEmployeeEducation({UserDetails_id: e.id})
+      .pipe(takeUntil(this.unsubsribeNotifier))
+      .subscribe((res: any) => {
+        if (res.status.code === 200) {
+          this.totalCountEducation = res.data.total_count;
+        
+    this.importsService.getEmployeeWork({UserDetails_id: e.id})
+      .pipe(takeUntil(this.unsubsribeNotifier))
+      .subscribe((res: any) => {
+        if (res.status.code === 200) {
+          this.totalCountWork = res.data.total_count;
+            
+    this.importsService.getEmployeeTraining({UserDetails_id: e.id})
+      .pipe(takeUntil(this.unsubsribeNotifier))
+      .subscribe((res: any) => {
+        if (res.status.code === 200) {
+          this.totalCountTraining = res.data.total_count;
+                
+    this.importsService.getEmployeeReference({UserDetails_id: e.id})
+      .pipe(takeUntil(this.unsubsribeNotifier))
+      .subscribe((res: any) => {
+        if (res.status.code === 200) {
+          this.totalCountReference = res.data.total_count;
+                    
+    this.importsService.getEmployeeContact({UserDetails_id: e.id})
+      .pipe(takeUntil(this.unsubsribeNotifier))
+      .subscribe((res: any) => {
+        if (res.status.code === 200) {
+          this.totalCountContact = res.data.total_count;
+                        
+    this.importsService.getEmployeeBankDetails({UserDetails_id: e.id})
+      .pipe(takeUntil(this.unsubsribeNotifier))
+      .subscribe((res: any) => {
+        if (res.status.code === 200) {
+          this.totalCountBank = res.data.total_count;
+                            
+    this.importsService.getEmployeeDocs({UserDetails_id: e.id})
+      .pipe(takeUntil(this.unsubsribeNotifier))
+      .subscribe((res: any) => {
+        if (res.status.code === 200) {
+          this.totalCountDocs = res.data.total_count;
+        console.log(this.totalCountAddress)
+        console.log(this.totalCountFamily)
+        console.log(this.totalCountEducation)
+        console.log(this.totalCountWork)
+        console.log(this.totalCountTraining)
+        console.log(this.totalCountReference)
+        console.log(this.totalCountContact)
+        console.log(this.totalCountBank)
+        console.log(this.totalCountDocs)                  
+        if(this.totalCountAddress>0 && this.totalCountFamily>0 && this.totalCountEducation>0 &&
+          this.totalCountWork>0 && this.totalCountTraining>0 && this.totalCountReference>0 &&
+          this.totalCountContact>0 && this.totalCountBank && this.totalCountDocs>0){
+            this.router.navigate([`./employeeDetails/${e.id}`])
+        }else{
+          this.router.navigate(['/employeeForm/${e.id}'])
+        }                        
+      }}),() => {};
+      }}),() => {};
+      }}),() => {};
+      }}),() => {};       
+      }}),() => {};
+      }}),() => {};
+      }}),() => {};
+      }}),() => {};
+      }}),() => {};
+    
   }
 
   assignfile(e, data) {

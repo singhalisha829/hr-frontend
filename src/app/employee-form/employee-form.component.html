@@ -1,19 +1,8 @@
 <div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px;">
     <div class="row">
-    <h2 style="text-align: center;" *ngIf="!isHidden">Employee Details</h2>
-    <h2 style="text-align: center;" *ngIf="isHidden">Joining Form</h2>
-    <div class="col-12 pd-0">
-    <button type="submit" class="btn btn-success" (click)=" addEmployee()" style="float: right; margin-right: 20px;"
-                   >{{buttonName}}</button>
-    </div></div></div>
-
-    <div class="row" style="margin-top: 50px;" *ngIf="!isHidden">
-      <app-common-table [headers]="employeeTableHeaders" [rows]="employeeTableRows"  (onRowClicked) = "onTableRowClicked($event)"
-        >
-      </app-common-table>
-    </div>
-   
-<div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" *ngIf="isHidden">
+    <h2 style="text-align: center;" >Joining Form</h2>
+  
+<div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" >
     
 			<mat-vertical-stepper>
 
@@ -424,27 +413,6 @@
       </mat-vertical-stepper>
         </div>
 
-        <div class="row" *ngIf="!isHidden" style="margin-top: 500px;">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="companyCount">Total :<span class="text-primary">{{totalCount}}</span></div>
-          </div>
-          <div class="col-md-2 col-sm-4 col-xs-12 buttonpostion">
-            <button  (click)="getallEmployeeExport()" class="btn third">Export</button>
-          </div>
-          <div class="col-md-7 col-sm-12 col-xs-12">
-            <div class="justify-content-end" *ngIf="totalCount">
-              <pagination style="float: right;" [boundaryLinks]="true" [itemsPerPage]="10" [maxSize]="10" [totalItems]="totalCount" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
-            </div>
-          </div>
-        </div>
-        <div class="row" hidden>
-          <div class="col-lg-12" #TABLE>
-            <app-common-table
-            [headers] = "employeeTableHeaders"
-            [rows] = "employeeTableRows"
-            ></app-common-table>
-          </div>
-        </div>
 
               
           

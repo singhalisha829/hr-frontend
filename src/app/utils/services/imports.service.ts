@@ -20,6 +20,43 @@ export class ImportsService {
     return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_DETAILS, data);
   }
 
+  public getEmployeeAddress(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_ADDRESS, data);
+  }
+
+
+  public getEmployeeFamily(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_FAMILY, data);
+  }
+
+  public getEmployeeEducation(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_EDUCATION, data);
+  }
+
+  public getEmployeeWork(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_WORK, data);
+  }
+
+  public getEmployeeTraining(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_TRAINING, data);
+  }
+
+  public getEmployeeReference(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.REFERENCE, data);
+  }
+
+  public getEmployeeContact(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.CONTACT, data);
+  }
+
+  public getEmployeeBankDetails(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.USER_BANK, data);
+  }
+
+  public getEmployeeDocs(data:any) {
+    return this.httpService.get(CONSTANTS.MAIN.APP.URLS.DOCUMENT, data);
+  }
+
   public getAppointment(data:any) {
     return this.httpService.get(CONSTANTS.MAIN.APP.URLS.APPOINTMENT, data);
   }

@@ -22,6 +22,7 @@ import { OfferLetterComponent } from './offer-letter/offer-letter.component';
 import { DepartmentComponent } from './department/department.component';
 import { NewHiresComponent } from './new-hires/new-hires.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
+import { EmployeeFormComponent } from './employee-form/employee-form.component';
 
 
 const routes: Routes = [
@@ -110,6 +111,10 @@ const routes: Routes = [
   {
     path:'employeeDetails/:id',
     component:EmployeeDetailsComponent
+  },
+  {
+    path:'employeeForm/:id',
+    component:EmployeeFormComponent
   }
  ]
 },

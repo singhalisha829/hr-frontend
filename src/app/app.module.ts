@@ -48,6 +48,7 @@ import { DepartmentComponent } from './department/department.component';
 import { NewHiresComponent } from './new-hires/new-hires.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { EmployeeFormComponent } from './employee-form/employee-form.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
     NewHiresComponent,
     BirthdaysComponent,
     EmployeeDetailsComponent,
+    EmployeeFormComponent,
     
   ],
   imports: [
