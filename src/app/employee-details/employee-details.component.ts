@@ -14,6 +14,12 @@ export class EmployeeDetailsComponent implements OnInit {
   unsubsribeNotifier = new Subject(); 
   employeeObj:any={};
   employeeFamilyObj:any={};
+  employeeEduObj:any={};
+  employeeWorkObj:any={};
+  employeeTrainingObj:any={};
+  employeeRefObj:any={};
+  employeeContactObj:any={};
+  employeeBankObj:any={};
   constructor(private importsService: ImportsService,) { }
 
   ngOnInit(): void {
@@ -21,6 +27,12 @@ export class EmployeeDetailsComponent implements OnInit {
     this.employeeId = path[path.length - 1];
     this.getEmployeeDetails();
     this.getFamilyDetails();
+    this.getEmployeeEduaction();
+    this.getEmployeeWork();
+    this.getEmployeeTraining();
+    this.getEmployeeRef();
+    this.getEmployeeContact();
+    this.getEmployeeBank();
   }
 
   public getEmployeeDetails() {
@@ -41,22 +53,23 @@ export class EmployeeDetailsComponent implements OnInit {
           aadhar_card: res.data.output[0].aadhar_card,
           pancard: res.data.output[0].pancard,
           fathers_name: res.data.output[0].fathers_name,
+          organisation:res.data.output[0].organisation,
+          application_date: res.data.output[0].application_date,
+          designation:res.data.output[0].designation,
+          reference_by:res.data.output[0].reference_by,
+          is_active:res.data.output[0].is_active,
           // dob: res.data.output[0].date_of_birth,
           // doj: res.data.output[0].date_of_joining,
           // aadhar_card: res.data.output[0].aadhar_card,
           fathers_pancard: res.data.output[0].fathers_pancard,
           fathers_occupation: res.data.output[0].fathers_occupation,
         };
-        // this.selectedCity = this.cityDDList && this.cityDDList
-        // .filter(city => city.name === res.data.output[0].city)[0];
-        // this.selectedSource = this.sourceDDList && this.sourceDDList
-        // .filter(source => source.source === res.data.output[0].lead_source)[0];
-        // this.selectedOwner = this.ownerDDList && this.ownerDDList
-        // .filter(owner => owner.fullName === res.data.output[0].owner)[0];
-        // this.existingDetails = Object.assign({},this.editCompanyObj);
-        // this.existingDetails.city = this.selectedCity;
-        // this.existingDetails.source = this.selectedSource;
-        // this.existingDetails.owner = this.selectedOwner;
+        if(this.employeeObj.is_active ==="True")
+        {
+          this.employeeObj.is_active ="Working";
+        }else{
+          this.employeeObj.is_active = "Not-Working";
+        }
       } else {
         // console.log('Error fetching company details')
       }
@@ -73,22 +86,109 @@ export class EmployeeDetailsComponent implements OnInit {
     .subscribe((res: any) => {
       if(res.status.code === 200) {
         this.employeeFamilyObj =res.data.output;
-        // for(let i=0; i<this.obj.length; i++){
-        // this.employeeFamilyObj = {
-        //   name: res.data.output[i].name,
-        //   age: res.data.output[i].age,
-        //   occupation: res.data.output[0].occupation,
-      
-        // this.selectedCity = this.cityDDList && this.cityDDList
-        // .filter(city => city.name === res.data.output[0].city)[0];
-        // this.selectedSource = this.sourceDDList && this.sourceDDList
-        // .filter(source => source.source === res.data.output[0].lead_source)[0];
-        // this.selectedOwner = this.ownerDDList && this.ownerDDList
-        // .filter(owner => owner.fullName === res.data.output[0].owner)[0];
-        // this.existingDetails = Object.assign({},this.editCompanyObj);
-        // this.existingDetails.city = this.selectedCity;
-        // this.existingDetails.source = this.selectedSource;
-        // this.existingDetails.owner = this.selectedOwner;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
+
+  public getEmployeeEduaction() {
+    this.importsService.getEmployeeEducation({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeEduObj =res.data.output;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
+
+  public getEmployeeWork() {
+    this.importsService.getEmployeeWork({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeWorkObj =res.data.output;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
+
+  public getEmployeeTraining() {
+    this.importsService.getEmployeeTraining({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeTrainingObj =res.data.output;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
+
+  public getEmployeeRef() {
+    this.importsService.getEmployeeReference({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeRefObj =res.data.output;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
+
+  public getEmployeeContact() {
+    this.importsService.getEmployeeContact({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeContactObj =res.data.output;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
+
+  public getEmployeeBank() {
+    this.importsService.getEmployeeBankDetails({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeBankObj ={
+        account_holder_name: res.data.output[0].account_holder_name,
+        bank_name: res.data.output[0].bank_name,
+        bank_account: res.data.output[0].bank_account,
+        bank_branch: res.data.output[0].bank_branch,
+        ifsc_code: res.data.output[0].ifsc_code,
+       
+        }
       } else {
         // console.log('Error fetching company details')
       }

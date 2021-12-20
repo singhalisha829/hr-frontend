@@ -13,7 +13,7 @@
 <div class="col-sm-12" style="margin-top:20px;">
 
  <div class="form-group">
-<h4 >Personal Details</h4><hr/>
+<h4 ><b>1. Personal Details</b></h4><hr/>
 </div>
 </div>
 
@@ -198,8 +198,8 @@
     {{employeeObj.pancard}}
 </div>
 </div>
-</div>
-       <h4 >2. Family Details</h4><hr/>
+</div><br>
+       <h4 ><b>2. Family Details</b></h4><hr/>
    
    
      
@@ -238,274 +238,169 @@
     {{employeeObj.fathers_occupation}}
 </div>
 </div>
-</div>
+</div><br>
 
         <p><b>Please mention briefly about your family</b></p>
-          <table class="table">
-<thead>
-  <tr style="background-color:#ffeecc">
-   <b>
-    <th>Name</th>
-    <th>Age</th>
-    <th>Occuption</th></b>
-  </tr>
-</thead>
-<tbody>
-  <tr *ngFor="let data of employeeFamilyObj;">
-    <td>{{data.name}}</td>
-    <td>{{data.age}}</td>
-    <td>{{data.occupation}}</td>
-   
-  </tr>
-
-
-</tbody>
-</table>
-        
-        
-        <!--
-                     
-
-
-
-
-
     
-
-
-<h4 >3. Eduction Qualification : </h4><hr/>
+        <div class="col-sm-12" >
+          <table class="table border mt-1" >
+              <thead class="sticky-top">
+              <tr style="background-color:#ffeecc">
+                  <th style="width: 200px;">Name</th>
+                  <th style="width: 200px;">Age</th>
+                  <th style="width: 200px;">Occupation</th>
+              </tr>
+              </thead>
+              <tbody>
+                   <tr *ngFor="let data of employeeFamilyObj">
+                  <td style="width: 200px;"> {{data.name}}</td>
+                  <td style="width: 200px;"> {{data.age}}</td>
+                  <td style="width: 200px;"> {{data.occupation}}</td>
+      
+                  </tr> 
+              </tbody>
+              </table>
+      
+          </div><br>
+        
+<h4 ><b>3. Eduction Qualification : </b></h4><hr/>
 
 
     <p><b>Please mention you Qualification class X onwards, including Degrees and Diplomas</b></p>
     
-    
-      <table class="table">
-<thead>
-  <tr style="background-color:#ffeecc">
-   <b> <th>Institution Name and Address</th>
-    <th>Start-Complete Date</th>
-    <th>Course Name</th>
-    <th>Overall Percentage</th></b>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><?php echo $instution_name1; ?></td>
-    <td><?php echo $start_date1; ?>-<?php echo $complete_date1; ?></td>
-    <td><?php echo $course_name1; ?></td>
-    <td><?php echo $prcentage1; ?></td>
-   
-  </tr>
-  <tr>
-    <td><?php echo $instution_name2; ?></td>
-    <td><?php echo $start_date2; ?>-<?php echo $complete_date2; ?></td>
-    <td><?php echo $course_name2; ?></td>
-    <td><?php echo $prcentage2; ?></td>
-   
-  </tr>
-  <tr>
-    <td><?php echo $instution_name3; ?></td>
-    <td><?php echo $start_date3; ?>-<?php echo $complete_date3; ?></td>
-    <td><?php echo $course_name3; ?></td>
-    <td><?php echo $prcentage3; ?></td>
-   
-  </tr>
-  <tr>
-    <td><?php echo $instution_name4; ?></td>
-    <td><?php echo $start_date4; ?>-<?php echo $complete_date4; ?></td>
-    <td><?php echo $course_name4; ?></td>
-    <td><?php echo $prcentage4; ?></td>
-   
-  </tr>
+    <div class="col-sm-12" >
+      <table class="table border mt-1" >
+          <thead class="sticky-top">
+          <tr style="background-color:#ffeecc">
+              <th style="width: 200px;">Institution Name and Address</th>
+              <th style="width: 200px;">Start-End Date</th>
+              <th style="width: 200px;">Course Name</th>
+              <th>Overall Percentage</th>
+          </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let data of employeeEduObj">
+              <td style="width: 200px;"> {{data.inst_name +" / "+ data.inst_address}}</td>
+              <td style="width: 200px;"> {{data.start_date +" - "+ data.end_date}}</td>
+              <td style="width: 200px;"> {{data.course_name}}</td>
+              <td style="width: 200px;"> {{data.overall_percentage}}</td>
+              </tr> 
+          </tbody>
+          </table>
+  
+      </div><br>
 
-</tbody>
-</table>
-
-
-
-
-
-    
-
-
-
-
-    <h4 >  4. Work Experience/ Internship : </h4><hr/>
+  <h4 ><b>  4. Work Experience/ Internship : </b></h4><hr/>
 
 
     <p><b>Please mention briefly the internship/ Work ex you have:</b></p>
     
-            
-      <table class="table">
-<thead>
-  <tr style="background-color:#ffeecc">
-  <b>  <th>Name and Address of Company</th>
-    <th>Joining-Last Date</th>
-    <th>Position Held & Job Profile</th>
-    <th>Employer Name and contact no</th></b>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><?php echo $name_company1; ?></td>
-    <td><?php echo $j_date1; ?>-<?php echo $l_date1; ?></td>
-    <td><?php echo $position1; ?></td>
-    <td><?php echo $employer_name1; ?> - <?php echo $contact_no1; ?></td>
-   
-  </tr>
-     <tr>
-    <td><?php echo $name_company2; ?></td>
-    <td><?php echo $j_date2; ?>-<?php echo $l_date2; ?></td>
-    <td><?php echo $position2; ?></td>
-    <td><?php echo $employer_name2; ?> - <?php echo $contact_no2; ?></td>
-   
-  </tr>
-     <tr>
-    <td><?php echo $name_company3; ?></td>
-    <td><?php echo $j_date3; ?>-<?php echo $l_date3; ?></td>
-    <td><?php echo $position3; ?></td>
-    <td><?php echo $employer_name3; ?> - <?php echo $contact_no3; ?></td>
-   
-  </tr>
-     <tr>
-    <td><?php echo $name_company4; ?></td>
-    <td><?php echo $j_date4; ?>-<?php echo $l_date4; ?></td>
-    <td><?php echo $position4 ?></td>
-    <td><?php echo $employer_name4; ?> - <?php echo $contact_no4; ?></td>
-    </tr>
-</tbody>
-</table>
-             
+    <div class="col-sm-12" >
+      <table class="table border mt-1" >
+          <thead class="sticky-top">
+          <tr style="background-color:#ffeecc">
+              <th style="width: 200px;">Company Name and Address</th>
+              <th style="width: 200px;">Start-End Date</th>
+              <th style="width: 200px;">Job Profile</th>
+              <th>Employer Name & Contact No.</th>
+          </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let data of employeeWorkObj">
+              <td style="width: 200px;"> {{data.company_name +" / "+ data.company_address}}</td>
+              <td style="width: 200px;"> {{data.start_date +" - "+ data.end_date}}</td>
+              <td style="width: 200px;"> {{data.job_profile}}</td>
+              <td style="width: 200px;"> {{data.employer_name + " / " + data.contact_no}}</td>
+              </tr> 
+          </tbody>
+          </table>
+  
+      </div><br>
 
-    <h4 >5. Traning Attended: </h4><hr/>
+    <h4 ><b>5. Traning Attended: </b></h4><hr/>
 
 
     <p><b>Please mention briefly the the tranings you have attended:</b></p>
     
-    
-  <table class="table">
-<thead>
-  <tr style="background-color:#ffeecc">
-    <b><th>Name & Address of institution</th>
-    <th>Year & Duration of Traning(Days)</th>
-    <th>Nmae of Traning Attended</th>
-    <th>Take Away</th></b>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><?php echo $traning_instute1; ?></td>
-    <td><?php echo $year1; ?>-<?php echo $duration1; ?></td>
-    <td><?php echo $name_traning1; ?></td>
-    <td><?php echo $take_away1; ?></td>
-   
-  </tr>
-           <tr>
-    <td><?php echo $traning_instute2; ?></td>
-    <td><?php echo $year2; ?>-<?php echo $duration2; ?></td>
-    <td><?php echo $name_traning2; ?></td>
-    <td><?php echo $take_away2; ?></td>
-   
-  </tr>
-  <tr>
-    <td><?php echo $traning_instute3; ?></td>
-    <td><?php echo $year3; ?>-<?php echo $duration3; ?></td>
-    <td><?php echo $name_traning3; ?></td>
-    <td><?php echo $take_away3; ?></td>
-   
-  </tr>
-</tbody>
-</table>			 
-
-
-
-
-
-
-        
-
-    <h4 >6. References: </h4><hr/>
-
-
-    <p><b>Please mention Two references with whome we can cross check details provided :</b></p>
-    
-    
-        
-  <table class="table">
-<thead>
-  <tr style="background-color:#ffeecc">
-   <b> <th>Name</th>
-    <th>Address</th>
-    <th>Contact No.</th>
-    <th>Relation/ Association</th></b>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><?php echo $ref_name1; ?></td>
-    <td><?php echo $ref_add1; ?>-<?php echo $duration1; ?></td>
-    <td><?php echo $ref_contact1; ?></td>
-    <td><?php echo $ref_relation1; ?></td>
-   
-  </tr>
-    <tr>
-    <td><?php echo $ref_name2; ?></td>
-    <td><?php echo $ref_add2; ?>-<?php echo $duration1; ?></td>
-    <td><?php echo $ref_contact2; ?></td>
-    <td><?php echo $ref_relation2; ?></td>
-   
-  </tr>
-
-</tbody>
-</table>			 
-
-     
-
-
-
-
-        <h4 >7. Emergency Contact: </h4><hr/>
-
-
-
-    
- <table class="table">
-<thead>
-  <tr style="background-color:#ffeecc">
-   <b> <th>Name</th>
-    <th>Address</th>
-    <th>Contact No.</th>
-    <th>Relation/ Association</th></b>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><?php echo $em_name1; ?></td>
-    <td><?php echo $em_add1; ?></td>
-    <td><?php echo $em_contact1; ?></td>
-    <td><?php echo $em_relation1; ?></td>
-   
-  </tr>
+    <div class="col-sm-12" >
+      <table class="table border mt-1" >
+          <thead class="sticky-top">
+          <tr style="background-color:#ffeecc">
+              <th style="width: 200px;">Institute Name and Address</th>
+              <th style="width: 200px;">Start-End Date</th>
+              <th style="width: 200px;">Name of Training Attended</th>
+              <th>Take Away</th>
+          </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let data of employeeTrainingObj">
+              <td style="width: 200px;"> {{data.inst_name +" / "+ data.inst_address}}</td>
+              <td style="width: 200px;"> {{data.start_date +" - "+ data.end_date}}</td>
+              <td style="width: 200px;"> {{data.name_training_attended}}</td>
+              <td style="width: 200px;"> {{data.take_away}}</td>
+              </tr> 
+          </tbody>
+          </table>
   
-   <tr>
-    <td><?php echo $em_name2; ?></td>
-    <td><?php echo $em_add2; ?></td>
-    <td><?php echo $em_contact2; ?></td>
-    <td><?php echo $em_relation2; ?></td>
-   
-  </tr>
-   
+      </div>  <br> 
 
-</tbody>
-</table>			 	
-             
+ 
+    <h4 ><b>6. References:</b> </h4><hr/>
 
 
+    <p><b>Please mention references with whom we can cross check the details provided :</b></p>
+    
+    <div class="col-sm-12" >
+      <table class="table border mt-1" >
+          <thead class="sticky-top">
+          <tr style="background-color:#ffeecc">
+              <th style="width: 200px;">Name</th>
+              <th style="width: 200px;">Address</th>
+              <th style="width: 200px;">Contact No.</th>
+              <th>Relation/Association</th>
+          </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let data of employeeRefObj">
+              <td style="width: 200px;"> {{data.name}}</td>
+              <td style="width: 200px;"> {{data.address}}</td>
+              <td style="width: 200px;"> {{data.phone}}</td>
+              <td style="width: 200px;"> {{data.relation}}</td>
+              </tr> 
+          </tbody>
+          </table>
+  
+      </div>  <br>
+        
+ 
+        <h4 ><b>7. Emergency Contact:</b> </h4><hr/>
+
+        <div class="col-sm-12" >
+          <table class="table border mt-1" >
+              <thead class="sticky-top">
+              <tr style="background-color:#ffeecc">
+                  <th style="width: 200px;">Name</th>
+                  <th style="width: 200px;">Address</th>
+                  <th style="width: 200px;">Contact No.</th>
+                  <th>Relation/Association</th>
+              </tr>
+              </thead>
+              <tbody>
+                   <tr *ngFor="let data of employeeContactObj">
+                  <td style="width: 200px;"> {{data.name}}</td>
+                  <td style="width: 200px;"> {{data.address}}</td>
+                  <td style="width: 200px;"> {{data.phone}}</td>
+                  <td style="width: 200px;"> {{data.relation}}</td>
+                  </tr> 
+              </tbody>
+              </table>
+      
+          </div>  <br>
 
 
  <div class="col-sm-12" style="margin-top:20px;">
  <div class="form-group">
- <h4 >8. Application Details :</h4><hr/>
+ <h4 ><b>8. Application Details :</b></h4><hr/>
 </div>
 </div>
 <div class="row" style="margin-top:10px; margin-left:15px; ">
@@ -516,7 +411,7 @@
 </div>
 <div class="col-sm-6">
 <div class="form-group">
-  <?php echo $company; ?>
+  {{employeeObj.organisation}}
 </div>
 </div>
 </div>
@@ -528,8 +423,7 @@
 </div>
 </div>
 <div class="col-sm-6">
-<div class="form-group"><?php echo $application_date; ?>
-
+<div class="form-group"> {{employeeObj.application_date}}
 </div>
 </div>
 </div>
@@ -541,7 +435,7 @@
 </div>
 </div>
 <div class="col-sm-6">
-<div class="form-group"><?php echo $application_position; ?>
+<div class="form-group"> {{employeeObj.designation}}
    </div>
 </div>
 </div>
@@ -552,17 +446,18 @@
 </div>
 </div>
 <div class="col-sm-6">
-<div class="form-group"><?php echo $application_by; ?>
+<div class="form-group"> {{employeeObj.reference_by}}
 </div>
 </div>
-</div>
+</div><br>
 
-<p><i>Name & No. of Refrence/ Institution / Other</i></p>
+<p><i>Name & No. of Refrence/ Institution / Other</i></p><br>
+
 
 <div class="col-sm-12" style="margin-top:20px;">
 
  <div class="form-group">
-<h4>9. Bank Details</h4><hr/>
+<h4><b>9. Bank Details</b></h4><hr/>
 </div>
 </div>
 
@@ -573,7 +468,7 @@
 </div>
 </div>
 <div class="col-sm-6">
-<div class="form-group"><?php echo $bank_holder_name; ?>
+<div class="form-group">{{employeeBankObj.account_holder_name}}
 </div>
 </div>
 </div>
@@ -584,7 +479,7 @@
 </div>
 </div>
 <div class="col-sm-6">
-<div class="form-group"><?php echo $bank_account_no; ?>
+<div class="form-group">{{employeeBankObj.bank_account}}
 </div>
 </div>
 </div>
@@ -595,7 +490,7 @@
 </div>
 </div>
 <div class="col-sm-6">
-<div class="form-group"><?php echo $bank_name; ?>
+<div class="form-group">{{employeeBankObj.bank_name}}
 </div>
 </div>
 </div>
@@ -606,7 +501,7 @@
 </div>
 </div>
 <div class="col-sm-6">
-<div class="form-group"><?php echo $branch_name; ?>
+<div class="form-group">{{employeeBankObj.bank_branch}}
 </div>
 </div>
 </div>
@@ -618,7 +513,7 @@
 </div>
 </div>
 <div class="col-sm-6">
-<div class="form-group"><?php echo $ifsc; ?>
+<div class="form-group">{{employeeBankObj.ifsc_code}}
 </div>
 </div>
 </div>
@@ -632,7 +527,7 @@
 </div>
 <div class="col-sm-6">
 <div class="form-group">
-  <?php echo $status; ?>
+ {{employeeObj.is_active}}
 </div>
 </div>
 </div>
@@ -656,6 +551,6 @@
 
     </div>
     </div>
-    </div> -->
+    </div> 
     
   
