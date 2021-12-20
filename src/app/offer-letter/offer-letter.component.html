@@ -27,21 +27,20 @@
 
 <p>Date: {{offerObj.date}}  <p align="right">Ref No. : {{offerObj.ref_no}} </p>
     
-    <p ><?php echo $name?> <br/>
-    <?php echo $address1?> <br/>
-    <?php echo $address2?><br/>
-   <?php echo $address3?><br/>
-    M:<?php echo $mobile?> </p>
-    <p align="center"><b><u>Subject: Offer Letter for the Position of <?php echo $profile;?> </u></b></p>
+    <p >{{offerObj.emp_name}} <br/>
+    {{offerObj.address}} <br/>
+    {{offerObj.city}}-{{offerObj.pincode}}<br/>
+    M:{{offerObj.mobile_no}} </p>
+    <p align="center"><b><u>Subject: Offer Letter for the Position of {{offerObj.job_profile}} </u></b></p>
 	
-	<p>Dear  <?php echo $name?> </p>
+	<p>Dear {{offerObj.emp_name}} </p>
 	<p>Welcome To Ornate Solar ! </p>
-<p>It gives us great pleasure to offer the role of <?php echo $profile;?> with effect from  	<?php echo       date_format($expected_joining, 'jS F Y')    ?> .</p>
+<p>It gives us great pleasure to offer the role of {{offerObj.job_profile}} with effect from  {{offerObj.exp_joining_date}} .</p>
 <p>The compensation and other benefits that you would be entitled shall be as per the details mentioned herewith.</p>
-<p>a) <?php echo $subject?> </p> 
+<p>a){{offerObj.subject}}</p> 
 <p>b)	Your compensation will be subject to Income tax as per the provisions of the Income Tax Act,1961, as amended from time to time.</p>
 <p>The role, in which you join us, is a very important one which will entail dealing with important and sensitive information, records and such other matters of the company. You will, therefore, be required to maintain the highest levels of secrecy and honesty from the time of your joining.</p>
-<p>Kindly return a duplicate copy of this offer letter duly signed, as a token of acceptance of this offer. In case of your inability to join by 	<?php echo       date_format($expected_joining, 'jS F Y')    ?>  this offer letter shall stand  revoked.</p>
+<p>Kindly return a duplicate copy of this offer letter duly signed, as a token of acceptance of this offer. In case of your inability to join by {{offerObj.exp_joining_date}}  this offer letter shall stand  revoked.</p>
 <p>We look forward to you join our team and are sure that you shall have a bright career with us. We are pleased to welcome you to the Ornate family</p>
 
 	<!--<p>The role, in which you join us, is a very important one which will entail dealing with important and sensitive information, records and such other matters of the company. You will, therefore, be required to maintain the highest levels of secrecy and honesty from the time of your joining.</p>-->
@@ -49,7 +48,7 @@
 	<!--<p>We look forward to you joining our organization and a mutually satisfying and rewarding relationship.</p>-->
 	<p>For <b>Ornate Solar</b> </p>
     
-    <!-- <p> <img src="prakruti_signature.png" alt="Signature" height="102" width="202">  </p> -->
+    <p> <img src="../../../assets/images/prakruti_signature.png" alt="Signature" height="102" width="202">  </p>
   
     
 

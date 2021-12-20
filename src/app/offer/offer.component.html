@@ -7,7 +7,10 @@
     </div></div></div>
 
     <div class="row" style="margin-top: 50px;" *ngIf="!isHidden">
-      <app-common-table [headers]="offerTableHeaders" [rows]="offerTableRows" 
+      <app-common-table 
+      [headers]="offerTableHeaders" 
+      [rows]="offerTableRows" 
+      (onRowClicked) = "onTableRowClicked($event)"
         >
       </app-common-table>
     </div>
@@ -17,7 +20,9 @@
     <div class="row" style="padding: 10px;">
               <div class="col-sm-3">
                 <label>Date:<span style="color: red;">*</span></label>
-                <app-custom-dateRangePicker [singleCalendar]="true" [resetCalendar]="true"
+                <app-custom-dateRangePicker 
+                [singleCalendar]="true" 
+                [resetCalendar]="true"
                 (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
             
               </div>

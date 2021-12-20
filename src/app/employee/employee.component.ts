@@ -511,16 +511,7 @@ selectMaritalStatus(e:any){
       .pipe(takeUntil(this.unsubsribeNotifier))
       .subscribe((res: any) => {
         if (res.status.code === 200) {
-          this.totalCountDocs = res.data.total_count;
-        console.log(this.totalCountAddress)
-        console.log(this.totalCountFamily)
-        console.log(this.totalCountEducation)
-        console.log(this.totalCountWork)
-        console.log(this.totalCountTraining)
-        console.log(this.totalCountReference)
-        console.log(this.totalCountContact)
-        console.log(this.totalCountBank)
-        console.log(this.totalCountDocs)                  
+          this.totalCountDocs = res.data.total_count;              
         if(this.totalCountAddress>0 && this.totalCountFamily>0 && this.totalCountEducation>0 &&
           this.totalCountWork>0 && this.totalCountTraining>0 && this.totalCountReference>0 &&
           this.totalCountContact>0 && this.totalCountBank && this.totalCountDocs>0){

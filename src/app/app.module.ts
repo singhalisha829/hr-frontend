@@ -50,6 +50,7 @@ import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +79,7 @@ import { EmployeeFormComponent } from './employee-form/employee-form.component';
     BirthdaysComponent,
     EmployeeDetailsComponent,
     EmployeeFormComponent,
+    
     
   ],
   imports: [

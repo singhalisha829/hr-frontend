@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UtilsService } from '../services/utils.service';
 import { CompanyapiService } from '../utils/services/companyapi.service';
@@ -37,13 +38,16 @@ export class OfferComponent implements OnInit {
     { headerName: 'Document', field: 'occupation',  width: 65},
   ];
   constructor( public utilsService: UtilsService, private companyService: CompanyapiService,private importsService: ImportsService,
-    private toaster: ToastrService) { }
+    private toaster: ToastrService, private router:Router) { }
 
   ngOnInit(): void {
     this.getCities();
     this.getallOffer();
   }
 
+  onTableRowClicked(e){
+    this.router.navigate([`./offer-letter-pdf/${e.id}`])
+  }
   public getCities() {
     this.companyService.AllCities()
     .pipe(takeUntil(this.unsubsribeNotifier))

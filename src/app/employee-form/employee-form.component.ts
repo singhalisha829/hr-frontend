@@ -7,7 +7,8 @@ import * as XLSX from 'xlsx';
 import { CompanyapiService } from '../utils/services/companyapi.service';
 import { ToastrService } from 'ngx-toastr';
 import { UtilsService } from '../services/utils.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-employee-form',
@@ -18,10 +19,17 @@ export class EmployeeFormComponent implements OnInit {
 
   selectedCity :any={};
  selectedDept :any={};
+ selectedGender:any={};
+ selectedDOB:any;
+ selectedAppDate:any;
+ selectedJoiningDate:any;
+ selectedMaritalStatus :any={};
  selectedDesignation :any={};
  selectedCity2 :any={};
   employeeObj :any ={};
   employeeDetailObj :any ={};
+  employeeFamilyObj :any ={};
+  employeeEduObj :any ={};
   bankDetailObj:any={};
   docsTableRows: any = {};
   familyTableRows: any[]= [];
@@ -120,6 +128,17 @@ export class EmployeeFormComponent implements OnInit {
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
 
+  MaritalStatusList = [
+    {name: 'Single', id: 'Single'},
+    {name: 'Married', id: 'Married'},
+    {name: 'Divorced', id: 'Divorced'},
+    {name: 'Widowed', id: 'Widowed'},
+  ];
+
+  GenderList = [
+    {name: 'Male', id: 'Male'},
+    {name: 'Female', id: 'Female'},
+  ];
   contactTableHeaders = [
     // { headerName: 'Sr No.', field: 'sr_no',  type: 'text', value: 'sr_no',width: 60, },
     { headerName: 'Name', field: 'name', type: 'text', value: 'name', isEditable: true, width: 180},
@@ -142,6 +161,24 @@ export class EmployeeFormComponent implements OnInit {
     this.getDept();
     this.getDesignation();
     this.getEmployeeDetails();
+    this.getFamilyDetails();
+    this.getEmployeeEduaction();
+  }
+
+  public getEmployeeEduaction() {
+    this.importsService.getEmployeeEducation({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeEduObj =res.data.output;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
   }
 
   initProductTable() {
@@ -172,24 +209,35 @@ export class EmployeeFormComponent implements OnInit {
           phone2: res.data.output[0].phone2,
           personal_email: res.data.output[0].personal_email,
           email_secondary: res.data.output[0].organisational_email,
-          gender: res.data.output[0].gender,
-          dob: res.data.output[0].date_of_birth,
-          doj: res.data.output[0].date_of_joining,
           aadhar_card: res.data.output[0].aadhar_card,
           pancard: res.data.output[0].pancard,
           fathers_name: res.data.output[0].fathers_name,
           organisation:res.data.output[0].organisation,
-          application_date: res.data.output[0].application_date,
-          designation:res.data.output[0].designation,
+          relavant_work_ex_months: res.data.output[0].relavant_work_ex_months,
+          relavant_work_ex_year: res.data.output[0].relavant_work_ex_year,
+          total_work_ex_months: res.data.output[0].total_work_ex_months,
+          total_work_ex_year: res.data.output[0].total_work_ex_year,
+          
           reference_by:res.data.output[0].reference_by,
           is_active:res.data.output[0].is_active,
-          // dob: res.data.output[0].date_of_birth,
-          // doj: res.data.output[0].date_of_joining,
-          // aadhar_card: res.data.output[0].aadhar_card,
+    
           fathers_pancard: res.data.output[0].fathers_pancard,
           fathers_occupation: res.data.output[0].fathers_occupation,
           photo:res.data.output[0].photo,
+         
         };
+        this.selectedDOB = { start_date: moment(res.data.output[0]['date_of_birth']).format('YYYY-MM-DD') };
+        this.selectedAppDate = { start_date: moment(res.data.output[0]['application_date']).format('YYYY-MM-DD') };
+        this.selectedJoiningDate = { start_date: moment(res.data.output[0]['joining_date']).format('YYYY-MM-DD') };
+
+        this.selectedMaritalStatus = this.MaritalStatusList && this.MaritalStatusList 
+        .filter(el => el.name == res.data.output[0].marital_status)[0];
+        this.selectedGender = this.GenderList && this.GenderList 
+        .filter(el => el.name == res.data.output[0].gender)[0];
+        this.selectedDept = this.deptDDList && this.deptDDList 
+        .filter(el => el.department == res.data.output[0].department)[0];
+        this.selectedDesignation = this.designationList && this.designationList 
+        .filter(el => el.designation == res.data.output[0].designation)[0];
       } else {
         // console.log('Error fetching company details')
       }
@@ -198,6 +246,23 @@ export class EmployeeFormComponent implements OnInit {
       // console.log('Error fetching company details')
     }
   }
+
+  public getFamilyDetails() {
+    this.importsService.getFamilyDetails({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeFamilyObj =res.data.output;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
+
   public getCities() {
     this.companyService.AllCities()
     .pipe(takeUntil(this.unsubsribeNotifier))
@@ -356,5 +421,14 @@ selectMaritalStatus(e:any){
 
 goBack(){
   this.router.navigate(['/employee'])
+}
+
+onGenderSelect(event){
+  this.selectedGender = event;
+    this.employeeDetailObj['gender'] = event;
+}
+
+editEmpEdu(){
+  
 }
 }

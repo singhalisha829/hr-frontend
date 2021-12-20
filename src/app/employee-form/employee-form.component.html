@@ -26,22 +26,44 @@
           </div>
           <div class="form-group col-sm-3 col-12">
             <label>Marital Status:<span style="color: red;">*</span></label>
-            <select class="form-control" (change)="selectMaritalStatus($event)">
+            <!-- <select class="form-control" (change)="selectMaritalStatus($event)"  ngModel="employeeDetailObj.marital_status" >
               <option>--Choose--</option>
               <option>Single</option>
               <option>Married</option>
               <option>Divorced</option>
               <option>Widowed</option>
-            </select>
+            </select> -->
+           
+              <app-dropdown class='dataon'
+                  [key]="'id'"
+                  [value]="'name'"
+                  [selectedItem]="selectedMaritalStatus"
+                  [placeholder]="'Choose'"
+                  [dropDownList]="MaritalStatusList"
+                  (selectItemEvent)="selectedMaritalStatus = $event;">
+                  </app-dropdown>
+            
           </div>
+
           <div class="form-group col-sm-3 col-12">
             <label for="pi_file">Gender:<span style="color: red;">*</span> </label>
-            <select class="form-control" (change)="selectGender($event)">
+            <!-- <select class="form-control" (change)="selectGender($event)">
               <option>--Select Gender--</option>
               <option>Male</option>
               <option>Female</option>
-            </select>
-        </div></div><br>
+            </select> -->
+            <app-dropdown 
+            [key]="'id'"
+            [value]="'name'"
+            [selectedItem]="selectedGender"
+            [placeholder]="'Choose'"
+            [dropDownList]="GenderList"
+            (selectItemEvent)="onGenderSelect($event);">
+            </app-dropdown>
+      
+    </div>
+
+        </div><br>
 
           <div class="row">
           <div class="form-group col-sm-3 col-12">
@@ -111,8 +133,11 @@
           <div class="row">
           <div class="form-group col-sm-3 col-12">
             <label> Date of Birth:<span style="color: red;">*</span> </label>
-            <app-custom-dateRangePicker [singleCalendar]="true" [resetCalendar]="true"
-              (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
+            <app-custom-dateRangePicker
+            [selectedDateRange]="selectedDOB"
+            [singleCalendar]="true" 
+            [resetCalendar]="true"
+            (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
           </div>
          
             <!-- <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker">
@@ -160,8 +185,11 @@
           </div>
           <div class="form-group col-sm-3 col-12">
             <label> Application Date:<span style="color: red;">*</span> </label>
-            <app-custom-dateRangePicker [singleCalendar]="true" [resetCalendar]="true"
-              (onDateRangeSelection)="onDateRangeSelection1($event)"></app-custom-dateRangePicker>  
+            <app-custom-dateRangePicker 
+            [selectedDateRange]="selectedAppDate"
+            [singleCalendar]="true" 
+            [resetCalendar]="true"
+            (onDateRangeSelection)="onDateRangeSelection1($event)"></app-custom-dateRangePicker>  
           </div>
         <div class="form-group col-sm-3 col-12"  [(ngModel)]="employeeObj.position">
             <label>Application By:<span style="color: red;">*</span></label>
@@ -194,9 +222,9 @@
               <div class="row">
                 <label>Total Work Exp:</label>
                 <div class="input-group" style="width: 400px;">
-                  <input type="text" class="form-control" [(ngModel)]="employeeObj.totalWorkYear"/>
+                  <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.total_work_ex_year" [disabled]="!isEditMode"/>
                       <span class="input-group-text">years</span>
-                  <input type="text" class="form-control"  [(ngModel)]="employeeObj.totalWorkMon"/>
+                  <input type="text" class="form-control"  [(ngModel)]="employeeDetailObj.total_work_ex_months" [disabled]="!isEditMode"/>
                   <span class="input-group-text" 
                       style="border-left: 0; border-right: 0;">
                       months
@@ -207,9 +235,9 @@
               <div class="row">
               <label>Relevant Work Exp:</label>
                 <div class="input-group" style="width: 400px;">
-                  <input type="text" class="form-control" [(ngModel)]="employeeObj.relWorkYear" />
+                  <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.relavant_work_ex_year" [disabled]="!isEditMode" />
                   <span class="input-group-text">years</span>
-                  <input type="text" class="form-control" [(ngModel)]="employeeObj.relWorkMon" />
+                  <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.relavant_work_ex_months" [disabled]="!isEditMode"/>
                   <span class="input-group-text" 
                       style="border-left: 0; border-right: 0;">
                       months
@@ -221,7 +249,10 @@
               <div class="row">
                 <div class="form-group col-sm-3 col-12">
                   <label>Joining Date:<span style="color: red;">*</span></label>
-                  <app-custom-dateRangePicker [singleCalendar]="true" [resetCalendar]="true"
+                  <app-custom-dateRangePicker
+                  [selectedDateRange]="selectedJoiningDate" 
+                  [singleCalendar]="true" 
+                  [resetCalendar]="true"
                   (onDateRangeSelection)="onDateRangeSelection2($event)"></app-custom-dateRangePicker>  
                 </div>
                 <div class="form-group col-sm-3 col-12">
@@ -259,6 +290,10 @@
              
              
         <mat-step label="Qualifications & Experiences"><br>
+          <div class="col-12 pd-0">
+            <button *ngIf="!isEditMode" type="submit" class="btn btn-success float-right" 
+            (click)="editEmpEdu()" style="margin-right: 60px;margin-top:10px; float:right"
+            >Edit</button></div><br>
           <h4><b>Education Qualification</b></h4><hr>
                 <h4>Please mention your Qualification class X onwards, including Degrees and Diplomas.</h4>
                 <!--add qualification table-->

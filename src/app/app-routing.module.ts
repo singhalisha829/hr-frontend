@@ -89,7 +89,7 @@ const routes: Routes = [
     component:BuddyBannerComponent
   },
   {
-    path:'offer-letter-pdf',
+    path:'offer-letter-pdf/:id',
     component:OfferLetterComponent
   },
   {
