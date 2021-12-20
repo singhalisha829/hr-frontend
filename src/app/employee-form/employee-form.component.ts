@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -6,6 +7,7 @@ import * as XLSX from 'xlsx';
 import { CompanyapiService } from '../utils/services/companyapi.service';
 import { ToastrService } from 'ngx-toastr';
 import { UtilsService } from '../services/utils.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-employee-form',
@@ -19,6 +21,7 @@ export class EmployeeFormComponent implements OnInit {
  selectedDesignation :any={};
  selectedCity2 :any={};
   employeeObj :any ={};
+  employeeDetailObj :any ={};
   bankDetailObj:any={};
   docsTableRows: any = {};
   familyTableRows: any[]= [];
@@ -30,6 +33,7 @@ export class EmployeeFormComponent implements OnInit {
   newProductArray: any[] = [];
   incomingApi:any;
   totalCount:any;
+  isEditMode:boolean = false;
   cityDDList:any =[];
   deptDDList:any =[];
   designationList:any=[];
@@ -125,13 +129,19 @@ export class EmployeeFormComponent implements OnInit {
     { headerName: 'Action', field: 'deleteBTN', width: 65,  },
   ];
   empDocs: any;
-  constructor(private utilsService: UtilsService,private companyService: CompanyapiService,private importsService: ImportsService,) { }
+  employeeId:any;
+
+  constructor(private utilsService: UtilsService,private companyService: CompanyapiService,private importsService: ImportsService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    const path = window.location.pathname.split('/');
+    this.employeeId = path[path.length - 1];
     this.initProductTable();
     this.getCities();
     this.getDept();
     this.getDesignation();
+    this.getEmployeeDetails();
   }
 
   initProductTable() {
@@ -146,6 +156,48 @@ export class EmployeeFormComponent implements OnInit {
     this.docsTableRows=[{row_id1:0,file_name:'',file:'',deleteBTN:''}]
   }
 
+  editEmpDetail(){
+    this.isEditMode = !this.isEditMode;
+    console.log(this.isEditMode)
+  }
+  public getEmployeeDetails() {
+    this.importsService.getEmployeeData({id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.employeeDetailObj = {
+          first_name: res.data.output[0].first_name,
+          last_name: res.data.output[0].last_name,
+          phone: res.data.output[0].phone,
+          phone2: res.data.output[0].phone2,
+          personal_email: res.data.output[0].personal_email,
+          email_secondary: res.data.output[0].organisational_email,
+          gender: res.data.output[0].gender,
+          dob: res.data.output[0].date_of_birth,
+          doj: res.data.output[0].date_of_joining,
+          aadhar_card: res.data.output[0].aadhar_card,
+          pancard: res.data.output[0].pancard,
+          fathers_name: res.data.output[0].fathers_name,
+          organisation:res.data.output[0].organisation,
+          application_date: res.data.output[0].application_date,
+          designation:res.data.output[0].designation,
+          reference_by:res.data.output[0].reference_by,
+          is_active:res.data.output[0].is_active,
+          // dob: res.data.output[0].date_of_birth,
+          // doj: res.data.output[0].date_of_joining,
+          // aadhar_card: res.data.output[0].aadhar_card,
+          fathers_pancard: res.data.output[0].fathers_pancard,
+          fathers_occupation: res.data.output[0].fathers_occupation,
+          photo:res.data.output[0].photo,
+        };
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
   public getCities() {
     this.companyService.AllCities()
     .pipe(takeUntil(this.unsubsribeNotifier))
@@ -230,7 +282,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   submitUserDetails(){
-
+    this.isEditMode = !this.isEditMode;
   }
 
   submitFamilyDetails(){
@@ -300,5 +352,9 @@ export class EmployeeFormComponent implements OnInit {
 
 selectMaritalStatus(e:any){
   this.employeeObj.marital_status = e.target.value;
+}
+
+goBack(){
+  this.router.navigate(['/employee'])
 }
 }

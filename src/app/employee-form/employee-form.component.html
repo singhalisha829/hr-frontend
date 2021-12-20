@@ -1,20 +1,28 @@
 <div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px;">
     <div class="row">
     <h2 style="text-align: center;" >Joining Form</h2>
-  
+    <div class="col-12 pd-0">
+      <button type="submit" class="btn btn-success float-right" 
+      (click)="goBack()" style="margin-right: 60px;margin-bottom:10px; float:right"
+      >Back</button><br></div>
 <div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" >
     
 			<mat-vertical-stepper>
 
         <mat-step label="Personal Details">
-          <div class="row">
+          <div class="col-12 pd-0">
+            <button *ngIf="!isEditMode" type="submit" class="btn btn-success float-right" 
+            (click)="editEmpDetail()" style="margin-right: 60px;margin-top:10px; float:right"
+            >Edit</button></div><br>
+          
+          <div class="row" >
           <div class="form-group col-sm-3 col-12">
             <label>First Name:<span style="color: red;">*</span></label>
-            <input  type="text" class="form-control" [(ngModel)]="employeeObj.firstName"/>
+            <input  type="text" class="form-control" [(ngModel)]="employeeDetailObj.first_name" [disabled]="!isEditMode"/>
           </div>
           <div class="form-group col-sm-3 col-12">
             <label>Last Name:<span style="color: red;">*</span></label>
-            <input  type="text" class="form-control"   [(ngModel)]="employeeObj.lastName"/>
+            <input  type="text" class="form-control"   [(ngModel)]="employeeDetailObj.last_name" [disabled]="!isEditMode"/>
           </div>
           <div class="form-group col-sm-3 col-12">
             <label>Marital Status:<span style="color: red;">*</span></label>
@@ -38,7 +46,7 @@
           <div class="row">
           <div class="form-group col-sm-3 col-12">
             <label> Present Address: <span style="color: red;">*</span> </label>
-            <input  type="text" class="form-control"  [(ngModel)]="employeeObj.presentAddress" /> 
+            <input  type="text" class="form-control"  [(ngModel)]="employeeObj.presentAddress" [disabled]="!isEditMode"/> 
           </div>
           <div class="form-group col-sm-3 col-12">
             <label for="city">City <span style="color: red;">*</span></label>
@@ -53,14 +61,14 @@
         </div>
           <div class="form-group col-sm-3 col-12">
                 <label>Pincode:<span style="color: red;">*</span></label>
-                <input name="pincode" type="number" class="form-control" id="pincode"   [(ngModel)]="employeeObj.pincode"> 
+                <input name="pincode" type="number" class="form-control" id="pincode"   [(ngModel)]="employeeObj.pincode" [disabled]="!isEditMode"> 
             </div></div><br>
 
 
             <div class="row">
             <div class="form-group col-sm-3 col-12">
               <label>Permanent Address:<span style="color: red;">*</span></label>
-              <input type="text" class="form-control"   [(ngModel)]="employeeObj.permanentAddress">
+              <input type="text" class="form-control"   [(ngModel)]="employeeObj.permanentAddress" [disabled]="!isEditMode">
            </div> 
               <div class="form-group col-sm-3 col-12">
                 <label>City:<span style="color: red;">*</span></label>
@@ -75,26 +83,28 @@
             </div>
             <div class="form-group col-sm-3 col-12">
               <label> Pincode: <span style="color: red;">*</span> </label>
-              <input name="p_pincode" type="number"  class="form-control" id="p_pincode"   [(ngModel)]="employeeObj.pincode1"/> 
+              <input name="p_pincode" type="number"  class="form-control" id="p_pincode"   [(ngModel)]="employeeObj.pincode1" [disabled]="!isEditMode"/> 
             </div></div><br>
             
 
             <div class="row">
             <div class="form-group col-sm-3 col-12">
               <label>Contact No: <span style="color: red;">*</span></label>
-              <input type="number" class="form-control" name="phone_primary" (focusout)="checkDuplicate('phone_primary')"  [(ngModel)]="employeeObj.contact">
+              <input type="number" class="form-control" name="phone_primary" (focusout)="checkDuplicate('phone_primary')"  
+              [disabled]="!isEditMode" [(ngModel)]="employeeDetailObj.phone">
           </div>
           <div class="form-group col-sm-3 col-12">
             <label>Alternate Contact No:<span style="color: red;">*</span> </label>
-            <input type="number" class="form-control"   [(ngModel)]="employeeObj.alternateContact" >
+            <input type="number" class="form-control"   [(ngModel)]="employeeDetailObj.phone2" [disabled]="!isEditMode" >
           </div>
           <div class="form-group col-sm-3 col-12">
             <label>Personal Email:<span style="color: red;">*</span> </label>
-            <input type="email" class="form-control" name="email_primary" (focusout)="checkDuplicate('email_primary')" [(ngModel)]="employeeObj.email">
+            <input type="email" class="form-control" name="email_primary" (focusout)="checkDuplicate('email_primary')"
+            [disabled]="!isEditMode" [(ngModel)]="employeeDetailObj.personal_email">
           </div>
           <div class="form-group col-sm-3 col-12">
             <label>Organisational Email:<span style="color: red;">*</span> </label>
-            <input type="email" class="form-control"   [(ngModel)]="employeeObj.orgEmail">
+            <input type="email" class="form-control"   [(ngModel)]="employeeDetailObj.email_secondary" [disabled]="!isEditMode">
           </div></div><br>
           
 
@@ -112,15 +122,15 @@
 
           <div class="form-group col-sm-3 col-12">
             <label>Aadhaar Card No:<font color="red">*</font></label>
-            <input type="text" class="form-control" [(ngModel)]="employeeObj.aadhar">
+            <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.aadhar_card" [disabled]="!isEditMode">
             </div>
             <div class="form-group col-sm-3 col-12">
               <label>Pancard No:<font color="red">*</font></label>
-              <input type="text" class="form-control" [(ngModel)]="employeeObj.pancard">
+              <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.pancard" [disabled]="!isEditMode">
             </div>
             <div class="form-group col-sm-3 col-12">
               <label>Organisation:<font color="red">*</font></label>
-              <input type="text" class="form-control" [(ngModel)]="employeeObj.organisation">
+              <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.organisation" [disabled]="!isEditMode">
             </div>
           </div><br>
 
@@ -155,27 +165,28 @@
           </div>
         <div class="form-group col-sm-3 col-12"  [(ngModel)]="employeeObj.position">
             <label>Application By:<span style="color: red;">*</span></label>
-            <input type="text" class="form-control"  [(ngModel)]="employeeObj.app_by"><br>
+            <input type="text" class="form-control"  [(ngModel)]="employeeDetailObj.reference_by" [disabled]="!isEditMode"><br>
         </div></div><br>
           
 
             <div class="row">
             <div class="form-group col-sm-3 col-12">
                 <label>Father's Name:<span style="color: red;">*</span></label>
-                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherName"/>
+                <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.fathers_name" [disabled]="!isEditMode"/>
               </div>
               <div class="form-group col-sm-3 col-12">
                 <label>Father's Pancard No:<span style="color: red;">*</span></label>
-                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherPancard"/>
+                <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.fathers_pancard" [disabled]="!isEditMode"/>
               </div>
               <div class="form-group col-sm-3 col-12">
                 <label>Occupation:<span style="color: red;">*</span></label>
-                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherOccupation"/><br>
+                <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.fathers_occupation" [disabled]="!isEditMode"/><br>
               </div>
-              <div class="form-group col-sm-3 col-12">
+              <!-- <div class="form-group col-sm-3 col-12">
                 <label>Last Drawn Salary:<span style="color: red;">*</span></label>
                 <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherOccupation"/><br>
-              </div></div><br>
+              </div> -->
+            </div><br>
 
 
              
@@ -183,27 +194,27 @@
               <div class="row">
                 <label>Total Work Exp:</label>
                 <div class="input-group" style="width: 400px;">
-                  
+                  <input type="text" class="form-control" [(ngModel)]="employeeObj.totalWorkYear"/>
+                      <span class="input-group-text">years</span>
                   <input type="text" class="form-control"  [(ngModel)]="employeeObj.totalWorkMon"/>
                   <span class="input-group-text" 
                       style="border-left: 0; border-right: 0;">
                       months
                   </span>
-                  <input type="text" class="form-control" [(ngModel)]="employeeObj.totalWorkYear"/>
-                      <span class="input-group-text">years</span>
+                  
               </div></div><br>
 
               <div class="row">
               <label>Relevant Work Exp:</label>
                 <div class="input-group" style="width: 400px;">
-                  
+                  <input type="text" class="form-control" [(ngModel)]="employeeObj.relWorkYear" />
+                  <span class="input-group-text">years</span>
                   <input type="text" class="form-control" [(ngModel)]="employeeObj.relWorkMon" />
                   <span class="input-group-text" 
                       style="border-left: 0; border-right: 0;">
                       months
                   </span>
-                  <input type="text" class="form-control" [(ngModel)]="employeeObj.relWorkYear" />
-                      <span class="input-group-text">years</span>
+                 
               </div>
               </div><br>
 
@@ -217,9 +228,10 @@
                   <label>Photo:<span style="color: red;">*</span></label>
                   <input name="file"  type="file" id="file"  (change)="assignPhoto($event)">
               </div></div><br>
+              <!-- </div> -->
               <button mat-button matStepperNext style=" background-color:green;
               color:white; 
-              margin-top:10px" (click)="submitUserDetails()">Save and Continue</button>
+              margin-top:10px" (click)="submitUserDetails()" [disabled]="!isEditMode">Save and Continue</button>
     
         </mat-step>
       

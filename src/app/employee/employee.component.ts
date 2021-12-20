@@ -526,7 +526,7 @@ selectMaritalStatus(e:any){
           this.totalCountContact>0 && this.totalCountBank && this.totalCountDocs>0){
             this.router.navigate([`./employeeDetails/${e.id}`])
         }else{
-          this.router.navigate(['/employeeForm/${e.id}'])
+          this.router.navigate([`./employeeForm/${e.id}`])
         }                        
       }}),() => {};
       }}),() => {};

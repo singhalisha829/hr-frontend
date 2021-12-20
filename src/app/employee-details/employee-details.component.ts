@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -20,7 +21,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employeeRefObj:any={};
   employeeContactObj:any={};
   employeeBankObj:any={};
-  constructor(private importsService: ImportsService,) { }
+  constructor(private importsService: ImportsService,private router:Router) { }
 
   ngOnInit(): void {
     const path = window.location.pathname.split('/');
@@ -63,7 +64,9 @@ export class EmployeeDetailsComponent implements OnInit {
           // aadhar_card: res.data.output[0].aadhar_card,
           fathers_pancard: res.data.output[0].fathers_pancard,
           fathers_occupation: res.data.output[0].fathers_occupation,
+          photo:res.data.output[0].photo,
         };
+        console.log(this.employeeObj.photo)
         if(this.employeeObj.is_active ==="True")
         {
           this.employeeObj.is_active ="Working";
@@ -198,4 +201,7 @@ export class EmployeeDetailsComponent implements OnInit {
     }
   }
   
+  goBack(){
+    this.router.navigate(['/employee'])
+  }
 }

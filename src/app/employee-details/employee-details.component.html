@@ -2,13 +2,18 @@
         
     <div class="content-wrapper">
     
-    <h2>Details of <font color="red"> {{employeeObj.first_name}} {{employeeObj.last_name}}</font></h2>
-
+      <div class="row" style="margin-top: 10px;">
+    <h1>Details of <font color="red"> {{employeeObj.first_name}} {{employeeObj.last_name}}</font></h1>
+    <div class="col-12 pd-0">
+    <button type="submit" class="btn btn-success float-right" 
+    (click)="goBack()" style="margin-right: 60px;margin-bottom:10px; float:right"
+    >Back</button><br></div></div>
 
             
                         <div class="card">
                         <div class="container" >
                     <form class="form-horizontal" method="POST" action="">
+                      <img src={{employeeObj.photo}}>
                     
 <div class="col-sm-12" style="margin-top:20px;">
 
@@ -531,19 +536,9 @@
 </div>
 </div>
 </div>
-<div class="row" style="margin-top:10px;  margin-left:15px;" >
-<div class="col-sm-1">
-<div class="form-group">
-<input type="reset" class="btn btn-danger" value="Clear">
-</div>
-</div> <div class="col-sm-1"></div>
-<div class="col-sm-1">
-<div class="form-group">
- <a href="edit_employee.php?id=<?php echo $edited_by;?>"> <input class="btn btn-success" type="button" value="Update"> </a>
- 
-</div>
-</div>
-</div>
+<button type="submit" class="btn btn-success float-right" 
+               style="margin-right: 60px;margin-top:30px"
+              >Update</button>
 
 
 </form>
