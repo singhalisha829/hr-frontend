@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DateAdapter } from 'angular-calendar';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Component, OnInit } from '@angular/core';
@@ -36,13 +37,17 @@ export class AppointmentComponent implements OnInit {
     { headerName: 'Status', field: 'status',  width: 65},
     { headerName: 'Document', field: 'occupation',  width: 65},
   ];
-  constructor(private utilsService: UtilsService ,private importsService: ImportsService,private toaster: ToastrService) { }
+  constructor(private utilsService: UtilsService ,private importsService: ImportsService,private toaster: ToastrService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.getallOffer();
     this.getallAppointment();
   }
 
+  onTableRowClicked(e){
+    this.router.navigate([`./appointment-letter/${e.id}`])
+  }
   addAppointment(){
     if(!this.isHidden)
     {

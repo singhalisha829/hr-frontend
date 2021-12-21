@@ -1,7 +1,6 @@
-<!-- 
-  <body onload="window.print();"> -->
+
   
-    <!-- <div class="page-header" style="text-align: center">
+     <div class="page-header" style="text-align: center">
   
       <br/>
   
@@ -15,19 +14,19 @@
   
       <thead>
         <tr>
-          <td> -->
+          <td> 
             <!--place holder for the fixed-position header-->
-            <!-- <div class="page-header-space"></div>
+            <div class="page-header-space"></div>
           </td>
         </tr>
       </thead>
   
       <tbody>
         <tr>
-          <td> -->
+          <td> 
             <!--*** CONTENT GOES HERE ***-->
         
-            <!-- <div  style=" margin:10.5mm;">
+             <div  style=" margin:10.5mm;">
            <div style="font-size:11pt;">
        <p align="center"><b><u>PRIVATE & CONFIDENTIAL</u></b></p>
        
@@ -35,19 +34,19 @@
        
   
        
-  <p>   <p align="right"> <?php echo $newdate?> </p></p>
+  <p>   <p align="right"> {{appointmentObj.date}} </p>
       <p >To,<br/>
-          <b><?php echo $name?></b> <br/>
+          <b>{{appointmentObj.name}}</b> <br/>
       <?php echo $address?> <br/>
       <?php echo $city?>,
      <?php echo $state?>-
      <?php echo $pincode?> </p>
       
       <?php $newdate1 = date("j F Y", strtotime($date_of_commen)); ?>
-  <p>We are pleased to offer you employment with <b><?php echo $company?></b> on the following terms and conditions:</p>
+  <p>We are pleased to offer you employment with <b>{{appointmentObj.company}}</b> on the following terms and conditions:</p>
      <p>1.	<u> Date of Commencement:</u> Your employment with the Company will commence on  <?php echo $newdate1;?>  .</p>
      <p>2.	<u>Position & Scope </u><</p>
-     <p>2.1.	Your appointment with the Company is that of  <b><?php echo $profile?></b> .You will faithfully and diligently perform all acts, duties and obligations and comply with such orders as may be designated by the Company which are reasonably consistent with that position. <br/> 2.2.	You are required to comply with all the Company's rules, regulations and policies from time to time in force and to comply with the Company's lawful and reasonable instructions. </p>
+     <p>2.1.	Your appointment with the Company is that of  <b>{{appointmentObj.job_profile}}</b> .You will faithfully and diligently perform all acts, duties and obligations and comply with such orders as may be designated by the Company which are reasonably consistent with that position. <br/> 2.2.	You are required to comply with all the Company's rules, regulations and policies from time to time in force and to comply with the Company's lawful and reasonable instructions. </p>
   
   <p>3.	<u>Probation:</u> You will be on probation for a period of 6 months, from your Date Of Joining, after which you will be confrimed.During the probation period either party may terminate this agreement by giving 7 days notice.If your services are not considered appropriate during your probation period you would be  to leave with immediate effect.</p>
      <p>4.	<u>Remuneration  </u></p>
@@ -68,58 +67,58 @@
       <td rowspan= "5" style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">1. </td>
       <td rowspan= "5" style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">Gross Salary  </td>
       <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;"> 1a. Basic Salary</td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $basic_salary?> </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;<?php echo $abasic_salary?> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;{{appointmentObj.basic_salary}}</td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;{{appointmentObj.basic_salary*12}} </td>
     </tr>
       <tr>
    
      
       <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">1b. HRA                                                      </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $hra?> </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $ahra?></td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; {{appointmentObj.hra}}</td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; {{appointmentObj.hra*12}}</td>
     </tr>
       <tr>
      
       
       <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">1c. Conveyance </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $conveyance?> </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;  <?php echo $aconveyance?></td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; {{appointmentObj.conveyance}} </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; {{appointmentObj.conveyance*12}}</td>
     </tr>
       <tr>
       
       
       <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">1d.Other Allowances  </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $other_allowances?> </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;<?php echo $aother_allowances?> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; {{appointmentObj.other_allowance}} </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;{{appointmentObj.other_allowance*12}} </td>
     </tr>
         <tr>
       
       
       <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;"><b>Sub Total(Gross Salary)</b></td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9; <?php echo $sub?></b> </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9;<?php echo $asub?></b> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9; {{appointmentObj.gross_salary}}</b> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9;{{appointmentObj.gross_salary*12}}</b> </td>
     </tr>
       <tr>
       <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">2. </td>
       <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;"> EPF</td>
       <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;">Employers Contribution </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;  <?php echo $epf?> </td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; <?php echo $aepf?> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9;  {{appointmentObj.epf}} </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;">&#x20B9; {{appointmentObj.epf*12}} </td>
     </tr>
       <tr>
       
       <td colspan="3" style=" border: 1px solid black;   border-collapse: collapse;  text-align: left; padding: 5px;"><b>Total Cost to Company </b></td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9;  <?php echo $tcc?> </b></td>
-      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9; <?php echo $atcc?> </b> </td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9;  {{appointmentObj.epf +appointmentObj.gross_salary}} </b></td>
+      <td style=" border: 1px solid black;   border-collapse: collapse;  text-align: center; padding: 5px;"><b>&#x20B9; {{appointmentObj.epf*12 +appointmentObj.gross_salary*12}} </b> </td>
     </tr>
     
   
-  </table>
+  </table><br>
   
      
      
     <p>4.1.	<u>Annual fixed compensation   </u></p> 
-  <p>You will receive a gross annual fixed compensation, defined as a <b>gross salary of &#x20B9; <?php echo $atcc?> /year.</b> Your Cost to Company may be split into appropriate heads, within Indian laws and prevailing Company policy. The gross annual salary may be reviewed and revised periodically.</p>
+  <p>You will receive a gross annual fixed compensation, defined as a <b>gross salary of &#x20B9; {{appointmentObj.gross_salary*12}} /year.</b> Your Cost to Company may be split into appropriate heads, within Indian laws and prevailing Company policy. The gross annual salary may be reviewed and revised periodically.</p>
   
    <p>4.2.	<u>Payment    </u></p> 
   <p>The salary will be paid by the Company on a monthly basis, in Indian Rupees into your bank account in India</p>
@@ -185,8 +184,8 @@
   <p>Please sign and return the duplicate of this agreement to the undersigned to indicate your acceptance of this appointment and the terms of this agreement.</p>
   <p>We welcome you to our company and look forward to your association with us</p>
   <p>Yours sincerely,</p>
-  <p>For and on behalf of <b><?php echo $company?></b></p>
-  <br/>
+  <p>For and on behalf of <b>{{appointmentObj.company}}</b></p>
+  <br/>                                           
   <p><b>Aditya Goel,</b> </p>
   <p><b>Director</b></p>
   <p>I agree with the terms and conditions of my employment with the Company as set out or referred to above.</p>
@@ -202,7 +201,7 @@
   
       <tfoot>
         <tr>
-          <td> -->
+          <td> 
             <!--place holder for the fixed-position footer-->
             <!-- <div class="page-footer-space"></div>
           </td>
@@ -212,4 +211,4 @@
     </table>
    -->
  
-   -->
+   

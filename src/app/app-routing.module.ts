@@ -23,6 +23,7 @@ import { DepartmentComponent } from './department/department.component';
 import { NewHiresComponent } from './new-hires/new-hires.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
+import { AppointmentLetterComponent } from './appointment-letter/appointment-letter.component';
 
 
 const routes: Routes = [
@@ -63,6 +64,10 @@ const routes: Routes = [
   {
     path:'appointment',
     component:AppointmentComponent
+  },
+  {
+    path:'appointment-letter/:id',
+    component:AppointmentLetterComponent
   },
   {
     path:'notice',
