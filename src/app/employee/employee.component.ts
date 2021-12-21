@@ -177,14 +177,14 @@ export class EmployeeComponent implements OnInit {
     this.trainingTableRows[e.index]['inst_city'] = e.rowObj.inst_city.selectedDDList.id;
     
   }
-  id:any= 6;
+  
   isActive:any=1;
   submit(){
     for(let i=0;i<this.docsTableRows.length;i++){
     const formdata = new FormData();
     formdata.append('file_name',this.docsTableRows[i].file_name)
     formdata.append('file',this.docsTableRows[i].file);
-    formdata.append('UserDetails',this.id)
+    formdata.append('UserDetails',this.employeeId)
     formdata.append('is_active',this.isActive)
 
     this.importsService.postDocuments(formdata)
@@ -271,8 +271,8 @@ export class EmployeeComponent implements OnInit {
     .subscribe((res: any) => {
       if(res.status.code === 200) {
         this.toaster.success("User Successfully Added");
-        this.getallEmployee();
-        this.submitAddress();
+        this.getallEmployee1();
+        
       }
     }, () => {})
 
@@ -581,11 +581,30 @@ selectMaritalStatus(e:any){
       if (res.status.code === 200) {
         this.employeeTableRows = res.data.output;
         this.totalCount = res.data.total_count;
+        // this.employeeId = this.employeeTableRows[this.totalCount-1]['id'];
+        console.log(this.employeeId)
+        for(let i =0 ; i < this.employeeTableRows.length; i++){
+          this.employeeTableRows[i]['fullName'] = this.employeeTableRows[i]['first_name']+" "+ this.employeeTableRows[i]['last_name'];
+        }
+      } else {this.employeeTableRows = [];}
+    }),
+      () => {this.employeeTableRows = [];};
+  }
+
+  public getallEmployee1() {
+    if (this.incomingApi) this.incomingApi.unsubscribe();
+    this.incomingApi = this.importsService.getEmployeeData({end_limit: 25, page: this.currentPage, ...this.filterObj})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.employeeTableRows = res.data.output;
+        this.totalCount = res.data.total_count;
         this.employeeId = this.employeeTableRows[this.totalCount-1]['id'];
         console.log(this.employeeId)
         for(let i =0 ; i < this.employeeTableRows.length; i++){
           this.employeeTableRows[i]['fullName'] = this.employeeTableRows[i]['first_name']+" "+ this.employeeTableRows[i]['last_name'];
         }
+        this.submitAddress();
       } else {this.employeeTableRows = [];}
     }),
       () => {this.employeeTableRows = [];};

@@ -267,6 +267,10 @@
         </mat-step>
       
               <mat-step label="Family Details"><br>
+                <div class="col-12 pd-0">
+                  <button *ngIf="!(isFamilyEditMode && isFamily)" type="submit" class="btn btn-success float-right" 
+                  (click)="editEmpFamily()" style="margin-right: 60px;margin-top:10px; float:right"
+                  >Edit</button></div><br>
                 <h4>Please mention briefly about your family.</h4><br>
               <div class="col-md-6 col-12 mt-4">
                 <button class="btn btn-primary add-Btn" type="button"
@@ -284,7 +288,10 @@
             background-color:lightgrey; margin-right:30px">Back</button>
             <button mat-button matStepperNext style=" background-color:green;
             color:white; 
-            margin-top:10px" (click)="submitFamilyDetails()">Save and Continue</button>
+            margin-top:10px" (click)="submitFamilyDetails()" *ngIf="!isFamily">Submit and Continue</button>
+            <button mat-button matStepperNext style=" background-color:green;
+            color:white; 
+            margin-top:10px" (click)="saveFamilyDetails()" *ngIf="isFamily" [disabled]="!isFamilyEditMode">Save and Continue</button>
         </div>
               </mat-step>
              

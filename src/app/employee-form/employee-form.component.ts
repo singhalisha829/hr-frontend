@@ -8,6 +8,7 @@ import { CompanyapiService } from '../utils/services/companyapi.service';
 import { ToastrService } from 'ngx-toastr';
 import { UtilsService } from '../services/utils.service';
 import * as moment from 'moment';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class EmployeeFormComponent implements OnInit {
   incomingApi:any;
   totalCount:any;
   isEditMode:boolean = false;
+  isFamilyEditMode:boolean = false;
   cityDDList:any =[];
   deptDDList:any =[];
   designationList:any=[];
@@ -57,15 +59,15 @@ export class EmployeeFormComponent implements OnInit {
     {name: 'Salary Certificate/Salary Slip', id: 'Salary Certificate/Salary Slip'},
     {name: 'Proof of Address(Permanent)', id: 'Proof of Address(Permanent)'},
     {name: 'Proof of Address(Correspondence)', id: 'Proof of Address(Correspondence)'},
-    {name: 'Job Acceptance Letter', id: 'cfs charges'},
-    {name: 'Relieving Letter', id: 'dpd charges'},
-    {name: 'Bank Details', id: 'clearance charge(CHA)'},
-    {name: "Master's Degree", id: 'stamp duty'},
-    {name: 'Diploma Certificate', id: 'FREIGHT'},
-    {name: 'Previous Job Offer Letter', id: 'inland freight'},
-    {name: 'Previous Job Acceptance Letter', id: 'cfs charges'},
-    {name: 'Experience Letter', id: 'dpd charges'},
-    {name: 'Letter of Recommendation', id: 'clearance charge(CHA)'},
+    {name: 'Job Acceptance Letter', id: 'Job Acceptance Letter'},
+    {name: 'Relieving Letter', id: 'Relieving Letter'},
+    {name: 'Bank Details', id: 'Bank Details'},
+    {name: "Master's Degree", id: "Master's Degree"},
+    {name: 'Diploma Certificate', id: 'Diploma Certificate'},
+    {name: 'Previous Job Offer Letter', id: 'Previous Job Offer Letter'},
+    {name: 'Previous Job Acceptance Letter', id: 'Previous Job Acceptance Letter'},
+    {name: 'Experience Letter', id: 'Experience Letter'},
+    {name: 'Letter of Recommendation', id: 'Letter of Recommendation'},
   ]
 
   familyTableHeaders = [
@@ -149,6 +151,12 @@ export class EmployeeFormComponent implements OnInit {
   ];
   empDocs: any;
   employeeId:any;
+  totalCountFamily:any;
+  totalCountDocs:any;
+  
+  isFamily:boolean = false;
+  isDocs:boolean = false;
+
 
   constructor(private utilsService: UtilsService,private companyService: CompanyapiService,private importsService: ImportsService,
     private router: Router) { }
@@ -163,8 +171,50 @@ export class EmployeeFormComponent implements OnInit {
     this.getEmployeeDetails();
     this.getFamilyDetails();
     this.getEmployeeEduaction();
+    this.checkFamily();
   }
 
+  public checkFamily(){
+    this.importsService.getEmployeeFamily({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.totalCountFamily = res.data.total_count;
+        if(this.totalCountFamily>0){
+          this.isFamily=true;
+          this.getEmployeeDoc();
+        }
+      }}),() => {};
+  }
+
+  public checkDocs(){
+    this.importsService.getEmployeeDocs({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.totalCountDocs = res.data.total_count;
+        if(this.totalCountDocs>0){
+          this.isDocs=true;
+          this.getEmployeeDoc();
+        }
+      }}),() => {};
+  }
+
+  public getEmployeeDoc() {
+    this.importsService.getEmployeeDocs({UserDetails_id: this.employeeId})
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        this.docsTableRows =res.data.output;
+        
+      } else {
+        // console.log('Error fetching company details')
+      }
+    }),
+    () => {
+      // console.log('Error fetching company details')
+    }
+  }
   public getEmployeeEduaction() {
     this.importsService.getEmployeeEducation({UserDetails_id: this.employeeId})
     .pipe(takeUntil(this.unsubsribeNotifier))
@@ -196,6 +246,11 @@ export class EmployeeFormComponent implements OnInit {
   editEmpDetail(){
     this.isEditMode = !this.isEditMode;
     console.log(this.isEditMode)
+  }
+
+  editEmpFamily(){
+    this.isFamilyEditMode = !this.isFamilyEditMode;
+    console.log(this.isFamilyEditMode)
   }
   public getEmployeeDetails() {
     this.importsService.getEmployeeData({id: this.employeeId})
@@ -252,7 +307,7 @@ export class EmployeeFormComponent implements OnInit {
     .pipe(takeUntil(this.unsubsribeNotifier))
     .subscribe((res: any) => {
       if(res.status.code === 200) {
-        this.employeeFamilyObj =res.data.output;
+        this.familyTableRows = res.data.output;
         
       } else {
         // console.log('Error fetching company details')
@@ -354,6 +409,10 @@ export class EmployeeFormComponent implements OnInit {
 
   }
 
+  saveFamilyDetails(){
+    this.isFamilyEditMode = !this.isFamilyEditMode;
+  }
+
   onStep2(){
 
   }
@@ -366,12 +425,27 @@ export class EmployeeFormComponent implements OnInit {
 
   }
 
+  isActive:any=1;
   submit(){
+    for(let i=0;i<this.docsTableRows.length;i++){
+    const formdata = new FormData();
+    formdata.append('file_name',this.docsTableRows[i].file_name)
+    formdata.append('file',this.docsTableRows[i].file);
+    formdata.append('UserDetails',this.employeeId)
+    formdata.append('is_active',this.isActive)
 
+    this.importsService.postDocuments(formdata)
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if(res.status.code === 200) {
+        // this.toaster.success("User Address Successfully Added");
+      }
+    }, () => {})
+  }
   }
 
   assignfile(e, data){
-
+    this.docsTableRows[data.row_id1].file =  e.target.files[0];
   }
 
   onRowDelete(data){

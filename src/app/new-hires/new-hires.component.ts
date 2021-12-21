@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewHiresComponent implements OnInit {
 
+  newTableRows:any=[];
   constructor() { }
 
   ngOnInit(): void {
