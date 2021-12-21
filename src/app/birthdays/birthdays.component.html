@@ -2,9 +2,35 @@
     <div class="row">
     <h2 style="text-align: center;">Upcoming Birthdays</h2>
     <div class="row" style="margin-top: 50px;" >
-        <app-common-table [headers]="birthdayTableHeaders" [rows]="birthdayTableRows" 
-          >
-        </app-common-table>
+        <div class="col-sm-12" >
+          <table class="table border mt-1" >
+              <thead class="sticky-top">
+              <tr style="background-color:#ffeecc">
+                <th style="width: 200px;">Employee Id</th>
+                  <th style="width: 200px;">Name</th>
+                  <th style="width: 200px;">DOB</th>
+                  <th style="width: 200px;">Email Id</th>
+                  <th style="width: 200px;">Contact No.</th>
+                  <th style="width: 200px;">Company</th>
+                  <th style="width: 200px;">Department</th>
+              </tr>
+              </thead>
+              <tbody>
+                   <tr *ngFor="let data of birthdayTableRows">
+                    <td style="width: 200px;"> {{data.id}}</td>
+                  <td style="width: 200px;"> {{data.first_name + " "+data.last_name}}</td>
+                  <td style="width: 200px;"> {{data.date_of_birth}}</td>
+                  <td style="width: 200px;"> {{data.organisation_email}}</td>
+                  <td style="width: 200px;"> {{data.phone}}</td>
+                  <td style="width: 200px;"> {{data.organisation}}</td>
+                  <td style="width: 200px;"> {{data.department}}</td>
+      
+                  </tr> 
+              </tbody>
+              </table>
+      
+          </div><br>
+        
       </div>
     </div>
     </div>

@@ -1,8 +1,10 @@
+import { CompanyapiService } from './../utils/services/companyapi.service';
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ImportsService } from '../utils/services/imports.service';
 import * as moment from 'moment';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-birthdays',
@@ -12,44 +14,60 @@ import * as moment from 'moment';
 export class BirthdaysComponent implements OnInit {
 
   empTableRows: any[]= [];
-  birthdayTableRows: any[]= [];
+  birthdayTableRows: any= [];
   unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets 
   incomingApi:any;
   totalCount:any;
-  today = new Date().toLocaleDateString()
-  today_date= moment(this.today).format('YYYY-MM-DD');
-  birthdayTableHeaders = [
-    { headerName: 'Employee Id', field: 'id',width: 60, },
-    { headerName: 'Name', field: 'fullName', width: 180},
-    { headerName: 'DOB', field: 'date_of_birth', width: 180},
-    { headerName: 'Email Id', field: 'organisation_email', width: 180},
-    { headerName: 'Contact No', field: 'phone',  width: 180},
-    { headerName: 'Company', field: 'organisation',  width: 180},
-    { headerName: 'Department', field: 'department', width: 180,  },
-    { headerName: 'Details', field: 'occupation',  width: 65},
-  ];
-  constructor(private importsService: ImportsService,) { }
+  future_date:any;
+  today_date:any;
+  deptDDList=[];
+  
+  today = new Date()
+  future = new Date()
+  constructor(private importsService: ImportsService,private companyService: CompanyapiService) { }
 
   ngOnInit(): void {
     this.getallEmployee();
+    this.future.setMonth(this.today.getMonth() + 3);
+    
+    this.future_date = moment(this.future.toLocaleDateString()).format('YYYY-MM-DD')
+    this.today_date= moment(this.today.toLocaleDateString()).format('YYYY-MM-DD');
   }
 
   public getallEmployee() {
-    if (this.incomingApi) this.incomingApi.unsubscribe();
-    this.incomingApi = this.importsService.getEmployeeData({end_limit: 25})
+    this.companyService.AllDept()
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.deptDDList = res.data.output;
+        console.log(this.deptDDList)
+      } else {
+        this.deptDDList = [];
+      }
+    }),
+      () => {
+        this.deptDDList = [];
+      };
+
+    this.importsService.getEmployeeData({end_limit: 25})
     .pipe(takeUntil(this.unsubsribeNotifier))
     .subscribe((res: any) => {
       if (res.status.code === 200) {
         this.empTableRows = res.data.output;
         this.totalCount = res.data.total_count;
         for(let i =0 ; i < this.empTableRows.length; i++){
-          this.empTableRows[i]['fullName'] = this.empTableRows[i]['first_name']+" "+ this.empTableRows[i]['last_name'];
-          if(this.empTableRows[i]['date_of_birth']){
-            
-          }
+          if(this.empTableRows[i]['date_of_birth']>= this.today_date && this.empTableRows[i]['date_of_birth']<=this.future_date){
+            this.deptDDList.forEach(e => {
+              if(this.empTableRows[i]['department']== e.id){
+                  this.empTableRows[i]['department'] = e.department;
+              }});
+            this.birthdayTableRows.push(this.empTableRows[i]);
+            }
         }
+        console.log(this.birthdayTableRows)
       } else {this.empTableRows = [];}
     }),
       () => {this.empTableRows = [];};
   }
+
 }
