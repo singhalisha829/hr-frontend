@@ -25,6 +25,11 @@ export class OfferLetterComponent implements OnInit {
     const path = window.location.pathname.split('/');
     this.employeeId = path[path.length - 1];
     this.getallOffer()
+
+    setTimeout(() => {
+      let element:HTMLElement = document.getElementById('auto_trigger') as HTMLElement;
+      element.click();
+    }, 1000);
   }
 
 
@@ -43,6 +48,7 @@ export class OfferLetterComponent implements OnInit {
           exp_joining_date: moment(res.data.output[0]['exp_joining_date']).format('Do MMMM YYYY'),
           subject: res.data.output[0].subject,
           ref_no: res.data.output[0].ref_no,
+          date:res.data.output[0].date,
         };
         this.totalCount = res.data.total_count;
        console.log(moment(res.data.output[0]['exp_joining_date']).format('Do MMMM YYYY'))

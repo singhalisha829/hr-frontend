@@ -32,6 +32,7 @@
     "moment": "^2.29.1",
     "ngx-bootstrap": "^7.1.0",
     "ngx-daterangepicker-material": "^2.4.2",
+    "ngx-print": "^1.2.1",
     "ngx-tabset": "^2.2.0",
     "ngx-toastr": "^14.2.0",
     "rxjs": "~6.6.0",
