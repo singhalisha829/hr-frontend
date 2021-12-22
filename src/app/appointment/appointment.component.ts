@@ -6,6 +6,7 @@ import { ImportsService } from '../utils/services/imports.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -89,37 +90,56 @@ onDateRangeSelection1(event: { startDate: string | number | Date; }) {
     }, () => {})
   }
 
-  public getallOffer() {
-   this.importsService.getOfferData({end_limit: 25,  })
-    .pipe(takeUntil(this.unsubsribeNotifier))
-    .subscribe((res: any) => {
-      if (res.status.code === 200) {
-        this.offerDetails = res.data.output;
-        console.log(res.data.output)
+  
+  removeId:any;
+  // public getallOffer() {
+  //   this.importsService.getOfferData({end_limit: 25,  })
+  //    .pipe(takeUntil(this.unsubsribeNotifier))
+  //    .subscribe((res: any) => {
+  //      if (res.status.code === 200) {
+  //        this.offerDetails = res.data.output;
+       
+  //      } else {this.offerDetails = [];}
+  //    }),
+  //      () => {this.offerDetails = [];};
+  //  }
 
-        this.importsService.getAppointment({end_limit: 25,  })
-    .pipe(takeUntil(this.unsubsribeNotifier))
-    .subscribe((res: any) => {
-      if (res.status.code === 200) {
-        this.appointmentTableRows = res.data.output;
-        for(let i=0;i<this.offerDetails.length;i++){
-            this.appointmentTableRows.forEach(e => {
-              
-              if(this.offerDetails[i]['id']==e.offer_id){
-               console.log('hey')
-                 this.offerDetails.pop(this.offerDetails[i]);
-              }});
-          
-        }
-
-      } else {this.appointmentTableRows = [];}
-    }),
-      () => {this.appointmentTableRows = [];};
-      } else {this.offerDetails = [];}
-    }),
-      () => {this.offerDetails = [];};
-  }
-
+   public getallOffer() {
+    this.importsService.getOfferData({end_limit: 25,  })
+     .pipe(takeUntil(this.unsubsribeNotifier))
+     .subscribe((res: any) => {
+       if (res.status.code === 200) {
+         this.offerDetails = res.data.output;
+         console.log(res.data.output)
+ 
+         this.importsService.getAppointment({end_limit: 25,  })
+     .pipe(takeUntil(this.unsubsribeNotifier))
+     .subscribe((res: any) => {
+       if (res.status.code === 200) {
+         this.appointmentTableRows = res.data.output;
+        //  for(let i=0;i<this.appointmentTableRows.length;i++){
+            //  this.offerDetails.forEach(e => {
+               
+              //  if(e.id === this.appointmentTableRows[i].offer_id){
+              //   console.log(this.appointmentTableRows.findIndex(e))
+              //   this.offerDetails.splice(this.offerDetails.findIndex(item => item.id ===e.offer_id ),1);
+              //  }});
+           
+         
+         this.appointmentTableRows.forEach(e=>{
+         
+            this.offerDetails.splice(this.offerDetails.findIndex(item => item.id ==e.offer_id ),1);
+          });
+        //  }
+       console.log(this.offerDetails)
+       } else {this.appointmentTableRows = [];}
+     }),
+       () => {this.appointmentTableRows = [];};
+       } else {this.offerDetails = [];}
+     }),
+       () => {this.offerDetails = [];};
+   }
+ 
   public getallAppointment() {   
    this.importsService.getAppointment({end_limit: 25,  })
     .pipe(takeUntil(this.unsubsribeNotifier))
