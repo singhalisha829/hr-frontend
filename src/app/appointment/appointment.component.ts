@@ -22,6 +22,7 @@ export class AppointmentComponent implements OnInit {
   appointmentTableRows: any= {};
 
   offerDetails:any={};
+  offerList:any={};
   public buttonName:any = 'Create New Appointment Letter';
   addNewAppoint: any = {};
   unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets destroyed
@@ -35,7 +36,7 @@ export class AppointmentComponent implements OnInit {
     // { headerName: 'Contact', field: 'mobile_no', width: 65,  },
     { headerName: 'Company', field: 'company',  width: 65},
     { headerName: 'Status', field: 'status',  width: 65},
-    { headerName: 'Document', field: 'occupation',  width: 65},
+    // { headerName: 'Document', field: 'occupation',  width: 65},
   ];
   constructor(private utilsService: UtilsService ,private importsService: ImportsService,private toaster: ToastrService,
     private router:Router) { }
@@ -89,12 +90,31 @@ onDateRangeSelection1(event: { startDate: string | number | Date; }) {
   }
 
   public getallOffer() {
-    if (this.incomingApi) this.incomingApi.unsubscribe();
-    this.incomingApi = this.importsService.getOfferData({end_limit: 25,  })
+   this.importsService.getOfferData({end_limit: 25,  })
     .pipe(takeUntil(this.unsubsribeNotifier))
     .subscribe((res: any) => {
       if (res.status.code === 200) {
         this.offerDetails = res.data.output;
+        console.log(res.data.output)
+
+        this.importsService.getAppointment({end_limit: 25,  })
+    .pipe(takeUntil(this.unsubsribeNotifier))
+    .subscribe((res: any) => {
+      if (res.status.code === 200) {
+        this.appointmentTableRows = res.data.output;
+        for(let i=0;i<this.offerDetails.length;i++){
+            this.appointmentTableRows.forEach(e => {
+              
+              if(this.offerDetails[i]['id']==e.offer_id){
+               console.log('hey')
+                 this.offerDetails.pop(this.offerDetails[i]);
+              }});
+          
+        }
+
+      } else {this.appointmentTableRows = [];}
+    }),
+      () => {this.appointmentTableRows = [];};
       } else {this.offerDetails = [];}
     }),
       () => {this.offerDetails = [];};

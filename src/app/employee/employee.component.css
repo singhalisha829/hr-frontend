@@ -10,3 +10,6 @@
     /* the bottom margin is the negative value of the footer's height */
   }
   
+  .tab1{
+    tab-size: 2;
+  }

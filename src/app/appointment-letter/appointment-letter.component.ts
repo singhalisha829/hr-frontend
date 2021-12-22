@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CompanyapiService } from './../utils/services/companyapi.service';
 import { Component, OnInit } from '@angular/core';
 import { ImportsService } from '../utils/services/imports.service';
@@ -16,7 +17,7 @@ export class AppointmentLetterComponent implements OnInit {
   offerObj:any={};
   cityDDList:any=[];
   unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets 
-  constructor(private importsService: ImportsService,private companyService: CompanyapiService) { }
+  constructor(private importsService: ImportsService,private companyService: CompanyapiService, private router:Router) { }
 
   ngOnInit(): void {
     const path = window.location.pathname.split('/');
@@ -36,7 +37,7 @@ export class AppointmentLetterComponent implements OnInit {
   .subscribe((res: any) => {
     if (res.status.code === 200) {
       this.cityDDList = res.data.output;
-      console.log(this.cityDDList)
+   
    
      this.importsService.getAppointment({id:this.employeeId  })
     .pipe(takeUntil(this.unsubsribeNotifier))
@@ -94,4 +95,7 @@ export class AppointmentLetterComponent implements OnInit {
     };
   }
 
+  goBack(){
+    this.router.navigate(['./appointment'])
+  }
 }

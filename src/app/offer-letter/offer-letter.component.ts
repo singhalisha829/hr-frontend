@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -19,7 +20,7 @@ export class OfferLetterComponent implements OnInit {
   employeeId:any;
   unsubsribeNotifier = new Subject(); // to notify to cancel api when component gets 
 
-  constructor(private importsService: ImportsService,) { }
+  constructor(private importsService: ImportsService,private router: Router) { }
 
   ngOnInit(): void {
     const path = window.location.pathname.split('/');
@@ -32,6 +33,9 @@ export class OfferLetterComponent implements OnInit {
     }, 1000);
   }
 
+  goBack(){
+    this.router.navigate(['./offer-letter'])
+  }
 
   public getallOffer() {
     if (this.incomingApi) this.incomingApi.unsubscribe();
