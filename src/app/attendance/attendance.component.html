@@ -1,0 +1,36 @@
+<h3 style="text-align:center;">Attendance</h3><hr>
+<h5>Today</h5><br>
+<h5>{{now | date:'fullDate'}}</h5>
+<h5>{{now | date:'h:mm:ss a'}}</h5>
+<br>
+<div class="col-sm-12" >
+    <table class="table border mt-1" >
+        <thead class="sticky-top">
+        <tr>
+            <th style="width: 500px;">Name</th>
+            <th style="width: 150px;text-align:center;">Present</th>
+            <th style="width: 150px;text-align:center;">Absent</th>
+            <th style="width: 150px;text-align:center;">Meeting</th>
+            <th style="width: 150px;text-align:center;">First 1/2 Leave</th>
+            <th style="width: 150px;text-align:center;">Second 1/2 Leave</th>
+        </tr>
+        </thead>
+        <tbody>
+             <tr *ngFor="let data of Employee;let i=index">
+            <th style="width: 500px;"> {{ data }}</th>
+            <td style="width: 150px;text-align:center; ">  <input type="radio" id="present" value="Present" name={{i}} checked (change)="changeGender($event)"></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="absent" value="Absent" name={{i}} (change)="changeGender($event)"></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="meeting" value="Meeting" name={{i}} (change)="changeGender($event)"></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="first" value="First_half_leave" name={{i}} (change)="changeGender($event)"></td>
+            <td style="width: 150px;text-align:center;">  <input type="radio" id="second" value="Second_half_leave" name={{i}} (change)="changeGender($event)"></td>
+            </tr> 
+        </tbody>
+        </table>
+
+    </div>
+    <div class="col-12 pd-0" style="margin-top: 10px;">
+        <button type="submit" class="btn btn-success float-right" 
+         (click)="submit()" style="margin-right: 60px;"
+         >Submit</button>
+         </div>
+   

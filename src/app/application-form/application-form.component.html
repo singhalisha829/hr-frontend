@@ -1,0 +1,306 @@
+
+			<mat-vertical-stepper>
+
+        <mat-step label="Personal Details">
+          <div class="row">
+          <div class="col-sm-3">
+            <label>First Name:<span style="color: red;">*</span></label>
+            <input  type="text" class="form-control" [(ngModel)]="employeeObj.firstName"/>
+          </div>
+          <div class="col-sm-3">
+            <label>Last Name:<span style="color: red;">*</span></label>
+            <input  type="text" class="form-control"   [(ngModel)]="employeeObj.lastName"/>
+          </div>
+          
+
+          <div class="form-group col-sm-3">
+            <label> Present Address: <span style="color: red;">*</span> </label>
+            <input  type="text" class="form-control"  [(ngModel)]="employeeObj.presentAddress" /> 
+          </div>
+
+
+          <div class="form-group col-sm-3 col-12">
+            <label for="city">City <span style="color: red;">*</span></label>
+            <app-dropdown class='dataon'
+            [key]="'id'"
+            [value]="'name'"
+            [selectedItem]="selectedCity"
+            [placeholder]="'Choose'"
+            [dropDownList]="cityDDList"
+            (selectItemEvent)="selectedCity = $event;">
+            </app-dropdown>
+        </div>
+          <div class="form-group col-sm-3 col-12">
+                <label>Pincode:<span style="color: red;">*</span></label>
+                <input name="pincode" type="number" class="form-control" id="pincode"   [(ngModel)]="employeeObj.pincode"> 
+            </div></div><br>
+
+            <div class="row">
+            <div class="form-group col-sm-3 col-12">
+              <label>Permanent Address:<span style="color: red;">*</span></label>
+              <input type="text" class="form-control"   [(ngModel)]="employeeObj.permanentAddress">
+           </div> 
+              <div class="form-group col-sm-3 col-12">
+                <label>City:<span style="color: red;">*</span></label>
+                <app-dropdown class='dataon'
+                [key]="'id'"
+                [value]="'name'"
+                [selectedItem]="selectedCity2"
+                [placeholder]="'Choose'"
+                [dropDownList]="cityDDList"
+                (selectItemEvent)="selectedCity2 = $event;">
+                </app-dropdown>
+            </div>
+            <div class="form-group col-sm-3">
+              <label> Pincode: <span style="color: red;">*</span> </label>
+              <input name="p_pincode" type="number"  class="form-control" id="p_pincode"   [(ngModel)]="employeeObj.pincode1"/> 
+            </div>
+            
+            <div class="form-group col-sm-3 col-12">
+              <label>Contact No: <span style="color: red;">*</span></label>
+              <input type="number" class="form-control"   [(ngModel)]="employeeObj.contact">
+          </div></div><br>
+
+          <div class="row">
+          <div class="col-sm-3">
+            <label>Alternate Contact No:<span style="color: red;">*</span> </label>
+            <input type="number" class="form-control"   [(ngModel)]="employeeObj.alternateContact" >
+          </div>
+
+       
+          <div class="form-group col-sm-3">
+            <label>Personal Email:<span style="color: red;">*</span> </label>
+            <input type="email" class="form-control"   [(ngModel)]="employeeObj.email">
+          </div>
+          <div class="form-group col-sm-3">
+            <label>Organisational Email:<span style="color: red;">*</span> </label>
+            <input type="email" class="form-control"   [(ngModel)]="employeeObj.orgEmail">
+          </div>
+          <div class="form-group col-sm-3">
+            <label> Date of Birth:<span style="color: red;">*</span> </label>
+            <app-custom-dateRangePicker [singleCalendar]="true" [resetCalendar]="true"
+              (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
+           
+          </div>
+
+          <div class="form-group col-sm-3 col-12">
+              <label for="pi_file">Gender:<span style="color: red;">*</span> </label>
+              <select class="form-control" (change)="selectGender($event)">
+                <option>--Select Gender--</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+          </div></div><br>
+
+          <div class="row">
+          <div class="form-group col-sm-3 col-12"><br>
+            <label>Aadhaar Card No:<font color="red">*</font></label>
+            <input type="text" class="form-control" [(ngModel)]="employeeObj.aadhar">
+            </div>
+            <div class="form-group col-sm-3 col-12"><br>
+              <label>Pancard No:<font color="red">*</font></label>
+              <input type="text" class="form-control" [(ngModel)]="employeeObj.pancard"><br>
+            </div>
+            <div class="form-group col-sm-3 col-12"><br>
+              <label>Organisation:<font color="red">*</font></label>
+              <input type="text" class="form-control" [(ngModel)]="employeeObj.organisation"><br>
+            </div>
+            <div class="form-group col-sm-3 col-12">
+              <label>Department:<span style="color: red;">*</span></label>
+              <app-dropdown class='dataon'
+              [key]="'id'"
+              [value]="'name'"
+              [selectedItem]="selectedDept"
+              [placeholder]="'Choose'"
+              [dropDownList]="deptDDList"
+              (selectItemEvent)="selectedDept = $event;">
+              </app-dropdown>
+          </div></div><br>
+            
+            <h4 style="font-size:medium;">Family Details</h4>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <label>Father's Name:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherName"/>
+              </div>
+              <div class="col-sm-3">
+                <label>Father's Pancard No:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherPancard"/>
+              </div>
+              <div class="col-sm-3">
+                <label>Occupation:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherOccupation"/><br>
+              </div></div>
+              
+              <h4>Please mention briefly about your family.</h4><br>
+              <div class="col-md-6 col-12 mt-4">
+                <button class="btn btn-primary add-Btn" type="button"
+                (click)="addRow()">Add Family Member</button>
+                
+              </div>
+            
+            <div class="row" style="margin-top: 10px;">
+                <app-common-table [headers]="familyTableHeaders" [rows]="familyTableRows" 
+                  >
+                </app-common-table>
+              </div>
+          <div>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px">Save and Continue</button>
+          </div>
+        </mat-step>
+      
+        <mat-step label="Qualifications & Experiences">
+          <h4>Education Qualification</h4><hr>
+                <h4>Please mention your Qualification class X onwards, including Degrees and Diplomas.</h4><br>
+                <!--add qualification table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow1()">Add Education Qualification</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="educationTableHeaders" [rows]="educationTableRows" 
+                    >
+                  </app-common-table>
+                </div>
+                <br>
+                <h4>Work Experience/Internship</h4><hr>
+                <h4>Please mention briefly any internship/Work experience you have.</h4><br>
+                <!--work exp table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow2()">Add Work Ex/Internship</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="workTableHeaders" [rows]="workTableRows" 
+                    >
+                  </app-common-table>
+                </div>
+                <br>
+                <h4>Training Attended</h4><hr>
+                <h6>Please mention briefly any Training that you have recieved.</h6><br>
+                <!--training table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow3()">Add Training</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="trainingTableHeaders" [rows]="trainingTableRows" 
+                    >
+                  </app-common-table>
+                </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px">Save and Continue</button>
+          </div>
+        </mat-step>
+      
+        <mat-step label="Contact">
+          <h6>Please mention references with whom we can cross check the details provided.</h6><br>
+                <!--refrences table-->
+                                <div class="col-md-6 col-12 mt-4">
+  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow4()">Add References</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="referenceTableHeaders" [rows]="referenceTableRows" 
+                    >
+                  </app-common-table>
+                </div>
+                <br>
+                <h4>Emergency Contact</h4><hr>
+                <!--emergency contact table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                                  (click)="addRow5()">Add Emergency Contact</button>
+                                  
+                                </div>
+                              
+                              <div class="row" style="margin-top: 10px;">
+                                  <app-common-table [headers]="contactTableHeaders" [rows]="contactTableRows" 
+                                    >
+                                  </app-common-table>
+                                </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px">Save and Continue</button>
+          </div>
+        </mat-step>
+        <mat-step label="Application Details">
+          <div class="form-group col-sm-3 col-12">
+            <label>Company:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Application Date:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Application Position:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div><div class="form-group col-sm-3 col-12">
+            <label>Application By:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"><br>
+        </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px">Save and Continue</button>
+          </div>
+        </mat-step>
+        <mat-step label="Bank Details">
+          <div class="form-group col-sm-3 col-12">
+            <label>Account Holder's Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank Account No:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div><div class="form-group col-sm-3 col-12">
+            <label>Bank Branch Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"><br>
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank IFSC Code:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control">
+        </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px">Save and Continue</button>
+          </div>
+        </mat-step>
+        <mat-step label="Documents">
+          Upload...
+          <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button type="submit" class="btn btn-success float-right" 
+              (click)=" submit()" style="margin-right: 60px;"
+              >Submit</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>

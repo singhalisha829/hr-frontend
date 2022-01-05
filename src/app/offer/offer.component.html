@@ -1,0 +1,99 @@
+<div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px;">
+    <div class="row">
+    <h2 style="text-align: center;">Offer List</h2>
+    <div class="col-12 pd-0">
+    <button type="submit" class="btn btn-success" (click)=" addOffer()" style="float: right; margin-right: 20px;"
+                   >{{buttonName}}</button>
+    </div></div></div>
+
+    <div class="row" style="margin-top: 50px;" *ngIf="!isHidden">
+      <app-common-table 
+      [headers]="offerTableHeaders" 
+      [rows]="offerTableRows" 
+      (onRowClicked) = "onTableRowClicked($event)"
+        >
+      </app-common-table>
+    </div>
+   
+
+<div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" *ngIf="isHidden">
+    <div class="row" style="padding: 10px;">
+              <div class="col-sm-3">
+                <label>Date:<span style="color: red;">*</span></label>
+                <app-custom-dateRangePicker 
+                [singleCalendar]="true" 
+                [resetCalendar]="true"
+                (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
+            
+              </div>
+  
+              
+  
+              <div class="form-group col-sm-3">
+                <label> Ref No: <span style="color: red;">*</span> </label>
+                <input name="ref_no" type="text" class="form-control" id="ref_no" [(ngModel)]="offerLetterObj.ref_no" /> 
+              </div>
+  
+  
+              <div class="form-group col-sm-3 col-12">
+                <label>Employee Name: <font color="red">*</font></label>
+                <input name="emp_name" type="text" class="form-control" id="emp_name" [(ngModel)]="offerLetterObj.emp_name" /> 
+            </div>
+            
+              <div class="form-group col-sm-3 col-12">
+                    <label>Job Profile:<span style="color: red;">*</span></label>
+                    <input name="job" type="text" class="form-control" id="job" [(ngModel)]="offerLetterObj.job_profile"> <br>
+                </div>
+                <div class="form-group col-sm-3 col-12">
+                  <label>Expected Joining Date:<span style="color: red;">*</span></label>
+                  <app-custom-dateRangePicker [singleCalendar]="true" [resetCalendar]="true"
+                  (onDateRangeSelection)="onDateRangeSelection1($event)"></app-custom-dateRangePicker>
+               </div> 
+                  <div class="form-group col-sm-3 col-12">
+                    <label>Contact No:<span style="color: red;">*</span></label>
+                    <input type="number" class="form-control" [(ngModel)]="offerLetterObj.mobile_no">
+                </div>
+                <div class="form-group col-sm-3">
+                  <label> Address: <span style="color: red;">*</span> </label>
+                  <input type="text"  class="form-control" [(ngModel)]="offerLetterObj.address"/> 
+                </div>
+                
+                <div class="form-group col-sm-3 col-12">
+                  <label>City: <span style="color: red;">*</span></label>
+                  <app-dropdown class='dataon'
+                  [key]="'id'"
+                  [value]="'name'"
+                  [selectedItem]="selectedCity"
+                  [placeholder]="'Choose'"
+                  [dropDownList]="cityDDList"
+                  (selectItemEvent)="selectedCity = $event;">
+                  </app-dropdown><br> 
+              </div>
+              <div class="col-sm-3">
+                <label>Pincode:<span style="color: red;">*</span> </label>
+                <input type="number" class="form-control"  [(ngModel)]="offerLetterObj.pincode">
+              </div>
+  
+           
+              <div class="form-group col-sm-3">
+                <label>Company:<span style="color: red;">*</span> </label>
+                <input type="text" class="form-control"  [(ngModel)]="offerLetterObj.company"><br>
+              </div>
+              <div class="row">
+                <label> Subject:<span style="color: red;">*</span> </label>
+                <textarea rows="2" class="form-control" [(ngModel)]="offerLetterObj.subject" ></textarea> 
+              </div>
+            </div>
+            <div class="col-12 pd-0" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success float-right" 
+                 (click)="submit()" style="margin-right: 60px;"
+                 >Submit</button>
+                <button class="btn btn-warning float-left" type="reset" 
+                >Reset</button>
+            </div>
+        </div>
+
+              
+          
+    
+

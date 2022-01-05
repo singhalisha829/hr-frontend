@@ -1,0 +1,45 @@
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) {
+    .formdiv {
+      flex-direction: column;
+    }
+
+    .login100 img {
+      margin: center;
+    }
+    .formdiv form {
+      padding: 10px;
+      width: 100% !important;
+    }
+
+}
+.login100 img{
+  height: 100px;
+  padding-top: 50px;
+ padding-bottom: 10px;
+}
+.container{
+  width: 100%;  
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #fff;  
+}
+
+.formdiv {
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.formdiv h1 {
+  color:blueviolet;
+  text-align: center;
+  padding-bottom: 20px;
+  font-weight: bold;
+}

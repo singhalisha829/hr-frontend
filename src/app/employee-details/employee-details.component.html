@@ -1,0 +1,551 @@
+<div class="main-panel">
+        
+    <div class="content-wrapper">
+    
+      <div class="row" style="margin-top: 10px;">
+    <h1>Details of <font color="red"> {{employeeObj.first_name}} {{employeeObj.last_name}}</font></h1>
+    <div class="col-12 pd-0">
+    <button type="submit" class="btn btn-success float-right" 
+    (click)="goBack()" style="margin-right: 60px;margin-bottom:10px; float:right"
+    >Back</button><br></div></div>
+
+            
+                        <div class="card">
+                        <div class="container" >
+                    <form class="form-horizontal" method="POST" action="">
+                      <img src={{employeeObj.photo}}>
+                    
+<div class="col-sm-12" style="margin-top:20px;">
+
+ <div class="form-group">
+<h4 ><b>1. Personal Details</b></h4><hr/>
+</div>
+</div>
+
+  <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"> <b> Full Name :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+<div type="text" id="name" >{{employeeObj.first_name}} {{employeeObj.last_name}}</div>
+</div>
+</div>
+</div>
+
+    <!--  <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " ><b>Prsent Address :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+ <div ><?php echo $present_address; ?></div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>City :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div  ><?php echo $present_city; ?></div>
+</div>
+</div>
+
+
+
+    <div class="col-sm-2">
+<div class="form-group">
+<div class="control-div " for="email"><b>Pincode :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div><?php echo $present_pincode; ?></div>
+</div>
+</div>
+</div>
+
+      <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Permanent Address :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+<div><?php echo $permanent_address; ?></div>
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3	">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>City :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div><?php echo $permanent_city; ?></div>
+</div>
+</div>
+
+    <div class="col-sm-2">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Pincode :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div><?php echo $permanent_pincode; ?></div>
+</div>
+</div>
+</div> -->
+
+    
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Contact No. :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div>{{employeeObj.phone}}</div>
+</div>
+</div>
+
+
+
+    <div class="col-sm-2">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Contact No. 2 :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<div>{{employeeObj.phone2}}</div>
+</div>
+</div>
+</div>
+
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Email ID :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+<div>{{employeeObj.personal_email}}	</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Date Of Birth :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+    {{employeeObj.dob}}
+
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<div class="control-div" for="gender"  ><b>Gender :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+    {{employeeObj.gender}}
+</div>
+</div>
+</div>
+
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="adhar"  ><b>Aadhar Card No. :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+    {{employeeObj.aadhar_card}}
+</div>
+</div>
+ <div class="col-sm-2">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>PAN Card No. :</b></div>
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+    {{employeeObj.pancard}}
+</div>
+</div>
+</div><br>
+       <h4 ><b>2. Family Details</b></h4><hr/>
+   
+   
+     
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="father_name"  ><b>Father's Name :</b></div>
+</div>
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+    {{employeeObj.fathers_name}}
+</div>
+</div>
+ <div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>PAN Card No. :</b></div>
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+    {{employeeObj.fathers_pancard}}
+</div>
+</div>
+</div>	
+
+
+  <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Present/Prior Occuption :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+    {{employeeObj.fathers_occupation}}
+</div>
+</div>
+</div><br>
+
+        <p><b>Please mention briefly about your family</b></p>
+    
+        <div class="col-sm-12" >
+          <table class="table border mt-1" >
+              <thead class="sticky-top">
+              <tr style="background-color:#ffeecc">
+                  <th style="width: 200px;">Name</th>
+                  <th style="width: 200px;">Age</th>
+                  <th style="width: 200px;">Occupation</th>
+              </tr>
+              </thead>
+              <tbody>
+                   <tr *ngFor="let data of employeeFamilyObj">
+                  <td style="width: 200px;"> {{data.name}}</td>
+                  <td style="width: 200px;"> {{data.age}}</td>
+                  <td style="width: 200px;"> {{data.occupation}}</td>
+      
+                  </tr> 
+              </tbody>
+              </table>
+      
+          </div><br>
+        
+<h4 ><b>3. Eduction Qualification : </b></h4><hr/>
+
+
+    <p><b>Please mention you Qualification class X onwards, including Degrees and Diplomas</b></p>
+    
+    <div class="col-sm-12" >
+      <table class="table border mt-1" >
+          <thead class="sticky-top">
+          <tr style="background-color:#ffeecc">
+              <th style="width: 200px;">Institution Name and Address</th>
+              <th style="width: 200px;">Start-End Date</th>
+              <th style="width: 200px;">Course Name</th>
+              <th>Overall Percentage</th>
+          </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let data of employeeEduObj">
+              <td style="width: 200px;"> {{data.inst_name +" / "+ data.inst_address}}</td>
+              <td style="width: 200px;"> {{data.start_date +" - "+ data.end_date}}</td>
+              <td style="width: 200px;"> {{data.course_name}}</td>
+              <td style="width: 200px;"> {{data.overall_percentage}}</td>
+              </tr> 
+          </tbody>
+          </table>
+  
+      </div><br>
+
+  <h4 ><b>  4. Work Experience/ Internship : </b></h4><hr/>
+
+
+    <p><b>Please mention briefly the internship/ Work ex you have:</b></p>
+    
+    <div class="col-sm-12" >
+      <table class="table border mt-1" >
+          <thead class="sticky-top">
+          <tr style="background-color:#ffeecc">
+              <th style="width: 200px;">Company Name and Address</th>
+              <th style="width: 200px;">Start-End Date</th>
+              <th style="width: 200px;">Job Profile</th>
+              <th>Employer Name & Contact No.</th>
+          </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let data of employeeWorkObj">
+              <td style="width: 200px;"> {{data.company_name +" / "+ data.company_address}}</td>
+              <td style="width: 200px;"> {{data.start_date +" - "+ data.end_date}}</td>
+              <td style="width: 200px;"> {{data.job_profile}}</td>
+              <td style="width: 200px;"> {{data.employer_name + " / " + data.contact_no}}</td>
+              </tr> 
+          </tbody>
+          </table>
+  
+      </div><br>
+
+    <h4 ><b>5. Traning Attended: </b></h4><hr/>
+
+
+    <p><b>Please mention briefly the the tranings you have attended:</b></p>
+    
+    <div class="col-sm-12" >
+      <table class="table border mt-1" >
+          <thead class="sticky-top">
+          <tr style="background-color:#ffeecc">
+              <th style="width: 200px;">Institute Name and Address</th>
+              <th style="width: 200px;">Start-End Date</th>
+              <th style="width: 200px;">Name of Training Attended</th>
+              <th>Take Away</th>
+          </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let data of employeeTrainingObj">
+              <td style="width: 200px;"> {{data.inst_name +" / "+ data.inst_address}}</td>
+              <td style="width: 200px;"> {{data.start_date +" - "+ data.end_date}}</td>
+              <td style="width: 200px;"> {{data.name_training_attended}}</td>
+              <td style="width: 200px;"> {{data.take_away}}</td>
+              </tr> 
+          </tbody>
+          </table>
+  
+      </div>  <br> 
+
+ 
+    <h4 ><b>6. References:</b> </h4><hr/>
+
+
+    <p><b>Please mention references with whom we can cross check the details provided :</b></p>
+    
+    <div class="col-sm-12" >
+      <table class="table border mt-1" >
+          <thead class="sticky-top">
+          <tr style="background-color:#ffeecc">
+              <th style="width: 200px;">Name</th>
+              <th style="width: 200px;">Address</th>
+              <th style="width: 200px;">Contact No.</th>
+              <th>Relation/Association</th>
+          </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let data of employeeRefObj">
+              <td style="width: 200px;"> {{data.name}}</td>
+              <td style="width: 200px;"> {{data.address}}</td>
+              <td style="width: 200px;"> {{data.phone}}</td>
+              <td style="width: 200px;"> {{data.relation}}</td>
+              </tr> 
+          </tbody>
+          </table>
+  
+      </div>  <br>
+        
+ 
+        <h4 ><b>7. Emergency Contact:</b> </h4><hr/>
+
+        <div class="col-sm-12" >
+          <table class="table border mt-1" >
+              <thead class="sticky-top">
+              <tr style="background-color:#ffeecc">
+                  <th style="width: 200px;">Name</th>
+                  <th style="width: 200px;">Address</th>
+                  <th style="width: 200px;">Contact No.</th>
+                  <th>Relation/Association</th>
+              </tr>
+              </thead>
+              <tbody>
+                   <tr *ngFor="let data of employeeContactObj">
+                  <td style="width: 200px;"> {{data.name}}</td>
+                  <td style="width: 200px;"> {{data.address}}</td>
+                  <td style="width: 200px;"> {{data.phone}}</td>
+                  <td style="width: 200px;"> {{data.relation}}</td>
+                  </tr> 
+              </tbody>
+              </table>
+      
+          </div>  <br>
+
+
+ <div class="col-sm-12" style="margin-top:20px;">
+ <div class="form-group">
+ <h4 ><b>8. Application Details :</b></h4><hr/>
+</div>
+</div>
+<div class="row" style="margin-top:10px; margin-left:15px; ">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Company :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+  {{employeeObj.organisation}}
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="application_date"  ><b>Application Date :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"> {{employeeObj.application_date}}
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Application Position :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"> {{employeeObj.designation}}
+   </div>
+</div>
+</div>
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Application By :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group"> {{employeeObj.reference_by}}
+</div>
+</div>
+</div><br>
+
+<p><i>Name & No. of Refrence/ Institution / Other</i></p><br>
+
+
+<div class="col-sm-12" style="margin-top:20px;">
+
+ <div class="form-group">
+<h4><b>9. Bank Details</b></h4><hr/>
+</div>
+</div>
+
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Account Holders Name :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">{{employeeBankObj.account_holder_name}}
+</div>
+</div>
+</div>
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Bank Account No :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">{{employeeBankObj.bank_account}}
+</div>
+</div>
+</div>
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Bank Name :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">{{employeeBankObj.bank_name}}
+</div>
+</div>
+</div>
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Bank Branch Name :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">{{employeeBankObj.bank_branch}}
+</div>
+</div>
+</div>
+
+    <div class="row" style="margin-top:10px; margin-left:15px;">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Bank IFCS Code :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">{{employeeBankObj.ifsc_code}}
+</div>
+</div>
+</div>
+    <hr/>
+    
+    <div class="row" style="margin-top:10px; margin-left:15px; ">
+<div class="col-sm-3">
+<div class="form-group">
+<div class="control-div " for="email"  ><b>Status :</b></div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="form-group">
+ {{employeeObj.is_active}}
+</div>
+</div>
+</div>
+<button type="submit" class="btn btn-success float-right" 
+               style="margin-right: 60px;margin-top:30px"
+              >Update</button>
+
+
+</form>
+                        </div>
+
+    </div>
+    </div>
+    </div> 
+    
+  

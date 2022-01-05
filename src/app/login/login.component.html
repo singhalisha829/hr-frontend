@@ -1,0 +1,31 @@
+
+<div class="container login">
+    <div class="row">
+      <div class="col-sm-12">
+           <span class="login100">
+            <img src="../../../assets/images/LogoOrnate.png">
+            </span>
+      </div>
+      <div class="col-sm-12 formdiv">
+        <form (ngSubmit)="onSubmit()">
+          <h1>LOGIN</h1>
+          <div class="form-group">
+            <label style="font-size: 20px;" >Username</label>
+            <input required #username="ngModel" type="text" name="uname" [(ngModel)]="user.username" class="form-control" id="username">
+            <div  *ngIf="username?.touched && username?.errors?.required" class="alert alert-danger" >
+              Username is required.
+          </div>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 20px;">Password</label>
+            <input required #password="ngModel" type="password" name="pw" [(ngModel)]="user.password" class="form-control" id="exampleInputPassword1">
+            <div  *ngIf="password?.touched && password?.errors?.required" class="alert alert-danger" >
+              Password is required.
+          </div>
+          </div><br/>
+          <button [disabled]="!user.password || !user.username" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+    </div>
+

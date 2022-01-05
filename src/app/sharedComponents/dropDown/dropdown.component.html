@@ -1,0 +1,47 @@
+<div *ngIf="!isAgGrid" [tabIndex]='(isDisabled ? -1 : 0)'
+(keyup.enter)="dropdown.isOpen = !dropdown.isOpen"
+(keydown)=" (($event.shiftKey && $event.keyCode === 9) || $event.keyCode === 9)  ? dropdown.toggle(false) : ''"
+(onShown)="handlerOnShown()"
+[container]=""
+placement="bottom"
+(isOpenChange)="onOpenChange($event)"
+(onHidden)="handlerOnHide()" #dropdown = "bs-dropdown"  class="dropdown " [dropup]="dropup" dropdown [isDisabled]="isDisabled" >
+<div  class="btn btn-default form-control  dropdownBTN dropdown-toggle" dropdownToggle>
+<span [ngClass]="{'overflow-ellipses': isAgGrid}" class="dropText">
+  {{(!_selectedItem[_key] || _selectedItem[_key] == '') ? _placeHolder: ((extendedSeperator && extendedSeperator.length > 0) ? (_selectedItem[_key] + extendedSeperator + _selectedItem[_value]) : _selectedItem[_value])}}</span>
+	&nbsp;&nbsp;<span class="caret"></span>
+  </div>
+  <!-- <div *ngIf="isToolTip === false" class="btn btn-default form-control  dropdownBTN dropdown-toggle"  dropdownToggle><span class="dropText">{{(!_selectedItem[_key] || _selectedItem[_key] == '') ? _placeHolder: ((extendedSeperator && extendedSeperator.length > 0) ? (_selectedItem[_key] + extendedSeperator + _selectedItem[_value]) : _selectedItem[_value])}}</span>
+		<span class="caret"></span>
+	</div> -->
+	<nav class="dropdown-menu" [style] = "customStyle ? 'max-height: 80px; width: 150px' : ''"  *dropdownMenu role="menu">
+    <ng-container  *ngIf="(isDDOpened && isDDClickedToOpen) || !isDDClickedToOpen">
+        <div *ngIf="isSearchEnabled && _filteredDDList.length > 5" class="search-wrap"
+            (click)="preventDDClose($event)">
+            <input style="width: 100%; border: 1px solid gray" type="text" name="search" placeholder="Search" [(ngModel)]="searchFilterText" (keyup)="filterData(searchFilterText)" />
+          </div>
+
+          <ul  style="list-style-type: none;max-height: 200px;" >
+            <li *ngFor="let item of _dropDownList let i = index; trackBy:rowIdentify">
+            <a style="text-align: left;margin: -4px;" (click)="selectItem(item);">{{(!item[_key] || item[_key] == '') ? _placeHolder : ((extendedSeperator && extendedSeperator.length > 0) ? (item[_key] + extendedSeperator + item[_value]) : item[_value])}}</a>
+            </li>
+          </ul>
+    </ng-container>
+
+	</nav>
+	<div *ngIf="showErrMsg && isError" style="text-align: left;" class="alert alert-danger">
+	{{errorMsg}}
+	</div>
+</div>
+
+<div class="btn-group" placement="left" dropdown *ngIf="isAgGrid" class="btn-group" dropdown container="body">
+  <button dropdownToggle type="button" class="btn btn-primary" (click)="$event.stopPropagation();">
+    <i class="fa fa-ellipsis-v"></i>
+  </button>
+<ul *dropdownMenu class="dropdown-menu" style="top:15px; left: -50px !important;" role="menu">
+    <ng-container *ngFor="let item of actionDDArr">
+    <li class="actionDDList" role="menuitem"><a class="dropdown-item" (click)="item.func({index: currentIndex});" >{{item.name}}</a></li>
+    <!-- <li role="menuitem"><a class="dropdown-item">Edit</a></li> -->
+  </ng-container>
+  </ul>
+</div>

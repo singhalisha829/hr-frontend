@@ -1,0 +1,473 @@
+<div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px;">
+    <div class="row">
+    <h2 style="text-align: center;" >Joining Form</h2>
+    <div class="col-12 pd-0">
+      <button type="submit" class="btn btn-success float-right" 
+      (click)="goBack()" style="margin-right: 60px;margin-bottom:10px; float:right"
+      >Back</button><br></div>
+<div class="col-lg-12 grid-margin stretch-card" style="padding-top: 20px; padding-left: 20px;" >
+    
+			<mat-vertical-stepper>
+
+        <mat-step label="Personal Details">
+          <div class="col-12 pd-0">
+            <button *ngIf="!isEditMode" type="submit" class="btn btn-success float-right" 
+            (click)="editEmpDetail()" style="margin-right: 60px;margin-top:10px; float:right"
+            >Edit</button></div><br>
+          
+          <div class="row" >
+          <div class="form-group col-sm-3 col-12">
+            <label>First Name:<span style="color: red;">*</span></label>
+            <input  type="text" class="form-control" [(ngModel)]="employeeDetailObj.first_name" [disabled]="!isEditMode"/>
+          </div>
+          <div class="form-group col-sm-3 col-12">
+            <label>Last Name:<span style="color: red;">*</span></label>
+            <input  type="text" class="form-control"   [(ngModel)]="employeeDetailObj.last_name" [disabled]="!isEditMode"/>
+          </div>
+          <div class="form-group col-sm-3 col-12">
+            <label>Marital Status:<span style="color: red;">*</span></label>
+            <!-- <select class="form-control" (change)="selectMaritalStatus($event)"  ngModel="employeeDetailObj.marital_status" >
+              <option>--Choose--</option>
+              <option>Single</option>
+              <option>Married</option>
+              <option>Divorced</option>
+              <option>Widowed</option>
+            </select> -->
+           
+              <app-dropdown class='dataon'
+                  [key]="'id'"
+                  [value]="'name'"
+                  [selectedItem]="selectedMaritalStatus"
+                  [placeholder]="'Choose'"
+                  [dropDownList]="MaritalStatusList"
+                  (selectItemEvent)="selectedMaritalStatus = $event;">
+                  </app-dropdown>
+            
+          </div>
+
+          <div class="form-group col-sm-3 col-12">
+            <label for="pi_file">Gender:<span style="color: red;">*</span> </label>
+            <!-- <select class="form-control" (change)="selectGender($event)">
+              <option>--Select Gender--</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select> -->
+            <app-dropdown 
+            [key]="'id'"
+            [value]="'name'"
+            [selectedItem]="selectedGender"
+            [placeholder]="'Choose'"
+            [dropDownList]="GenderList"
+            (selectItemEvent)="onGenderSelect($event);">
+            </app-dropdown>
+      
+    </div>
+
+        </div><br>
+
+          <div class="row">
+          <div class="form-group col-sm-3 col-12">
+            <label> Present Address: <span style="color: red;">*</span> </label>
+            <input  type="text" class="form-control"  [(ngModel)]="employeeObj.presentAddress" [disabled]="!isEditMode"/> 
+          </div>
+          <div class="form-group col-sm-3 col-12">
+            <label for="city">City <span style="color: red;">*</span></label>
+            <app-dropdown class='dataon'
+            [key]="'id'"
+            [value]="'name'"
+            [selectedItem]="selectedCity"
+            [placeholder]="'Choose'"
+            [dropDownList]="cityDDList"
+            (selectItemEvent)="selectedCity = $event;">
+            </app-dropdown>
+        </div>
+          <div class="form-group col-sm-3 col-12">
+                <label>Pincode:<span style="color: red;">*</span></label>
+                <input name="pincode" type="number" class="form-control" id="pincode"   [(ngModel)]="employeeObj.pincode" [disabled]="!isEditMode"> 
+            </div></div><br>
+
+
+            <div class="row">
+            <div class="form-group col-sm-3 col-12">
+              <label>Permanent Address:<span style="color: red;">*</span></label>
+              <input type="text" class="form-control"   [(ngModel)]="employeeObj.permanentAddress" [disabled]="!isEditMode">
+           </div> 
+              <div class="form-group col-sm-3 col-12">
+                <label>City:<span style="color: red;">*</span></label>
+                <app-dropdown class='dataon'
+                [key]="'id'"
+                [value]="'name'"
+                [selectedItem]="selectedCity2"
+                [placeholder]="'Choose'"
+                [dropDownList]="cityDDList"
+                (selectItemEvent)="selectedCity2 = $event;">
+                </app-dropdown>
+            </div>
+            <div class="form-group col-sm-3 col-12">
+              <label> Pincode: <span style="color: red;">*</span> </label>
+              <input name="p_pincode" type="number"  class="form-control" id="p_pincode"   [(ngModel)]="employeeObj.pincode1" [disabled]="!isEditMode"/> 
+            </div></div><br>
+            
+
+            <div class="row">
+            <div class="form-group col-sm-3 col-12">
+              <label>Contact No: <span style="color: red;">*</span></label>
+              <input type="number" class="form-control" name="phone_primary" (focusout)="checkDuplicate('phone_primary')"  
+              [disabled]="!isEditMode" [(ngModel)]="employeeDetailObj.phone">
+          </div>
+          <div class="form-group col-sm-3 col-12">
+            <label>Alternate Contact No:<span style="color: red;">*</span> </label>
+            <input type="number" class="form-control"   [(ngModel)]="employeeDetailObj.phone2" [disabled]="!isEditMode" >
+          </div>
+          <div class="form-group col-sm-3 col-12">
+            <label>Personal Email:<span style="color: red;">*</span> </label>
+            <input type="email" class="form-control" name="email_primary" (focusout)="checkDuplicate('email_primary')"
+            [disabled]="!isEditMode" [(ngModel)]="employeeDetailObj.personal_email">
+          </div>
+          <div class="form-group col-sm-3 col-12">
+            <label>Organisational Email:<span style="color: red;">*</span> </label>
+            <input type="email" class="form-control"   [(ngModel)]="employeeDetailObj.email_secondary" [disabled]="!isEditMode">
+          </div></div><br>
+          
+
+          <div class="row">
+          <div class="form-group col-sm-3 col-12">
+            <label> Date of Birth:<span style="color: red;">*</span> </label>
+            <app-custom-dateRangePicker
+            [selectedDateRange]="selectedDOB"
+            [singleCalendar]="true" 
+            [resetCalendar]="true"
+            (onDateRangeSelection)="onDateRangeSelection($event)"></app-custom-dateRangePicker>
+          </div>
+         
+            <!-- <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        -->
+
+          <div class="form-group col-sm-3 col-12">
+            <label>Aadhaar Card No:<font color="red">*</font></label>
+            <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.aadhar_card" [disabled]="!isEditMode">
+            </div>
+            <div class="form-group col-sm-3 col-12">
+              <label>Pancard No:<font color="red">*</font></label>
+              <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.pancard" [disabled]="!isEditMode">
+            </div>
+            <div class="form-group col-sm-3 col-12">
+              <label>Organisation:<font color="red">*</font></label>
+              <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.organisation" [disabled]="!isEditMode">
+            </div>
+          </div><br>
+
+
+            <div class="row">
+            <div class="form-group col-sm-3 col-12">
+              <label>Department:<span style="color: red;">*</span></label>
+              <app-dropdown class='dataon'
+              [key]="'id'"
+              [value]="'department'"
+              [selectedItem]="selectedDept"
+              [placeholder]="'Choose'"
+              [dropDownList]="deptDDList"
+              (selectItemEvent)="selectedDept = $event;">
+              </app-dropdown>
+          </div>
+          <div class="form-group col-sm-3 col-12">
+            <label>Designation:<font color="red">*</font></label>
+            <app-dropdown class='dataon'
+                [key]="'id'"
+                [value]="'designation'"
+                [selectedItem]="selectedDesignation"
+                [placeholder]="'Choose'"
+                [dropDownList]="designationList"
+                (selectItemEvent)="selectedDesignation = $event;">
+                </app-dropdown>
+          </div>
+          <div class="form-group col-sm-3 col-12">
+            <label> Application Date:<span style="color: red;">*</span> </label>
+            <app-custom-dateRangePicker 
+            [selectedDateRange]="selectedAppDate"
+            [singleCalendar]="true" 
+            [resetCalendar]="true"
+            (onDateRangeSelection)="onDateRangeSelection1($event)"></app-custom-dateRangePicker>  
+          </div>
+        <div class="form-group col-sm-3 col-12"  [(ngModel)]="employeeObj.position">
+            <label>Application By:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="employeeDetailObj.reference_by" [disabled]="!isEditMode"><br>
+        </div></div><br>
+          
+
+            <div class="row">
+            <div class="form-group col-sm-3 col-12">
+                <label>Father's Name:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.fathers_name" [disabled]="!isEditMode"/>
+              </div>
+              <div class="form-group col-sm-3 col-12">
+                <label>Father's Pancard No:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.fathers_pancard" [disabled]="!isEditMode"/>
+              </div>
+              <div class="form-group col-sm-3 col-12">
+                <label>Occupation:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.fathers_occupation" [disabled]="!isEditMode"/><br>
+              </div>
+              <!-- <div class="form-group col-sm-3 col-12">
+                <label>Last Drawn Salary:<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="employeeObj.fatherOccupation"/><br>
+              </div> -->
+            </div><br>
+
+
+             
+                
+              <div class="input-group">
+                <label>Total Work Exp:</label>
+                <div class="input-group" style="width: 400px;">
+                  <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.total_work_ex_year" [disabled]="!isEditMode"/>
+                      <span class="input-group-text">years</span>
+                  <input type="text" class="form-control"  [(ngModel)]="employeeDetailObj.total_work_ex_months" [disabled]="!isEditMode"/>
+                  <span class="input-group-text" 
+                      style="border-left: 0; border-right: 0;">
+                      months
+                  </span>
+                  
+              </div> <pre class="tab1">        </pre>
+
+             
+              <label>Relevant Work Exp:</label>
+                <div class="input-group" style="width: 400px;">
+                  <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.relavant_work_ex_year" [disabled]="!isEditMode" />
+                  <span class="input-group-text">years</span>
+                  <input type="text" class="form-control" [(ngModel)]="employeeDetailObj.relavant_work_ex_months" [disabled]="!isEditMode"/>
+                  <span class="input-group-text" 
+                      style="border-left: 0; border-right: 0;">
+                      months
+                  </span>
+                 
+              </div>
+              </div><br>
+
+              <div class="row">
+                <div class="form-group col-sm-3 col-12">
+                  <label>Joining Date:<span style="color: red;">*</span></label>
+                  <app-custom-dateRangePicker
+                  [selectedDateRange]="selectedJoiningDate" 
+                  [singleCalendar]="true" 
+                  [resetCalendar]="true"
+                  (onDateRangeSelection)="onDateRangeSelection2($event)"></app-custom-dateRangePicker>  
+                </div>
+                <div class="form-group col-sm-3 col-12">
+                  <label>Photo:<span style="color: red;">*</span></label>
+                  <input name="file"  type="file" id="file"  (change)="assignPhoto($event)">
+              </div></div><br>
+              <!-- </div> -->
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px" (click)="submitUserDetails()" [disabled]="!isEditMode">Save and Continue</button>
+    
+        </mat-step>
+      
+              <mat-step label="Family Details"><br>
+                <div class="col-12 pd-0">
+                  <button *ngIf="!(isFamilyEditMode && isFamily)" type="submit" class="btn btn-success float-right" 
+                  (click)="editEmpFamily()" style="margin-right: 60px;margin-top:10px; float:right"
+                  >Edit</button></div><br>
+                <h4>Please mention briefly about your family.</h4><br>
+              <div class="col-md-6 col-12 mt-4">
+                <button class="btn btn-primary add-Btn" type="button"
+                (click)="addRow()">Add Family Member</button>
+                
+              </div>
+            
+            <div class="row" style="margin-top: 10px;">
+                <app-common-table [headers]="familyTableHeaders" [rows]="familyTableRows" 
+                  >
+                </app-common-table>
+              </div>
+          <div>
+            <button mat-button matStepperPrevious style="margin-top: 10px;
+            background-color:lightgrey; margin-right:30px">Back</button>
+            <button mat-button matStepperNext style=" background-color:green;
+            color:white; 
+            margin-top:10px" (click)="submitFamilyDetails()" *ngIf="!isFamily">Submit and Continue</button>
+            <button mat-button matStepperNext style=" background-color:green;
+            color:white; 
+            margin-top:10px" (click)="saveFamilyDetails()" *ngIf="isFamily" [disabled]="!isFamilyEditMode">Save and Continue</button>
+        </div>
+              </mat-step>
+             
+             
+        <mat-step label="Qualifications & Experiences"><br>
+          <div class="col-12 pd-0">
+            <button *ngIf="!isEditMode" type="submit" class="btn btn-success float-right" 
+            (click)="editEmpEdu()" style="margin-right: 60px;margin-top:10px; float:right"
+            >Edit</button></div><br>
+          <h4><b>Education Qualification</b></h4><hr>
+                <h4>Please mention your Qualification class X onwards, including Degrees and Diplomas.</h4>
+                <!--add qualification table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow1()">Add Education Qualification</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="educationTableHeaders" [rows]="educationTableRows" (onDropDownSelected)="onEduCitySelected($event)"
+                    >
+                  </app-common-table>
+                </div>
+                <br><br>
+                <h4><b>Work Experience/Internship</b></h4><hr>
+                <h4>Please mention briefly any internship/Work experience you have.</h4>
+                <!--work exp table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow2()">Add Work Ex/Internship</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="workTableHeaders" [rows]="workTableRows"  (onDropDownSelected)="onWorkCitySelected($event)"
+                    >
+                  </app-common-table>
+                </div>
+                <br><br>
+                <h4><b>Training Attended</b></h4><hr>
+                <h4>Please mention briefly any Training that you have recieved.</h4>
+                <!--training table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow3()">Add Training</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="trainingTableHeaders" [rows]="trainingTableRows" (onDropDownSelected)="onTrainingCitySelected($event)"
+                    >
+                  </app-common-table>
+                </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px" (click)="onStep2()">Save and Continue</button>
+          </div>
+        </mat-step>
+      
+        <mat-step label="Contact"><br>
+          <h4><b>References</b></h4><hr>
+          <h4>Please mention references with whom we can cross check the details provided.</h4>
+                <!--refrences table-->
+                                <div class="col-md-6 col-12 mt-4">
+  <button class="btn btn-primary add-Btn" type="button"
+                  (click)="addRow4()">Add References</button>
+                  
+                </div>
+              
+              <div class="row" style="margin-top: 10px;">
+                  <app-common-table [headers]="referenceTableHeaders" [rows]="referenceTableRows" 
+                    >
+                  </app-common-table>
+                </div>
+                <br><br>
+                <h4><b>Emergency Contact</b></h4><hr>
+                <!--emergency contact table-->
+                <div class="col-md-6 col-12 mt-4">
+                  <button class="btn btn-primary add-Btn" type="button"
+                                  (click)="addRow5()">Add Emergency Contact</button>
+                                  
+                                </div>
+                              
+                              <div class="row" style="margin-top: 10px;">
+                                  <app-common-table [headers]="contactTableHeaders" [rows]="contactTableRows" 
+                                    >
+                                  </app-common-table>
+                                </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px" (click)="submitContact()">Save and Continue</button>
+          </div>
+        </mat-step>
+       
+        <mat-step label="Bank Details"><br>
+          <div class="form-group col-sm-3 col-12">
+            <label>Account Holder's Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control" [(ngModel)]="bankDetailObj.name">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank Account No:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankAccount">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankName">
+        </div><div class="form-group col-sm-3 col-12">
+            <label>Bank Branch Name:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.bankBranch">
+        </div>
+        <div class="form-group col-sm-3 col-12">
+            <label>Bank IFSC Code:<span style="color: red;">*</span></label>
+            <input type="text" class="form-control"  [(ngModel)]="bankDetailObj.ifsc_code">
+        </div>
+          <div>
+              <button mat-button matStepperPrevious style="margin-top: 10px;
+              background-color:lightgrey; margin-right:30px">Back</button>
+              <button mat-button matStepperNext style=" background-color:green;
+              color:white; 
+              margin-top:10px" (click)="submitBankDetails()">Save and Continue</button>
+          </div>
+        </mat-step>
+        <mat-step label="Documents">
+          <div class="form-group col-lg-6">
+            <!-- <div class="col-md-6 col-12 mt-4">
+              <button class="btn btn-primary add-Btn" type="button"
+              (click)="addDocRow()">Add Documents</button>
+              
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <app-common-table [headers]="docsTableHeaders" [rows]="docsTableRows" 
+                >
+              </app-common-table>
+            </div> -->
+            <div class="row piInfo-section" style="margin-top: 15px;" >
+              <div class="col-sm-20">
+                  <div style="display: flex;flex-direction: row-reverse;flex: 1;">
+                  <button type="button"  class="add-user float-right"  style="margin-right:10px" (click)="addDocuments()" > Add </button>
+                  </div>
+                 
+                  <table class="table border mt-1">
+                      <thead class="sticky-top">
+                      <tr>
+                          <th style="width: 250px;">Title</th>
+                          <th >File</th>
+                          <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let data of docsTableRows;let i=index">
+                            <td style="width: 250px;">   <select name="type_of_job" class="form-control" [(ngModel)]="data.file_name" >
+                              <option  *ngFor="let data of documentDDList" [value]="data.id"> {{data.name}}</option>
+                            </select>
+                       </td>
+                              <td style="width: 250px;">  <input  name="lr_file" class="form-control" (change)="assignfile($event,data)" type="file" id="lr_file" /></td>
+                          <td><button (click) = "onRowDelete(data)" class="btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  </div></div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button type="submit" class="btn btn-success float-right" 
+              (click)=" submit()" style="margin-right: 60px;margin-top:30px"
+              >Submit</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+        </div>
+
+
+              
+          
+    
