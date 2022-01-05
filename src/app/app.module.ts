@@ -50,6 +50,7 @@ import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import {NgxPrintModule} from 'ngx-print';
+import { PolicyComponent } from './policy/policy.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import {NgxPrintModule} from 'ngx-print';
     EmployeeDetailsComponent,
     EmployeeFormComponent,
     
+    PolicyComponent,
     
   ],
   imports: [

@@ -24,6 +24,7 @@ import { NewHiresComponent } from './new-hires/new-hires.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { AppointmentLetterComponent } from './appointment-letter/appointment-letter.component';
+import { PolicyComponent } from './policy/policy.component';
 
 
 const routes: Routes = [
@@ -120,6 +121,10 @@ const routes: Routes = [
   {
     path:'employeeForm/:id',
     component:EmployeeFormComponent
+  },
+  {
+    path:'policy',
+    component:PolicyComponent
   }
  ]
 },
